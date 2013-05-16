@@ -7,6 +7,7 @@ require 'routes/init.rb'
 
 get '/' do
   "Worked on dreamhost"
+  haml :index
 end
 
 get '/foo/:bar' do

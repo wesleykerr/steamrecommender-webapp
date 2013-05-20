@@ -1,0 +1,23 @@
+%center
+  %img{:src=>@img_url}
+
+%form
+  %p
+    Game: 
+    %input{ :type=>"text", :placeholder=>"Name of the game", :value=>@name }
+  %p
+    Metacritc URL: 
+    %input{ :type=>"url" }= @metacritic_site
+  %p 
+    Giantbomb URL:
+    %input{ :type=>"url" }= @giantbomb_site
+  %p
+    %input{ :type=>"text" }= @steam_genres
+  %p
+    %input{ :type=>"text" }= @giantbomb_genres
+  
+%h1 Game
+%p This is a test to see if I understand what is going on with HAML
+
+%h2 Game Test
+%p The values part 2

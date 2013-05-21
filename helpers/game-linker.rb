@@ -19,7 +19,7 @@ class GameLinker
 
     @steam = URI.parse("http://store.steampowered.com/")
 
-    @db = Database.new("localhost", "root")
+    #@db = Database.new("localhost", "root")
   end
 
   def run()
@@ -47,13 +47,25 @@ class GameLinker
   end
 
   def get_steam_url(appid)
-    req = Net::HTTP.new(url.host, url.port)
+    req = Net::HTTP.new(@steam.host, @steam.port)
     res = req.request_head("/app/#{appid}")
     if res.code == "200"
-      return "#{url.to_s}/app/#{appid}"
+      return "#{@steam.to_s}/app/#{appid}"
     else
       return nil
     end
+  end
+
+  def get_steam_genres(url)
+    doc = Nokogiri::HTML(open(URI::encode(url)))
+    results = doc.css('.details_block > a')
+    genres = results.map do |link|
+      if link['href'].include? 'genre'
+        link.content
+      else
+        nil
+      end
+    end.compact! 
   end
 
   def search_giantbomb(name)
@@ -72,8 +84,20 @@ class GameLinker
       a[2] <=> b[2]
     end
     return titles
-      
   end 
+
+  def get_giantbomb_genres(url)
+    doc = Nokogiri::HTML(open(URI::encode(url)))
+    results = doc.css('.wiki-details > table > tbody > tr')
+    genre_block = results.map do |result|
+      header = result.css('th')[0]
+      if header && header.content == 'Genre'
+        result
+      else
+        nil
+      end
+    end.compact![0]
+  end
 
   def search_metacritic(name)
     clean_name = name.gsub(':', '').gsub('-', ' ').gsub(' ', '+')

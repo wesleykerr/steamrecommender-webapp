@@ -7,4 +7,5 @@ gem 'haml'
 gem 'httparty'
 gem 'nokogiri'
 gem 'damerau-levenshtein', "~>1.0.2"
+gem 'mysql2'
 

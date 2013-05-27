@@ -4,6 +4,9 @@ require 'open-uri'
 require 'logger'
 require 'damerau-levenshtein'
 
+require 'uri'
+require 'net/http'
+
 log = Logger.new(STDOUT)
 log.level = Logger::DEBUG
 
@@ -14,8 +17,17 @@ class GameLinker
     @log = Logger.new(STDOUT)
     @log.level = Logger::DEBUG
 
-    @gb_api = "http://www.giantbomb.com/api/"
     @gb_key = "1bcdfb88180202845adab96300ff82e7ffefe0e9"
+    @gb_api = "http://www.giantbomb.com/api"
+
+    @steam = URI.parse("http://store.steampowered.com/")
+
+    #@db = Database.new("localhost", "root")
+  end
+
+  def run()
+    good = File.open("/Users/wkerr/development/game-linker/data/metacritic.tsv", "w")
+    bad = File.open("/Users/wkerr/development/game-linker/data/missing.tsv", "w")
 
     @steam = URI.parse("http://store.steampowered.com/")
 
@@ -50,10 +62,10 @@ class GameLinker
     req = Net::HTTP.new(@steam.host, @steam.port)
     res = req.request_head("/app/#{appid}")
     if res.code == "200"
-      return "#{@steam.to_s}/app/#{appid}"
-    else
-      return nil
-    end
+      body = req.get("/app/#{appid}")
+      return "#{@steam.to_s}/app/#{appid}" unless body.body.include?('This item is currently unavailable in your region')
+    end 
+    return nil
   end
 
   def get_steam_genres(url)
@@ -69,34 +81,40 @@ class GameLinker
   end
 
   def search_giantbomb(name)
-    search_url = 'http://www.giantbomb.com/search?indices[0]=gb_game&page=1&q='
-    doc = Nokogiri::HTML(open(URI::encode("#{search_url}#{name}")))
-    results = doc.css('ul.editorial > li > a')
-    titles = results.map do |node_set|
-      url = node_set['href']
-      title = node_set.css('h3.title')[0].content.lstrip.rstrip
-      @log.debug { "Name: #{name}:#{name.size} Title: #{title}:#{title.size}" }
-      @log.debug { "  Raw Distance: #{DamerauLevenshtein.distance(name,title)}, #{[name.size,title.size].max}" } 
-      score = DamerauLevenshtein.distance(name, title) / [name.size, title.size].max.to_f
-      [url, title, score]
-    end
-    titles.sort! do |a,b|
-      a[2] <=> b[2]
-    end
-    return titles
-  end 
+    encoded = URI::encode(name)
+    params = "resources=game&field_list=id,name,site_detail_url"
+    uri = URI("#{@gb_api}/search/?api_key=#{@gb_key}&format=json&query=#{encoded}&#{params}")
+    @log.debug { "URI: #{uri} " }
+    results = Net::HTTP.get(uri)
+    result_hash = JSON.parse(results)
 
-  def get_giantbomb_genres(url)
-    doc = Nokogiri::HTML(open(URI::encode(url)))
-    results = doc.css('.wiki-details > table > tbody > tr')
-    genre_block = results.map do |result|
-      header = result.css('th')[0]
-      if header && header.content == 'Genre'
-        result
-      else
-        nil
+    raise "bad results #{results}" unless result_hash['error'] == "OK"
+    games = result_hash['results']
+    games.each do |game_hash|
+      title = game_hash['name']
+      game_hash['score'] = DamerauLevenshtein.distance(name, title) / [name.size, title.size].max.to_r
+    end 
+    games.sort! do |a,b|
+      a['score'] <=> b['score']
+    end
+    games
+  end
+    
+  def get_giantbomb_genres(game_id)
+    params = "field_list=genres"
+    uri = URI("#{@gb_api}/game/#{game_id}/?api_key=#{@gb_key}&format=json&#{params}")
+    @log.debug { "URI: #{uri} " }
+    results = Net::HTTP.get(uri)
+    result_hash = JSON.parse(results)
+
+    raise "bad results #{results}" unless result_hash['error'] == "OK"
+    if result_hash['results'].size > 0
+      genres = result_hash['results']['genres']
+      return genres.map do |genre|
+        genre['name']
       end
-    end.compact![0]
+    end
+    return []
   end
 
   def search_metacritic(name)

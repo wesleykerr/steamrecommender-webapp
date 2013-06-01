@@ -6,6 +6,8 @@ class Database
   attr_reader :host
   attr_reader :user_name
 
+  attr_reader :client
+
   def initialize(a_host, a_user_name)
     @host = a_host
     @user_name = a_user_name

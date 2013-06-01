@@ -7,10 +7,6 @@ require 'damerau-levenshtein'
 require 'uri'
 require 'net/http'
 
-log = Logger.new(STDOUT)
-log.level = Logger::DEBUG
-
-
 class GameLinker
 
   def initialize()
@@ -20,52 +16,149 @@ class GameLinker
     @gb_key = "1bcdfb88180202845adab96300ff82e7ffefe0e9"
     @gb_api = "http://www.giantbomb.com/api"
 
-    @steam = URI.parse("http://store.steampowered.com/")
+    @steam = "http://store.steampowered.com/"
+    @steam_api = "http://api.steampowered.com/"
 
-    #@db = Database.new("localhost", "root")
+    @db = Database.new("localhost", "root")
   end
 
-  def run()
-    good = File.open("/Users/wkerr/development/game-linker/data/metacritic.tsv", "w")
-    bad = File.open("/Users/wkerr/development/game-linker/data/missing.tsv", "w")
-
-    @steam = URI.parse("http://store.steampowered.com/")
-
-    #@db = Database.new("localhost", "root")
+  def get_apps() 
+    uri = URI("#{@steam_api}/ISteamApps/GetAppList/v0002/")
+    document = Net::HTTP.get(uri)
+    apps = JSON.parse(document)["applist"]["apps"]
+    apps.each do |app_hash|
+      yield app_hash
+    end
   end
 
-  def run()
-    good = File.open("/Users/wkerr/development/game-linker/data/metacritic.tsv", "w")
-    bad = File.open("/Users/wkerr/development/game-linker/data/missing.tsv", "w")
-    File.open("/Users/wkerr/development/game-linker/data/apps.tsv", "r") do |fd|
-      fd.each() do |line|
-        line = line.chomp
-        tokens = line.split("\t")
-        meta = tokens[1].include?("Trailer") ? nil : metacritic(tokens[0]) 
-        if meta
-          good.puts "#{line}\t#{meta}"
-          good.fsync
-          @log.debug { "App: #{tokens[0]} #{meta}" } 
-        else
-          bad.puts "#{line}" 
-          bad.fsync
+  def get_app_details(app_list)
+    @log.debug { "Querying: #{app_list}" }
+    uri = URI("#{@steam}/api/appdetails/?appids=#{app_list.join(',')}")
+    game_hash = JSON.parse(Net::HTTP.get(uri))
+    app_list.each do |appid|
+      @log.debug { " Results: #{appid} " }
+      obj_hash = game_hash["#{appid}"]
+      if obj_hash['success'] == true
+        app_data = obj_hash['data']
+        update_game(appid, app_data)  
+        
+        if app_data['genres'] 
+          app_data['genres'].each do |genre_hash|
+            add_genre(app_data['steam_appid'], genre_hash['description'])
+          end
         end
-        sleep 5
+      else
+        # let's see if we can't get some more information out of
+        # steam db about this title
+        app_data = steamdb_app(appid)
+        update_game(appid, app_data) unless app_data.size == 0
+        @log.debug { "Missing #{appid} " } if app_data.size == 0
+        sleep 2
+      end
+    end 
+  end
+
+  # query the database and find the time when we inserted the information about this
+  # app into it.
+  # @param appid [Fixnum] the id of the app to check
+  def days_since_updated(appid)
+    rs = @db.query("select updated_datetime from game_recommender.games where appid = #{appid}")
+    if rs.size == 0
+      insert_app(appid)
+      return Float::INFINITY
+    end
+    return Float::INFINITY if rs.first['updated_datetime'] == nil
+    return (Time.now - rs.first['updated_datetime']) / 86400.0
+  end
+
+  # Test to see if this appid exists in the database.  
+  # @param appid [Fixnum] the appid to check
+  # @return if this row exists in the database
+  def app_exists?(appid)
+    rs = @db.query("select appid from game_recommender.games where appid = #{appid}")
+    return nil if rs.size == 0
+    return true
+  end
+
+  # insert the record into the table
+  # @param appid [Fixnum] the app id to add
+  def insert_app(appid)
+    @db.query("insert into game_recommender.games (appid) values (#{appid})")
+  end
+
+  # update the game with the given information
+  # @param app_data [Hash] the values to update in the database
+  def update_game(appid, app_data)
+    @log.debug { "Updating: #{app_data['name']}" }
+    sql = "update game_recommender.games set"
+    sql << "  name = '#{@db.escape(app_data['name'])}' "
+    sql << ", app_type = '#{@db.escape(app_data['type'])}' "
+    if app_data['metacritic'] && app_data['metacritic']['url'] && app_data['metacritic']['url'].length > 0
+      @log.debug { "   metacritic: #{app_data['metacritic']}" }
+      sql << ", metacritic_site = '#{@db.escape(app_data['metacritic']['url'])}' "
+    end
+    if (app_data['release_date'] && app_data['release_date']['date'] && app_data['release_date']['date'].length > 0)
+      puts app_data['release_date']
+      release_date = nil
+      begin
+        release_date = DateTime.strptime(app_data['release_date']['date'], "%b %e, %Y")
+      rescue ArgumentError
+        release_date = DateTime.strptime(app_data['release_date']['date'], "%b %Y")
+      end
+      sql << ", release_date = '#{release_date.strftime('%Y-%m-%d')}' "
+    end
+    sql << ", updated_datetime = CURRENT_TIMESTAMP "
+    sql << ", parent_appid = #{app_data['steam_appid']} " unless appid == app_data['steam_appid']
+    sql << " WHERE appid = #{appid} "
+    @log.debug { "Query: #{sql}" }
+    @db.query(sql)
+  end
+
+  # add a link between the genre and the app
+  # @param appid [Fixnum] the application to update
+  # @param genre [String] the name of the genre to attach
+  def add_genre(appid, genre)
+    g_name = @db.escape(genre)
+    results = @db.query("select genre_id from game_recommender.genre_lookup where genre_name = '#{g_name}'") 
+    genre_id = -1
+    if results.size == 0
+      @db.query("insert into game_recommender.genre_lookup (genre_name) values ('#{g_name}')")
+      genre_id  = db.client.last_id
+    else
+      genre_id = results.first['genre_id']
+    end 
+    begin
+      @db.query("insert into game_recommender.genres (appid, genre_id) values (#{appid}, #{genre_id})")
+    rescue Mysql2::Error
+      # the id already exists so there is nothing to do.
+    end
+  end
+
+  # pull available information from steamdb when we can't find it
+  # through other channels
+  # @param appid [Fixnum] the application to query
+  # @return [Hash] containing the information found in the steamdb page
+  def steamdb_app(appid)
+    results = {}
+    url = URI("http://steamdb.info/app/#{appid}")
+    doc = Nokogiri::HTML(open(url))
+    tables = doc.css('.table > tbody > tr')
+    if tables
+      tables.each do |element|
+        pieces = element.css('td')
+        if pieces.size > 1
+          data_name = pieces[0].content 
+          data_value = pieces[1].content
+          results['steam_appid'] = data_value if data_name == 'App ID'
+          results['name'] = data_value if data_name == 'Name'
+          results['type'] = data_value if data_name == 'App Type'
+          if data_name == 'metacritic_fullurl'
+            results['metacritic'] = { 'url' => data_value }
+          end
+        end
       end
     end
-
-    good.close
-    bad.close
-  end
-
-  def get_steam_url(appid)
-    req = Net::HTTP.new(@steam.host, @steam.port)
-    res = req.request_head("/app/#{appid}")
-    if res.code == "200"
-      body = req.get("/app/#{appid}")
-      return "#{@steam.to_s}/app/#{appid}" unless body.body.include?('This item is currently unavailable in your region')
-    end 
-    return nil
+    results
   end
 
   def get_steam_genres(url)

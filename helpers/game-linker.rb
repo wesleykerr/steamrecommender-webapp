@@ -50,9 +50,12 @@ class GameLinker
       else
         # let's see if we can't get some more information out of
         # steam db about this title
-        app_data = steamdb_app(appid)
-        update_game(appid, app_data) unless app_data.size == 0
-        @log.debug { "Missing #{appid} " } if app_data.size == 0
+        #app_data = steamdb_app(appid)
+        if (app_data && app_data.size > 0)
+          update_game(appid, app_data) 
+        else
+          @log.debug { "Missing #{appid} " } 
+        end
         sleep 2
       end
     end 
@@ -141,6 +144,7 @@ class GameLinker
   def steamdb_app(appid)
     results = {}
     url = URI("http://steamdb.info/app/#{appid}")
+    puts url
     doc = Nokogiri::HTML(open(url))
     tables = doc.css('.table > tbody > tr')
     if tables

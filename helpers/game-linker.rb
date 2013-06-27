@@ -9,7 +9,7 @@ require 'net/http'
 
 class GameLinker
 
-  def initialize()
+  def initialize
     @log = Logger.new(STDOUT)
     @log.level = Logger::DEBUG
 
@@ -18,8 +18,21 @@ class GameLinker
 
     @steam = "http://store.steampowered.com/"
     @steam_api = "http://api.steampowered.com/"
+    
+    @buffer = []
+    
+    user = ENV['recommender_user'] || 'root'
+    password = ENV['recommender_password'] || ''
+    @log.debug { "Connecting to database with user #{user}" }
+   
+    @db = Database.new("mysql.seekerr.com", user, password) 
 
-    @db = Database.new("localhost", "root")
+    # gather up all of the appids and when they were processed
+    @update_hash = {}
+    rs = @db.query("select appid,updated_datetime from game_recommender.games")
+    rs.each do |row|
+      @update_hash[row['appid']] = row['updated_datetime']  
+    end
   end
 
   def get_apps() 
@@ -31,11 +44,24 @@ class GameLinker
     end
   end
 
+  def add_game(appid, name)
+    @log.debug { "Adding game to buffer #{appid} " }
+    @buffer << [appid,name]
+    flush if @buffer.size >= 10
+  end
+
+  def flush()
+    get_app_details(@buffer) unless @buffer.size == 0
+    @buffer.clear
+    sleep 5
+  end
+
   def get_app_details(app_list)
     @log.debug { "Querying: #{app_list}" }
-    uri = URI("#{@steam}/api/appdetails/?appids=#{app_list.join(',')}")
+    apps = app_list.map { |appid,name| appid }.join(',')
+    uri = URI("#{@steam}/api/appdetails/?appids=#{apps}")
     game_hash = JSON.parse(Net::HTTP.get(uri))
-    app_list.each do |appid|
+    app_list.each do |appid,name|
       @log.debug { " Results: #{appid} " }
       obj_hash = game_hash["#{appid}"]
       if obj_hash['success'] == true
@@ -48,14 +74,7 @@ class GameLinker
           end
         end
       else
-        # let's see if we can't get some more information out of
-        # steam db about this title
-        #app_data = steamdb_app(appid)
-        if (app_data && app_data.size > 0)
-          update_game(appid, app_data) 
-        else
-          @log.debug { "Missing #{appid} " } 
-        end
+        update_app(appid, name, 'unknown') 
         sleep 2
       end
     end 
@@ -65,13 +84,10 @@ class GameLinker
   # app into it.
   # @param appid [Fixnum] the id of the app to check
   def days_since_updated(appid)
-    rs = @db.query("select updated_datetime from game_recommender.games where appid = #{appid}")
-    if rs.size == 0
-      insert_app(appid)
-      return Float::INFINITY
-    end
-    return Float::INFINITY if rs.first['updated_datetime'] == nil
-    return (Time.now - rs.first['updated_datetime']) / 86400.0
+    insert_app(appid) unless @update_hash.has_key?(appid)
+    last_update = @update_hash[appid]
+    return Float::INFINITY unless last_update
+    return (Time.now - last_update) / 86400.0
   end
 
   # Test to see if this appid exists in the database.  
@@ -113,6 +129,20 @@ class GameLinker
     sql << ", updated_datetime = CURRENT_TIMESTAMP "
     sql << ", parent_appid = #{app_data['steam_appid']} " unless appid == app_data['steam_appid']
     sql << " WHERE appid = #{appid} "
+    @log.debug { "Query: #{sql}" }
+    @db.query(sql)
+  end
+  
+  # update the game with the given information
+  # @param app_data [Hash] the values to update in the database
+  def update_app(appid, name, app_type)
+    @log.debug { "Updating: #{name}" }
+    sql = "INSERT INTO game_recommender.games (appid, name, app_type, updated_datetime) "
+    sql << " values (#{appid}, '#{@db.escape(name)}', '#{@db.escape(app_type)}', CURRENT_TIMESTAMP) "
+    sql << " ON DUPLICATE KEY UPDATE " 
+    sql << "   name = '#{@db.escape(name)}' "
+    sql << " , app_type = '#{@db.escape(app_type)}' "
+    sql << " , updated_datetime = CURRENT_TIMESTAMP "
     @log.debug { "Query: #{sql}" }
     @db.query(sql)
   end

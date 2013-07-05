@@ -6,6 +6,7 @@ class Game
 
   property :appid,            Integer, :min => 0, :max => 2**64-1, :key => true
   property :title,            String, :length => 256
+  property :app_type,         String, :length => 50
   property :owned,            Integer
   property :not_played,       Integer
   property :total_playtime,   Decimal

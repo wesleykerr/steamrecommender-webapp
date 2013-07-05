@@ -4,11 +4,6 @@ GEM
     addressable (2.3.5)
     backports (3.3.0)
     bcrypt-ruby (3.0.1)
-    couchrest (1.2.0)
-      mime-types (~> 1.15)
-      multi_json (~> 1.0)
-      rest-client (~> 1.6.1)
-    damerau-levenshtein (1.0.2)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -61,23 +56,14 @@ GEM
     fastercsv (1.5.5)
     haml (4.0.2)
       tilt
-    httparty (0.11.0)
-      multi_json (~> 1.0)
-      multi_xml (>= 0.5.2)
     json (1.7.7)
     json_pure (1.8.0)
-    mime-types (1.23)
     multi_json (1.7.3)
-    multi_xml (0.5.3)
-    mysql2 (0.3.11)
-    nokogiri (1.5.9)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     sinatra (1.4.2)
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
@@ -97,14 +83,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  couchrest
-  damerau-levenshtein (~> 1.0.2)
   data_mapper
   dm-mysql-adapter
   haml
-  httparty
   json
-  mysql2
-  nokogiri
   sinatra
   sinatra-contrib

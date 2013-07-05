@@ -9,7 +9,7 @@ pass = config_obj['mysql_password']
 DataMapper::Property::String.length(255)
 DataMapper.setup(:default, "mysql://#{user}:#{pass}@#{host}/#{db}")
 
-require 'model/game'
-require 'model/genre'
+require 'models/game'
+require 'models/genre'
 
 DataMapper.finalize

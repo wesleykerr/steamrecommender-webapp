@@ -1,0 +1,17 @@
+.container-fluid
+  .row-fluid
+    .span2
+    .span6
+      %h1= @genre.name
+      %table{:class => 'table'}
+        - @games.each do |game|
+          %tr
+            %td 
+              %a{ :href => "../games/#{game.appid}" }= game.appid
+            %td
+              %a{ :href => "../games/#{game.appid}" }= game.title
+      .flickr_pagination
+        = will_paginate @games, :container => false
+      %hr
+
+  %div= haml :footer

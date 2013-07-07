@@ -1,0 +1,18 @@
+.container-fluid
+  .row-fluid
+    .span1 
+    .span6
+      %center
+        %h2 Genres
+      %table{:class => 'table'}
+        - @genres.each do |genre|
+          %tr
+            %td 
+              %a{ :href => "genres/#{genre.id}" }= genre.id
+            %td
+              %a{ :href => "genres/#{genre.id}" }= genre.name
+      .flickr_pagination
+        = will_paginate @genres, :container => false
+      %hr
+
+  %div= haml :footer

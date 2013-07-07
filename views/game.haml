@@ -20,6 +20,9 @@
             %td
               %a{:href=> @game.metacritic}= @game.metacritic
           %tr
+            %td Genres
+            %td= @game.genres.map { |genre| genre.name }.join(", ")
+          %tr
             %td Owned By
             %td= @game.owned
       .row-fluid

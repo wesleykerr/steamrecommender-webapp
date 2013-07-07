@@ -11,5 +11,6 @@ DataMapper.setup(:default, "mysql://#{user}:#{pass}@#{host}/#{db}")
 
 require 'models/game'
 require 'models/genre'
+require 'models/genre_mapping'
 
 DataMapper.finalize

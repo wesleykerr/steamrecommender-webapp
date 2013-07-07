@@ -1,7 +1,7 @@
 
 
 get '/games/:game' do
-  "requested /games/#{:game}"
+  @game = Game.get(params[:game])
   haml :games
 end
 

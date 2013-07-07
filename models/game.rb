@@ -20,5 +20,8 @@ class Game
   property :metacritic,       String, :length => 256
   property :giantbomb_id,     Integer
   property :updated_datetime, DateTime
+
+  has n, :genre_mappings
+  has n, :genres, :through => :genre_mappings
 end
 

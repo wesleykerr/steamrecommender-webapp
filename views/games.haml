@@ -1,8 +1,61 @@
-%center
-  %img{:src=>@img_url}
+.container-fluid
+  .row-fluid
+    .span2
+      %center 
+        %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{@game.appid}/header_292x136.jpg", :width=>'200px'}
+    .span10
+      %h1= @game.title
+      %table
+        %tr
+          %td
+            App Type
+          %td= @game.app_type
+        %tr 
+          %td 
+            Metacritic Site
+          %td= @game.metacritic
+        %tr
+          %td 
+            Giantbomb Site
+          %td= @game.giantbomb_id
+        %tr
+          %td
+            Owned By
+          %td= @game.owned
+        %tr
+          %td
+      %p
+        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+      %p
+        %a.btn.btn-primary.btn-large
+          Learn more &raquo;
+      
+      .row-fluid
+        .span4
+          %h2
+            Heading
+          %p
+            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a.btn{:href => '/'}
+              View Details &raquo;
+        .span4
+          %h2
+            Heading
+          %p
+            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a.btn{:href => '/'}
+              View Details &raquo;
+        .span4
+          %h2
+            Heading
+          %p
+            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+          %p
+            %a.btn{:href => '/'}
+              View Details &raquo;
+        
+    %hr
 
-%h1 Game
-%p This is a test to see if I understand what is going on with HAML
-
-%h2 Game Test
-%p The values part 2
+    %div= haml :footer

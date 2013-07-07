@@ -6,3 +6,4 @@ gem "sinatra-contrib"
 gem 'haml'
 gem 'data_mapper'
 gem 'dm-mysql-adapter'
+gem 'will_paginate'

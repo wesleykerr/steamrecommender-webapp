@@ -78,6 +78,7 @@ GEM
     stringex (1.5.1)
     tilt (1.4.1)
     uuidtools (2.1.4)
+    will_paginate (3.0.4)
 
 PLATFORMS
   ruby
@@ -89,3 +90,4 @@ DEPENDENCIES
   json
   sinatra
   sinatra-contrib
+  will_paginate

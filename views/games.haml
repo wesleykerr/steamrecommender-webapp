@@ -1,59 +1,18 @@
 .container-fluid
   .row-fluid
-    .span2
+    .span1 
     .span6
-      %center 
-        %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{@game.appid}/header_292x136.jpg", :width=>'200px'}
-       
-        %h1= @game.title
-        %table{:class => 'table'}
+      %center
+        %h2 Steam Games
+      %table{:class => 'table'}
+        - @games.each do |game|
           %tr
-            %td App Type
-            %td= @game.app_type
-          %tr 
-            %td Metacritic Site
+            %td 
+              %a{ :href => "games/#{game.appid}" }= game.appid
             %td
-              %a{:href=> @game.metacritic}= @game.metacritic
-          %tr
-            %td Giantbomb Site
-            %td= @game.giantbomb_id
-          %tr
-            %td Owned By
-            %td= @game.owned
-      .row-fluid
-        .span2 
-        .span4
-          %center 
-            %h3 Total Playtime
-            %table{:class => 'table'}
-              %tr
-                %td Played Game
-                %td= (@game.owned - @game.not_played) if @game.owned && @game.not_played
-              %tr
-                %td Hours Played
-                %td= @game.total_playtime || 0
-              %tr
-                %td Mean Hours Played
-                %td= @game.total_mean || 0
-              %tr
-                %td Standard Deviation
-                %td= @game.total_std || 0
-        .span4
-          %center
-            %h3 Recent Playtime
-            %table{:class => 'table'}
-              %tr
-                %td Played Recently
-                %td= @game.recent_played || 0
-              %tr
-                %td Hours Played
-                %td= @game.recent_playtime || 0
-              %tr
-                %td Mean Hours Played
-                %td= @game.recent_mean || 0
-              %tr
-                %td Standard Deviation
-                %td= @game.recent_std || 0
-        .span2
+              %a{ :href => "games/#{game.appid}" }= game.title
+      .flickr_pagination
+        = will_paginate @games, :container => false
+      %hr
 
   %div= haml :footer

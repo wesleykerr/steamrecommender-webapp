@@ -2,6 +2,7 @@
 
 get '/games/:game' do
   @game = Game.get(params[:game])
+  @title = @game.title
   haml :games
 end
 

@@ -8,6 +8,7 @@ require 'models/init.rb'
 require 'routes/init.rb'
 
 get '/' do
+  @title = 'Steam Recommender'
   haml :index
 end
 

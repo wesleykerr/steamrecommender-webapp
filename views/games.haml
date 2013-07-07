@@ -1,61 +1,60 @@
 .container-fluid
   .row-fluid
-    .span2
+    .span12
       %center 
         %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{@game.appid}/header_292x136.jpg", :width=>'200px'}
-    .span10
-      %h1= @game.title
-      %table
-        %tr
-          %td
-            App Type
-          %td= @game.app_type
-        %tr 
-          %td 
-            Metacritic Site
-          %td= @game.metacritic
-        %tr
-          %td 
-            Giantbomb Site
-          %td= @game.giantbomb_id
-        %tr
-          %td
-            Owned By
-          %td= @game.owned
-        %tr
-          %td
-      %p
-        This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-      %p
-        %a.btn.btn-primary.btn-large
-          Learn more &raquo;
-      
+       
+        %h1= @game.title
+        %table
+          %tr
+            %td App Type
+            %td= @game.app_type
+          %tr 
+            %td Metacritic Site
+            %td= @game.metacritic
+          %tr
+            %td Giantbomb Site
+            %td= @game.giantbomb_id
+          %tr
+            %td Owned By
+            %td= @game.owned
+          %tr
+            %td
       .row-fluid
+        .span2 
         .span4
-          %h2
-            Heading
-          %p
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a.btn{:href => '/'}
-              View Details &raquo;
+          %center 
+            %h3 Total Playtime
+            %table
+              %tr
+                %td Played Game
+                %td= (@game.owned - @game.not_played) if @game.owned && @game.not_played
+              %tr
+                %td Hours Played
+                %td= @game.total_playtime || 0
+              %tr
+                %td Mean Hours Played
+                %td= @game.total_mean || 0
+              %tr
+                %td Standard Deviation
+                %td= @game.total_std || 0
         .span4
-          %h2
-            Heading
-          %p
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a.btn{:href => '/'}
-              View Details &raquo;
-        .span4
-          %h2
-            Heading
-          %p
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a.btn{:href => '/'}
-              View Details &raquo;
-        
+          %center
+            %h3 Recent Playtime
+            %table
+              %tr
+                %td Played Recently
+                %td= @game.recent_played || 0
+              %tr
+                %td Hours Played
+                %td= @game.recent_playtime || 0
+              %tr
+                %td Mean Hours Played
+                %td= @game.recent_mean || 0
+              %tr
+                %td Standard Deviation
+                %td= @game.recent_std || 0
+        .span2
     %hr
 
     %div= haml :footer

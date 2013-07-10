@@ -26,8 +26,7 @@
             %td Owned By
             %td= @game.owned
       .row-fluid
-        .span2 
-        .span4
+        .span6
           %center 
             %h3 Total Playtime
             %table{:class => 'table'}
@@ -36,14 +35,11 @@
                 %td= (@game.owned - @game.not_played) if @game.owned && @game.not_played
               %tr
                 %td Hours Played
-                %td= @game.total_playtime || 0
+                %td= @game.total_playtime.to_i || 0
               %tr
                 %td Mean Hours Played
-                %td= @game.total_mean || 0
-              %tr
-                %td Standard Deviation
-                %td= @game.total_std || 0
-        .span4
+                %td= @game.total_mean.to_i || 0
+        .span6
           %center
             %h3 Recent Playtime
             %table{:class => 'table'}
@@ -52,13 +48,9 @@
                 %td= @game.recent_played || 0
               %tr
                 %td Hours Played
-                %td= @game.recent_playtime || 0
+                %td= @game.recent_playtime.to_i || 0
               %tr
                 %td Mean Hours Played
-                %td= @game.recent_mean || 0
-              %tr
-                %td Standard Deviation
-                %td= @game.recent_std || 0
-        .span2
+                %td= @game.recent_mean.to_i || 0
 
   %div= haml :footer

@@ -2,3 +2,7 @@
 .table td { 
   text-align: center;
 }
+
+.table th, .table td { 
+  border-top: none;
+}

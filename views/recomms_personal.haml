@@ -1,0 +1,34 @@
+.container-fluid
+  .row-fluid
+    .span1 
+    .span6
+      %center
+        %h2 Recommendations
+        %table{:class => 'table table-condensed'}
+          %thead
+            %td
+              %h3 Should Play
+            %td
+              %h3 Should Buy
+          - @recomms.each do |e_game,n_game|
+            %tr
+              %td 
+                %a{ :href => "games/#{e_game['appid']}" }= @titles[e_game['appid']]
+                %br
+                %a{ :href => "http://store.steampowered.com/app/#{e_game['appid']}" }
+                  %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{e_game['appid']}/header_292x136.jpg", :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
+              %td 
+                %a{ :href => "games/#{n_game['appid']}" }= @titles[n_game['appid']]
+                %br
+                %a{ :href => "http://store.steampowered.com/app/#{n_game['appid']}" }
+                  %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{n_game['appid']}/header_292x136.jpg", :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
+
+      %hr
+
+  %div= haml :footer
+
+    

@@ -6,13 +6,15 @@ require 'haml'
 
 require 'models/init.rb'
 require 'routes/init.rb'
+require 'recomms.rb'
+
+configure do
+  @@cosine_recomms = CosineRecomms.new
+end
 
 get '/' do
   @title = 'Steam Recommender'
   haml :index
 end
 
-get '/foo/:bar' do
-  "You asked for foo/#{params[:bar]}"
-end
 

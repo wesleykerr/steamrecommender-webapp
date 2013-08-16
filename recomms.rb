@@ -8,6 +8,8 @@ require 'logger'
 class Recomms
  
   def initialize
+    @log = Logger.new(STDOUT)
+    @log.level = Logger::DEBUG
     @config_obj = YAML::load_file( "#{File.expand_path('models')}/../../config/steamrecommender.yml" )
   end 
   
@@ -20,6 +22,14 @@ class Recomms
     uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
     document = Net::HTTP.get(uri)
     data = JSON.parse(document)['response']
+
+    # save an audit record
+    audit = Audit.create(
+      :steamid => steamid,
+      :json => data,
+      :create_datetime => DateTime.now
+    )
+    @log.error("Failed to create audit record #{steamid}") unless audit.saved?
     data
   end
 
@@ -29,9 +39,6 @@ class CosineRecomms < Recomms
 
   def initialize
     super
-    @log = Logger.new(STDOUT)
-    @log.level = Logger::DEBUG
-
     load_cosine_matrix
   end
 

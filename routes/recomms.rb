@@ -8,10 +8,10 @@ get '/recomms_submit' do
   
   ids = not_played.map { |x| x['appid'] } .concat( not_owned.map { |x| x['appid'] } )
 
-  @titles = {}
-  games = Game.all(:fields => [:appid,:title], :appid => ids ) 
+  @games_map = {}
+  games = Game.all(:fields => [:appid,:title,:steam_url,:steam_img_url], :appid => ids ) 
   games.each do |game|
-    @titles[game.appid] = game.title
+    @games_map[game.appid] = game
   end
 
   @recomms = not_played.zip( not_owned )

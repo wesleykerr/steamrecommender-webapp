@@ -10,9 +10,9 @@ class Recomms
   def initialize
     @log = Logger.new(STDOUT)
     @log.level = Logger::DEBUG
-    @config_obj = YAML::load_file( "#{File.expand_path('models')}/../../config/steamrecommender.yml" )
+    @config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
   end 
-  
+
   def owned_games(steamid)
     # TODO: add retry logic
     steam_host="api.steampowered.com"

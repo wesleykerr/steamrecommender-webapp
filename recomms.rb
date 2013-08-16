@@ -69,7 +69,8 @@ class CosineRecomms < Recomms
   private
   def load_cosine_matrix
     @log.info { "loading cosine matrix" } 
-    File.open("/Users/wkerr/data/steam/item_item.csv", 'r') do |file_io|
+    cosine_file = "#{File.expand_path('.')}/../config/item_item.csv" )
+    File.open(cosine_file, 'r') do |file_io|
       @items = file_io.readline().split(',')
       @items.shift
       @items = @items.map { |item| item.to_i }

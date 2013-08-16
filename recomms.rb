@@ -18,6 +18,7 @@ class Recomms
     steam_host="api.steampowered.com"
     steam_path="/IPlayerService/GetOwnedGames/v0001/"
     steam_key=@config_obj['steam_key']
+    @log.debug { "key: #{steam_key}" }
     steam_params='include_played_free_games=1'
     uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
     document = Net::HTTP.get(uri)

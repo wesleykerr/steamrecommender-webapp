@@ -1,8 +1,9 @@
-.container-fluid
-  .row-fluid
-    .span2
-    .span6
-      %h1= @genre.name
+.container.marketing
+  .row
+    .col-md-1
+    .col-md-10
+      %center
+        %h2= @genre.name
       %table{:class => 'table'}
         - @games.each do |game|
           %tr
@@ -14,4 +15,7 @@
         = will_paginate @games, :container => false
       %hr
 
-  %div= haml :footer
+  .row
+    .col-md-1
+    .col-md-10
+      %div= haml :footer

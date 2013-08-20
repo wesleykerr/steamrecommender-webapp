@@ -15,7 +15,7 @@ get '/recomms_submit' do
   end
 
   @recomms = not_played.zip( not_owned )
-  haml :recomms_personal, :layout => :recomms_layout
+  haml :recomms_personal
 end
 
 get '/recomms/:steamid' do
@@ -23,7 +23,7 @@ get '/recomms/:steamid' do
   scores = @@cosine_recomms.get_recomms(params[:steamid])
   # existing things are 0 and new things are 1
   @recomms = scores[0].zip( scores[1] )
-  haml :recomms_personal, :layout => :recomms_layout
+  haml :recomms_personal
 end
 
 

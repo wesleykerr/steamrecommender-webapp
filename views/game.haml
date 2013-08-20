@@ -1,7 +1,7 @@
-.container-fluid
-  .row-fluid
-    .span2
-    .span6
+.container.marketing
+  .row
+    .col-md-1
+    .col-md-10
       %center 
         %a{ :href => "http://store.steampowered.com/app/#{@game.appid}" }
           %img{:src => "http://cdn2.steampowered.com/v/gfx/apps/#{@game.appid}/header_292x136.jpg", :width=>'200px'}
@@ -25,8 +25,8 @@
           %tr
             %td Owned By
             %td= @game.owned
-      .row-fluid
-        .span6
+      .row
+        .col-md-6
           %center 
             %h3 Total Playtime
             %table{:class => 'table'}
@@ -39,7 +39,7 @@
               %tr
                 %td Mean Hours Played
                 %td= @game.total_mean.to_i || 0
-        .span6
+        .col-md-6
           %center
             %h3 Recent Playtime
             %table{:class => 'table'}
@@ -53,4 +53,7 @@
                 %td Mean Hours Played
                 %td= @game.recent_mean.to_i || 0
 
-  %div= haml :footer
+  .row
+    .col-md-1
+    .col-md-10
+      %div= haml :footer

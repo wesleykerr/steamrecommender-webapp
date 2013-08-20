@@ -10,14 +10,15 @@ class Recomms
   def initialize
     @log = Logger.new(STDOUT)
     @log.level = Logger::DEBUG
-    @config_obj = YAML::load_file( "#{File.expand_path('models')}/../../config/steamrecommender.yml" )
+    @config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
   end 
-  
+
   def owned_games(steamid)
     # TODO: add retry logic
     steam_host="api.steampowered.com"
     steam_path="/IPlayerService/GetOwnedGames/v0001/"
     steam_key=@config_obj['steam_key']
+    @log.debug { "key: #{steam_key}" }
     steam_params='include_played_free_games=1'
     uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
     document = Net::HTTP.get(uri)
@@ -69,7 +70,8 @@ class CosineRecomms < Recomms
   private
   def load_cosine_matrix
     @log.info { "loading cosine matrix" } 
-    File.open("/Users/wkerr/data/steam/item_item.csv", 'r') do |file_io|
+    cosine_file = "#{File.expand_path('.')}/../config/item_item.csv" 
+    File.open(cosine_file, 'r') do |file_io|
       @items = file_io.readline().split(',')
       @items.shift
       @items = @items.map { |item| item.to_i }

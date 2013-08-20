@@ -1,34 +1,44 @@
-.container-fluid
-  .row-fluid
-    .span1 
-    .span6
+:css
+  .table td.recomms { 
+    text-align: center;
+  }
+  .table th.recomms, .table td.recomms { 
+    border-top: none;
+  }
+.container
+  .row
+    .col-md-1
+    .col-md-10
       %center
         %h2 Recommendations
-        %table{:class => 'table table-condensed'}
-          %thead
-            %td
-              %h3 Should Play
-            %td
-              %h3 Should Buy
-          - @recomms.each do |e_game,n_game|
-            %tr
-              %td
-                %a{ :href => "games/#{e_game['appid']}" }= @games_map[e_game['appid']].title
-                %br
-                %a{ :href => @games_map[e_game['appid']].steam_url }
-                  %img{:src => @games_map[e_game['appid']].steam_img_url, :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
-              %td 
-                %a{ :href => "games/#{n_game['appid']}" }= @games_map[n_game['appid']].title
-                %br
-                %a{ :href => @games_map[n_game['appid']].steam_url }
-                  %img{:src => @games_map[n_game['appid']].steam_img_url, :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
+      %table{:class => 'table table-condensed'}
+        %thead
+          %td.recomms
+            %h3 Should Play
+          %td.recomms
+            %h3 Should Buy
+        - @recomms.each do |e_game,n_game|
+          %tr
+            %td.recomms
+              %a{ :href => "games/#{e_game['appid']}" }= @games_map[e_game['appid']].title
+              %br
+              %a{ :href => @games_map[e_game['appid']].steam_url }
+                %img{:src => @games_map[e_game['appid']].steam_img_url, :width=>'150px'}
+              %br 
+              %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
+            %td.recomms
+              %a{ :href => "games/#{n_game['appid']}" }= @games_map[n_game['appid']].title
+              %br
+              %a{ :href => @games_map[n_game['appid']].steam_url }
+                %img{:src => @games_map[n_game['appid']].steam_img_url, :width=>'150px'}
+              %br 
+              %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
 
       %hr
 
-  %div= haml :footer
+  .row
+    .col-md-1
+    .col-md-10
+      %div= haml :footer
 
     

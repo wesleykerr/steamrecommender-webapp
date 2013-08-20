@@ -1,7 +1,7 @@
-.container-fluid
-  .row-fluid
-    .span1 
-    .span6
+.container.marketing
+  .row
+    .col-md-1
+    .col-md-10
       %form{:action => "recomms_submit" }
         %fieldset
           %legend Get Recommendations
@@ -23,6 +23,9 @@
 
       %hr
 
-  %div= haml :footer
+  .row
+    .col-md-1
+    .col-md-10
+      %div= haml :footer
 
     

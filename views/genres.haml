@@ -1,7 +1,7 @@
-.container-fluid
-  .row-fluid
-    .span1 
-    .span4
+.container.marketing
+  .row
+    .col-md-1
+    .col-md-10
       %center
         %h2 Genres
       %table{:class => 'table'}
@@ -15,4 +15,7 @@
         = will_paginate @genres, :container => false
       %hr
 
-  %div= haml :footer
+  .row
+    .col-md-1
+    .col-md-10
+      %div= haml :footer

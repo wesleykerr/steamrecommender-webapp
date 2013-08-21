@@ -36,18 +36,19 @@ class Recomms
 
 end
 
-class CosineRecomms < Recomms
+class MatrixRecomms < Recomms
 
   def initialize
     super
-    load_cosine_matrix
+    matrix_file = "#{File.expand_path('.')}/../config/heats.csv" 
+    load_matrix(matrix_file)
   end
 
   def get_recomms(steamid, num_recomms=100, session=nil)
     data = owned_games(steamid)
     player_vector,owned_set,played_set = parse_data(data)
     
-    result = @cosine_matrix * player_vector
+    result = @matrix * player_vector
     not_played_scores = []
     not_owned_scores = []
     @items.each_with_index do |item,idx|
@@ -68,28 +69,27 @@ class CosineRecomms < Recomms
   end
 
   private
-  def load_cosine_matrix
-    @log.info { "loading cosine matrix" } 
-    cosine_file = "#{File.expand_path('.')}/../config/item_item.csv" 
-    File.open(cosine_file, 'r') do |file_io|
+  def load_matrix(matrix_file)
+    @log.info { "loading matrix beginning" } 
+    File.open(matrix_file, 'r') do |file_io|
       @items = file_io.readline().split(',')
       @items.shift
       @items = @items.map { |item| item.to_i }
       
-      @cosine_matrix = NMatrix.float(@items.count, @items.count)
+      @matrix = NMatrix.float(@items.count, @items.count)
       file_io.each_line do |line|
         scores = line.split(',')
         scores.shift
         scores.each_with_index do |score,idx| 
-          @cosine_matrix[ file_io.lineno-2, idx ]  = score.to_f
+          @matrix[ idx, file_io.lineno-2 ] = score.to_f
         end
       end
     end
-    @log.info { "loading cosine matrix finished" }
+    @log.info { "loading matrix finished" }
   end
 
   def parse_data(data)
-    player_vector = NVector.float(@cosine_matrix.sizes[0])
+    player_vector = NVector.float(@matrix.sizes[0])
     owned_set = Set.new
     played_set = Set.new
     data['games'].each do |game_stats|

@@ -6,10 +6,11 @@ require 'haml'
 
 require 'models/init.rb'
 require 'routes/init.rb'
+require 'generated/init.rb'
 require 'recomms.rb'
 
 configure do
-  @@cosine_recomms = CosineRecomms.new
+  @@matrix_recomms = MatrixRecomms.new
 end
 
 get '/' do

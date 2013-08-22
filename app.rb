@@ -8,6 +8,8 @@ require 'models/init.rb'
 require 'routes/init.rb'
 require 'recomms.rb'
 
+enable :sessions
+
 configure do
   @@matrix_recomms = MatrixRecomms.new
 end

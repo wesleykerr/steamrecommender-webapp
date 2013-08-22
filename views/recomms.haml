@@ -2,9 +2,19 @@
   .row
     .col-md-1
     .col-md-10
+      %h2 Steam OpenID
+      %a{ :href => '/login'} 
+        %img{ :src => 'http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_large_border.png' }
+      %br
+      %br
+      %p
+        Login with Steam and we can automatically generate recommendations for you.  At no time do we have access
+        to your Steam credentials.  
+      %br
+      %br
       %form{:action => "recomms_submit" }
         %fieldset
-          %legend Get Recommendations
+          %legend Manual Entry
           %label Steam Id
           %input{:type => "text", :name => "steamid", :placeholder => "7656119xxxxxxxxxx", :required => true }
           %button{:type => "submit", "class" => "btn"} Submit
@@ -18,8 +28,12 @@
 
         and tracking down the profile ID (7656119xxxxxxxxx).  With this identifer we are able to see what 
         games you own and what games you have been playing so that we can give you personalized game
-        recommendations.  This only works if your profile is public, as we do not have access to any private
-        information from your profile.
+        recommendations.  
+        
+      %p
+        %strong
+          This only works if your profile is public, as we do not have access to any private
+          information from your profile.
 
       %hr
 

@@ -13,6 +13,7 @@ get '/login' do
       redirect "/recomms/#{id}"
     else
       "Error: #{resp.status}"
+      redirect "/recomms"
     end
   else
     headers 'WWW-Authenticate' => Rack::OpenID.build_header(

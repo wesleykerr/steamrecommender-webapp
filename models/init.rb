@@ -1,6 +1,11 @@
 require 'data_mapper'
 
-config_obj = YAML::load_file( "#{File.expand_path('models')}/../../config/steamrecommender.yml" )
+if (@@config_obj)
+  config_obj = @@config_obj
+else
+  config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
+end
+
 host = config_obj['mysql_host']
 db   = config_obj['mysql_db']
 user = config_obj['mysql_user']

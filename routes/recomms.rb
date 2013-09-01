@@ -55,14 +55,16 @@ get '/recomms' do
 end
 
 get '/recomms_submit' do
-  @page = params[:page].to_i || 1
+  @page = 1
+  @page = params[:page].to_i if params[:page]
   @steamid = params[:steamid]
   @not_played,@not_owned = get_recomms(@steamid, @page)
   haml :recomms_personal
 end
 
 get '/recomms/:steamid' do
-  @page = params[:page].to_i || 1
+  @page = 1
+  @page = params[:page].to_i if params[:page]
   @steamid = params[:steamid]
   @not_played,@not_owned = get_recomms(@steamid, @page)
   haml :recomms_personal

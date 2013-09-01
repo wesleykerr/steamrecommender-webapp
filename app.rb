@@ -4,14 +4,22 @@ require 'sinatra/reloader' if development?
 require 'yaml'
 require 'haml'
 
-require 'models/init.rb'
-require 'routes/init.rb'
 require 'recomms.rb'
+config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
-enable :sessions
+use Rack::Session::Cookie, 
+  :key => 'rack.session',
+  :domain => 'steamrecommender.com',
+  :path => '/',
+  :expire_after => 86400,
+  :secret => config_obj['secret_key']
 
 configure do
-  @@matrix_recomms = MatrixRecomms.new
+  @@log = Logger.new(STDOUT)
+  @@log.level = Logger::DEBUG
+  
+  @@config_obj = config_obj
+  @@matrix_recomms = MatrixRecomms.new(@@config_obj)
 end
 
 get '/' do
@@ -19,4 +27,6 @@ get '/' do
   haml :index
 end
 
+require 'models/init.rb'
+require 'routes/init.rb'
 

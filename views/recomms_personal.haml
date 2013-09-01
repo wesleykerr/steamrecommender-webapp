@@ -11,34 +11,64 @@
     .col-md-10
       %center
         %h2 Recommendations
-      %table{:class => 'table table-condensed'}
-        %thead
-          %td.recomms
+        .row
+          .col-md-1
+          .col-md-5
             %h3 Should Play
-          %td.recomms
+            - @not_played.each do |e_game|
+              .row
+                %a{ :href => "games/#{e_game['appid']}" }= e_game['title']
+                %br
+                %a{ :href => e_game['steam_url'] }
+                  %img{:src => e_game['steam_img_url'], :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
+          .col-md-5
             %h3 Should Buy
-        - @recomms.each do |e_game,n_game|
-          %tr
-            %td.recomms
-              %a{ :href => "games/#{e_game['appid']}" }= @games_map[e_game['appid']].title
-              %br
-              %a{ :href => @games_map[e_game['appid']].steam_url }
-                %img{:src => @games_map[e_game['appid']].steam_img_url, :width=>'150px'}
-              %br 
-              %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
-            %td.recomms
-              %a{ :href => "games/#{n_game['appid']}" }= @games_map[n_game['appid']].title
-              %br
-              %a{ :href => @games_map[n_game['appid']].steam_url }
-                %img{:src => @games_map[n_game['appid']].steam_img_url, :width=>'150px'}
-              %br 
-              %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
+            - @not_owned.each do |n_game|
+              .row
+                %a{ :href => "games/#{n_game['appid']}" }= n_game['title']
+                %br
+                %a{ :href => n_game['steam_url'] }
+                  %img{:src => n_game['steam_img_url'], :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
+
 
       %hr
   .row
     .col-md-1
     .col-md-10
-      :erb
+      %center
+        %ul.pagination
+          - if (@page == 1)
+            %li.disabled
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=1"}
+                &laquo;
+          - else
+            %li
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page-1}" }
+                &laquo;
+          - (1..9).each do |x|
+            - if (@page == x)
+              %li.active 
+                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
+            - else
+              %li 
+                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
+          - if (@page == 9)
+            %li.disabled
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=9"}
+                &raquo;
+          - else
+            %li
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page+1}"}
+                &raquo;
+        
+  .row
+    .col-md-1
+    .col-md-10
+      :plain
         <script type="text/javascript"><!-- 
         google_ad_client = "ca-pub-5053630439831931"; 
         /* Games */ 
@@ -55,4 +85,8 @@
     .col-md-10
       %div= haml :footer
 
-    
+:javascript
+  $(document).ready(function() { 
+    $('#recomms').oneSimpleTablePagination({});
+  });
+

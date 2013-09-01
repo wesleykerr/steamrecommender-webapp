@@ -7,10 +7,11 @@ require 'logger'
 
 class Recomms
  
-  def initialize
+  def initialize(config_obj)
     @log = Logger.new(STDOUT)
     @log.level = Logger::DEBUG
-    @config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
+    @config_obj = config_obj
+      #YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
   end 
 
   def owned_games(steamid)
@@ -38,8 +39,8 @@ end
 
 class MatrixRecomms < Recomms
 
-  def initialize
-    super
+  def initialize(config_obj)
+    super(config_obj)
     matrix_file = "#{File.expand_path('.')}/../config/heats.csv" 
     load_matrix(matrix_file)
   end

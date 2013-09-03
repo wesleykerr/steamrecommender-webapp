@@ -10,7 +10,7 @@ get '/login' do
       puts "Welcome: #{resp.display_identifier}"
       tokens = resp.display_identifier.split('/')
       id = tokens[tokens.length-1]
-      redirect "/recomms/#{id}"
+      redirect "/recomms_submit?steamid=#{id}"
     else
       "Error: #{resp.status}"
       redirect "/recomms"

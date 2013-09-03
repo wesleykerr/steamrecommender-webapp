@@ -22,8 +22,24 @@ class Recomms
     @log.debug { "key: #{steam_key}" }
     steam_params='include_played_free_games=1'
     uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
-    document = Net::HTTP.get(uri)
-    data = JSON.parse(document)['response']
+    
+    count = 0 
+    success = false
+    begin
+      begin
+        document = Net::HTTP.get(uri)
+        data = JSON.parse(document)['response']
+        success = true
+      rescue ParserError => e
+        @log.debug { "Failed to parse response document #{e}" }
+        count += 1
+      end
+    end while !success && count < 5
+
+    unless success
+      @log.error { "Failed to connect to steam after n tries, so giving up" }
+      return nil
+    end
 
     # save an audit record
     audit = Audit.create(

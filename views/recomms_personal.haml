@@ -68,25 +68,17 @@
   .row
     .col-md-1
     .col-md-10
-      :plain
-        <script type="text/javascript"><!-- 
-        google_ad_client = "ca-pub-5053630439831931"; 
-        /* Games */ 
-        google_ad_slot = "6861504808"; 
-        google_ad_width = 728; 
-        google_ad_height = 90; 
-        //-->
-        </script>
-        <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-        </script>
+      %script{ :type => "text/javascript" }
+        :plain
+          google_ad_client = "ca-pub-5053630439831931"; 
+          /* Games */ 
+          google_ad_slot = "6861504808"; 
+          google_ad_width = 728; 
+          google_ad_height = 90; 
+      %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js" }
   .row
     .col-md-1
     .col-md-10
       %div= haml :footer
 
-:javascript
-  $(document).ready(function() { 
-    $('#recomms').oneSimpleTablePagination({});
-  });
 

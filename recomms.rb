@@ -32,6 +32,7 @@ class Recomms
         success = true
       rescue ParserError => e
         @log.debug { "Failed to parse response document #{e}" }
+        success = false
         count += 1
       end
     end while !success && count < 5

@@ -27,6 +27,7 @@ get '/' do
   haml :index
 end
 
+require 'helpers/helpers.rb'
 require 'models/init.rb'
 require 'routes/init.rb'
 

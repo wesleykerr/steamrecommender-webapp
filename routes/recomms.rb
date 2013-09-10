@@ -12,15 +12,19 @@ helpers do
 
   def get_recomms(steamid, page_number=1)
     # 4 hours back
+    s_time = Time.now
     min_date = DateTime.now - Rational(4, 24)
     audit_records = AuditRecomm.all(:steamid => steamid, :order => [ :create_datetime.desc ])
     json_obj = { }
     if (audit_records && audit_records.length > 0 && audit_records.first[:create_datetime] > min_date)
       audit_recomm = audit_records.first
       json_obj = audit_recomm[:recomms]
+      e_time = Time.now
+      logger.info { "get_recomms audit record #{(e_time.to_ms - s_time.to_ms)}" } 
     else
       not_played,not_owned = @@matrix_recomms.get_recomms(steamid)
       json_obj = { "not_played" => not_played, "not_owned" => not_owned, "pages" => [] }
+      logger.info { "get_recomms matrix multiplication #{(e_time.to_ms - s_time.to_ms)}" } 
     end
    
     start_index = (page_number-1)*10
@@ -28,12 +32,15 @@ helpers do
     sub_no = json_obj["not_owned"][start_index..start_index+9]
     unless (json_obj["pages"].include? page_number) 
       games_map = {}
+      s_time = Time.now
       ids = sub_np.map { |x| x['appid'] } .concat(sub_no.map { |x| x['appid'] })
       games = Game.all(:fields => [:appid,:title,:steam_url,:steam_img_url], :appid => ids ) 
       games.each { |game| games_map[game.appid] = game }
       merge(sub_np, games_map)
       merge(sub_no, games_map)
       json_obj["pages"] << page_number
+      e_time = Time.now
+      logger.info { "get_recomms gathered games #{(e_time.to_ms - s_time.to_ms)}" } 
     end
 
     if (audit_recomm)

@@ -60,6 +60,7 @@ GEM
     json_pure (1.8.0)
     multi_json (1.7.3)
     narray (0.6.0.8)
+    newrelic_rpm (3.6.7.152)
     rack (1.5.2)
     rack-openid (1.3.1)
       rack (>= 1.1.0)
@@ -94,6 +95,7 @@ DEPENDENCIES
   haml
   json
   narray
+  newrelic_rpm
   rack-openid
   ruby-openid
   sinatra

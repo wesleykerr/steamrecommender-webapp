@@ -4,7 +4,7 @@ require 'sinatra/reloader' if development?
 require 'yaml'
 require 'haml'
 
-require 'time.rb'
+require 'time_ext.rb'
 require 'recomms.rb'
 config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 

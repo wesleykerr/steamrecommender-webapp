@@ -29,7 +29,7 @@ helpers do
     end
    
     start_index = (page_number-1)*10
-    sub_np = json_obj["not_played"][start_index..start_index+9]
+    sub_np = json_obj["not_played"][start_index..start_index+9] || []
     sub_no = json_obj["not_owned"][start_index..start_index+9]
     unless (json_obj["pages"].include? page_number) 
       games_map = {}

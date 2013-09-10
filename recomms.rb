@@ -30,7 +30,7 @@ class Recomms
         document = Net::HTTP.get(uri)
         data = JSON.parse(document)['response']
         success = true
-      rescue ParserError => e
+      rescue JSON::ParserError => e
         @log.debug { "Failed to parse response document #{e}" }
         success = false
         count += 1

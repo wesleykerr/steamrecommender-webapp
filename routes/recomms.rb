@@ -24,6 +24,7 @@ helpers do
     else
       not_played,not_owned = @@matrix_recomms.get_recomms(steamid)
       json_obj = { "not_played" => not_played, "not_owned" => not_owned, "pages" => [] }
+      e_time = Time.now
       logger.info { "get_recomms matrix multiplication #{(e_time.to_ms - s_time.to_ms)}" } 
     end
    

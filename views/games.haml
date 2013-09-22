@@ -1,16 +1,52 @@
 .container.marketing
   .row
-    .col-md-1
     .col-md-10
       %center
-        %h2 Steam Games
-      %table{:class => 'table'}
-        - @games.each do |game|
-          %tr
-            %td 
-              %a{ :href => "games/#{game.appid}" }= game.appid
-            %td
-              %a{ :href => "games/#{game.appid}" }= game.title
+        %h2 Games
+      %center
+        .row
+          .col-md-8
+          .col-md-2{ :title => "Sort by total playtime" }
+            %a{ :href => "games?order=total_playtime" }
+              %strong All Time
+          .col-md-2{ :title => "Sort by recent playtime" }
+            %a{ :href => "games?order=recent_playtime" }
+              %strong Recent
+      .row
+        .col-md-3
+        .col-md-5.text-center
+          %strong Title
+        .col-md-1.text-right{ :title => "Sort by total playtime" }
+          %a{ :href => "games?order=total_playtime" }
+            %strong Total
+        .col-md-1.text-right{ :title => "Sort by the total average playtime" }
+          %a{ :href => "games?order=total_mean" }
+            %strong Avg
+        .col-md-1.text-right{ :title => "Sort by recent playtime" }
+          %a{ :href => "games?order=recent_playtime" }
+            %strong Total
+        .col-md-1.text-right{ :title => "Sort by recent average playtime" }
+          %a{ :href => "games?order=recent_mean" }
+            %strong Avg
+      - @games.each do |game|
+        .row
+          .col-md-1
+          .col-md-2
+            %a{ :href => "games/#{game.appid}" }
+              %img{ :src => "#{game.steam_img_url}", :width => '150px' }
+            %br
+          .col-md-5
+            %a{ :href => "games/#{game.appid}" }= game.title
+          .col-md-1.text-right
+            = '%.0f' % game.total_playtime if game.total_playtime
+          .col-md-1.text-right
+            = '%.0f' % game.total_mean if game.total_mean
+          .col-md-1.text-right
+            = '%.0f' % game.recent_playtime if game.recent_playtime
+          .col-md-1.text-right
+            = '%.0f' % game.recent_mean if game.recent_mean
+        %br
+
       .flickr_pagination
         = will_paginate @games, :container => false
       %hr

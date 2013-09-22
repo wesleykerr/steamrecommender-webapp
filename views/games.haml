@@ -5,7 +5,7 @@
         %h2 Games
       %center
         .row
-          .col-md-8
+          .col-md-7
           .col-md-2{ :title => "Sort by total playtime" }
             %a{ :href => "games?order=total_playtime" }
               %strong All Time
@@ -13,7 +13,7 @@
             %a{ :href => "games?order=recent_playtime" }
               %strong Recent
       .row
-        .col-md-3
+        .col-md-2
         .col-md-5.text-center
           %strong Title
         .col-md-1.text-right{ :title => "Sort by total playtime" }
@@ -30,7 +30,6 @@
             %strong Avg
       - @games.each do |game|
         .row
-          .col-md-1
           .col-md-2
             %a{ :href => "games/#{game.appid}" }
               %img{ :src => "#{game.steam_img_url}", :width => '150px' }
@@ -45,7 +44,7 @@
             = '%.0f' % game.recent_playtime if game.recent_playtime
           .col-md-1.text-right
             = '%.0f' % game.recent_mean if game.recent_mean
-        %br
+        %hr
 
       .flickr_pagination
         = will_paginate @games, :container => false

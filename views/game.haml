@@ -37,8 +37,8 @@
                 %td Hours Played
                 %td= @game.total_playtime.to_i || 0
               %tr
-                %td Mean Hours Played
-                %td= @game.total_mean.to_i || 0
+                %td Median Hours Played
+                %td= @game.total_median.to_i || 0
         .col-md-6
           %center
             %h3 Recent Playtime
@@ -50,8 +50,8 @@
                 %td Hours Played
                 %td= @game.recent_playtime.to_i || 0
               %tr
-                %td Mean Hours Played
-                %td= @game.recent_mean.to_i || 0
+                %td Median Hours Played
+                %td= @game.recent_median.to_i || 0
 
   .row
     .col-md-1

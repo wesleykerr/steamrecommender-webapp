@@ -9,13 +9,15 @@ class Game
   property :app_type,         String, :length => 50
   property :owned,            Integer
   property :not_played,       Integer
-  property :total_playtime,   Decimal
-  property :total_mean,       Decimal
-  property :total_std,        Decimal
+  property :total_playtime,   Decimal, :precision => 10, :scale => 2
+  property :total_q25,        Decimal, :precision => 10, :scale => 2
+  property :total_q75,        Decimal, :precision => 10, :scale => 2
+  property :total_median,     Decimal, :precision => 10, :scale => 2
   property :recent_played,    Integer
-  property :recent_playtime,  Decimal
-  property :recent_mean,      Decimal
-  property :recent_std,       Decimal
+  property :recent_playtime,  Decimal, :precision => 10, :scale => 2
+  property :recent_q25,       Decimal, :precision => 10, :scale => 2
+  property :recent_q75,       Decimal, :precision => 10, :scale => 2
+  property :recent_median,    Decimal, :precision => 10, :scale => 2
 
   property :metacritic,       String, :length => 256
   property :giantbomb_id,     Integer

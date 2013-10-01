@@ -7,72 +7,59 @@
   }
 .container
   .row
-    .col-md-1
-    .col-md-10
-      %center
-        %h2 Recommendations
-        .row
-          .col-md-1
-          .col-md-5
-            %h3 Should Play
-            - @not_played.each do |e_game|
-              .row
-                %a{ :href => "games/#{e_game['appid']}" }= e_game['title']
-                %br
-                %a{ :href => e_game['steam_url'] }
-                  %img{:src => e_game['steam_img_url'], :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
-          .col-md-5
-            %h3 Should Buy
-            - @not_owned.each do |n_game|
-              .row
-                %a{ :href => "games/#{n_game['appid']}" }= n_game['title']
-                %br
-                %a{ :href => n_game['steam_url'] }
-                  %img{:src => n_game['steam_img_url'], :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
+    .col-md-11
+      %ul.nav.nav-tabs{ :id => "myTab" }
+        %li.active
+          %a{ :href => "#games"} Your Games
+        %li
+          %a{ :href => "#shouldBuy"} Recommended Purchases
+        %li
+          %a{ :href => "#shouldPlay"} Recommended to Play
+  
+  .tab-content
+    .tab-pane.active{ :id => "games" }
+      .row
+        .col-md-1
+        .col-md-10
+          %p This is a test to see what data shows up
+    .tab-pane{ :id => "shouldBuy" }
+      .row
+        .col-md-1
+        .col-md-10
+          %p This is test number two to see how things look
+    .tab-pane{ :id => "shouldPlay" }
+      .row 
+        .col-md-1
+        .col-md-10
+          %p This is the final test and we'll see what happens
 
+  .row
+    .col-md-11
+      %div{ :id => "example" }
+      %div.alert.alert-info{ :id => "page-clicked-event-alert" } 
+        %span{ :id => "alert-content" }
+          Click on the pages to trigger the page-clicked event
 
-      %hr
-  .row
-    .col-md-1
-    .col-md-10
-      %center
-        %ul.pagination
-          - if (@page == 1)
-            %li.disabled
-              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=1"}
-                &laquo;
-          - else
-            %li
-              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page-1}" }
-                &laquo;
-          - (1..9).each do |x|
-            - if (@page == x)
-              %li.active 
-                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
-            - else
-              %li 
-                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
-          - if (@page == 9)
-            %li.disabled
-              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=9"}
-                &raquo;
-          - else
-            %li
-              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page+1}"}
-                &raquo;
-        
-  .row
-    .col-md-1
-    .col-md-10
-      %center
-        = google_ad()
   .row
     .col-md-1
     .col-md-10
       %div= haml :footer
 
+%script{ :src => "js/jquery-1.10.2.min.js" }
+%script{ :src => "js/bootstrap.min.js" }
+%script{ :src => "js/bootstrap-paginator.js" }
+:javascript
+  $('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+:javascript
+  var options = {
+    currentPage: 3,
+    totalPages: 10, 
+    onPageClicked: function(e, originalEvent, type, page) {
+      $('#alert-content').text("Page item clicked, type: " + type + " page: " + page);
+    }
+  }
+  $('#example').bootstrapPaginator(options);
 

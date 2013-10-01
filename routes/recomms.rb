@@ -78,5 +78,13 @@ get '/recomms/:steamid' do
   haml :recomms_personal
 end
 
+get '/recomms/:steamid/games'
+  @page = 1
+  @page = params[:page].to_i if params[:page]
+  s_time = Time.now
+  min_date = DateTime.now - Rational(4, 24)
+
+end
+
 
 

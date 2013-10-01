@@ -15,7 +15,6 @@ class Recomms
   end 
 
   def owned_games(steamid)
-    # TODO: add retry logic
     steam_host="api.steampowered.com"
     steam_path="/IPlayerService/GetOwnedGames/v0001/"
     steam_key=@config_obj['steam_key']
@@ -59,7 +58,8 @@ class MatrixRecomms < Recomms
   def initialize(config_obj)
     super(config_obj)
     matrix_file = "#{File.expand_path('.')}/../config/heats.csv" 
-    load_matrix(matrix_file)
+    # TODO: uncomment when we are ready to start computing scores.
+    #load_matrix(matrix_file)
   end
 
   def get_recomms(steamid, num_recomms=100, session=nil)

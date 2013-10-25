@@ -2,57 +2,7 @@ require 'narray'
 require 'json'
 require 'uri'
 require 'net/http'
-require 'logger'
   
-
-class Recomms
- 
-  def initialize(config_obj)
-    @log = Logger.new(STDOUT)
-    @log.level = Logger::DEBUG
-    @config_obj = config_obj
-      #YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
-  end 
-
-  def owned_games(steamid)
-    steam_host="api.steampowered.com"
-    steam_path="/IPlayerService/GetOwnedGames/v0001/"
-    steam_key=@config_obj['steam_key']
-    @log.debug { "key: #{steam_key}" }
-    steam_params='include_played_free_games=1'
-    uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
-    
-    count = 0 
-    success = false
-    begin
-      begin
-        document = Net::HTTP.get(uri)
-        data = JSON.parse(document)['response']
-        success = true
-      rescue JSON::ParserError => e
-        @log.debug { "Failed to parse response document #{e}" }
-        success = false
-        count += 1
-      end
-    end while !success && count < 5
-
-    unless success
-      @log.error { "Failed to connect to steam after n tries, so giving up" }
-      return nil
-    end
-
-    # save an audit record
-    audit = Audit.create(
-      :steamid => steamid,
-      :json => data,
-      :create_datetime => DateTime.now
-    )
-    @log.error("Failed to create audit record #{steamid}") unless audit.saved?
-    data
-  end
-
-end
-
 class MatrixRecomms < Recomms
 
   def initialize(config_obj)

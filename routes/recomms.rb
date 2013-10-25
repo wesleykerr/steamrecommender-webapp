@@ -1,5 +1,42 @@
 
 helpers do
+  # This method sends a query to steam to get the most recent
+  # statistics about a players gaming habits.
+  # @param [String] steamid
+  def query_steam(steamid)
+    steam_host="api.steampowered.com"
+    steam_path="/IPlayerService/GetOwnedGames/v0001/"
+    steam_key=@@config_obj['steam_key']
+    logger.debug { "key: #{steam_key}" }
+    steam_params='include_played_free_games=1'
+    uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
+    
+    count = 0 
+    success = false
+    begin
+      begin
+        document = Net::HTTP.get(uri)
+        data = JSON.parse(document)['response']
+        success = true
+      rescue JSON::ParserError => e
+        logger.debug { "Failed to parse response document #{e}" }
+        success = false
+        count += 1
+      end
+    end while !success && count < 5
+
+    unless success
+      logger.error { "Failed to connect to steam after n tries, so giving up" }
+      return nil
+    end
+    audit = Audit.create(
+      :steamid => steamid,
+      :json => data,
+      :create_datetime => DateTime.now
+    )
+    logger.error("Failed to create audit record #{steamid}") unless audit.saved?
+    data 
+  end
 
   def merge(obj_array, obj_map) 
     obj_array.each do |hash|
@@ -10,6 +47,44 @@ helpers do
     end 
   end
 
+  # generate the recommendations
+  # @param [Number] the steam id we are looking up
+  # @param [Number] the maximum number of recomms
+  def get_recomms(steamid, num_recomms=100)
+    data = query_steam(steamid)
+    owned = []
+    played = []
+    data['games'].each do |game_stats|
+      owned << game_stats['appid']
+      forever = game_stats['playtime_forever']
+      played << game_stats['appid'] if (forever && forever >= 30)
+    end
+    columns = Model.all(:appid => played + [-1])
+    
+    result = @matrix * player_vector
+    not_played_scores = []
+    not_owned_scores = []
+    @items.each_with_index do |item,idx|
+      item_hash = {}
+      item_hash['appid'] = item
+      item_hash['score'] = result[idx]
+      if owned_set.include?(item) && !played_set.include?(item)
+        not_played_scores << item_hash
+      end
+
+      unless owned_set.include?(item)
+        not_owned_scores << item_hash
+      end
+    end
+    not_played_scores.sort! { |x,y| y['score'] <=> x['score'] }
+    not_owned_scores.sort! { |x,y| y['score'] <=> x['score'] }
+    [not_played_scores[0..num_recomms-1],not_owned_scores[0..num_recomms-1]]
+  end
+
+  # generate or find the recommendations for a steamid
+  # returns the subset within the page.
+  # @param [Number] the steamid we are looking up
+  # @param [Number] the page that we are on
   def get_recomms(steamid, page_number=1)
     # 4 hours back
     s_time = Time.now

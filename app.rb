@@ -1,11 +1,12 @@
 require 'rubygems' # skip this line in ruby 1.9 and later
 require 'sinatra'
 require 'sinatra/reloader' if development?
+require 'sinatra/cookies'
 require 'yaml'
 require 'haml'
 
 require 'time_ext.rb'
-require 'recomms.rb'
+#require 'helpers/recomms.rb'
 config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
 use Rack::Session::Cookie, 
@@ -16,11 +17,7 @@ use Rack::Session::Cookie,
   :secret => config_obj['secret_key']
 
 configure do
-  @@log = Logger.new(STDOUT)
-  @@log.level = Logger::DEBUG
-  
   @@config_obj = config_obj
-  @@matrix_recomms = MatrixRecomms.new(@@config_obj)
 end
 
 get '/' do

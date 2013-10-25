@@ -5,7 +5,7 @@ class Model
   include DataMapper::Resource
  
   property :model_id,       Integer, :key => true 
-  property :appid,          Integer, :key => true, :min => 0, :max => 2**64-1
+  property :appid,          Integer, :key => true, :max => 2**64-1
   property :model_column,   Text
 
 end

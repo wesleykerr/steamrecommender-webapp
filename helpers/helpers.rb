@@ -16,6 +16,9 @@ helpers do
                </script>'
   end
 
+  # This method sends a query to steam to get the most recent
+  # statistics about a players gaming habits.
+  # @param [String] steamid
   def query_steam(steamid)
     steam_host="api.steampowered.com"
     steam_path="/IPlayerService/GetOwnedGames/v0001/"
@@ -42,7 +45,12 @@ helpers do
       logger.error { "Failed to connect to steam after n tries, so giving up" }
       return nil
     end
-    data
+    audit = Audit.create(
+      :steamid => steamid,
+      :json => data,
+      :create_datetime => DateTime.now
+    )
+    logger.error("Failed to create audit record #{steamid}") unless audit.saved?
+    data 
   end
-
 end

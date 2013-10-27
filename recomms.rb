@@ -22,7 +22,6 @@ class Recomms
     @log.debug { "key: #{steam_key}" }
     steam_params='include_played_free_games=1'
     uri = URI("http://#{steam_host}#{steam_path}?key=#{steam_key}&steamid=#{steamid}&#{steam_params}")
-    
     count = 0 
     success = false
     begin
@@ -31,7 +30,7 @@ class Recomms
         data = JSON.parse(document)['response']
         success = true
       rescue JSON::ParserError => e
-        @log.debug { "Failed to parse response document #{e}" }
+        @log.error { "Failed to parse response document #{e}" }
         success = false
         count += 1
       end
@@ -39,7 +38,7 @@ class Recomms
 
     unless success
       @log.error { "Failed to connect to steam after n tries, so giving up" }
-      return nil
+      raise IOError, "Steam connection error!" 
     end
 
     # save an audit record
@@ -64,6 +63,8 @@ class MatrixRecomms < Recomms
 
   def get_recomms(steamid, num_recomms=100, session=nil)
     data = owned_games(steamid)
+    raise RuntimeError, 'Private Steam Profile!' if data.size == 0 
+
     player_vector,owned_set,played_set = parse_data(data)
     
     result = @matrix * player_vector

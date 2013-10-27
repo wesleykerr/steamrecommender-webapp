@@ -66,8 +66,14 @@ get '/recomms_submit' do
   @page = 1
   @page = params[:page].to_i if params[:page]
   @steamid = params[:steamid]
-  @not_played,@not_owned = get_recomms(@steamid, @page)
-  haml :recomms_personal
+  begin
+    @not_played,@not_owned = get_recomms(@steamid, @page)
+    haml :recomms_personal
+  rescue RuntimeError
+    redirect to('/private')
+  rescue IOError
+    redirect to('/connection')
+  end
 end
 
 get '/recomms/:steamid' do
@@ -78,5 +84,10 @@ get '/recomms/:steamid' do
   haml :recomms_personal
 end
 
+get '/private' do
+  haml :private
+end
 
-
+get '/connection' do
+  haml :connection
+end

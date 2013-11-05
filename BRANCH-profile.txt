@@ -1,0 +1,31 @@
+This branch is working towards a browsable profile for users of steam
+recommender.  This involves quite a few changes and this branch attempts to
+juggle them all.  This document will serve as a reminder for where I am so that
+when I return after a few days rest to the project I don't lose as much time
+trying to figure out what I was doing.
+
+1. recomms - We are changing the way that we are storing the recommendation and
+the model.  Rather than keep it in a file, we are storing by column in the
+database.  There is a single record in the database with column id equal to -1
+that stores the names (game ids) for all of the column information.  When we
+compute the recommendations, we first pull the Steam profile information for a
+player, then iterate over the games that we care about and pull the columns
+into a matrix so that we can multiply it by the estimated rating.
+
+    Status: database is prepared and queries are being prepared.  need to
+    update all of the recommendation code to actually pull in the correct
+    audits and details.
+
+2.  profile - The profile page contains the games that a player owns and the
+number of hours that they've played each game.  Every game that is played comes
+with it's own 4/5 recommendations.  
+
+    Status: currently are pulling the profile from steam and storing it into
+    mysql for viewing.  Need to update the webpage so that it looks good.  I
+    also need to augment the profile with all of the game related data (title,
+    steam_url, steam_img_url and recommendations).
+
+3.  pagination - In app pagination rather than server side.  
+
+    Status: Can't quite remember.  Was working but not sure how.
+

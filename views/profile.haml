@@ -15,42 +15,10 @@
           .col-md-1
           .col-md-5
             %h3 Should Play
-            - @not_played.each do |e_game|
-              .row
-                %a{ :href => "games/#{e_game['appid']}" }= e_game['title']
-                %br
-                %a{ :href => e_game['steam_url'] }
-                  %img{:src => e_game['steam_img_url'], :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
-
-  .row
-    .col-md-11
-      %div{ :id => "example" }
-      %div.alert.alert-info{ :id => "page-clicked-event-alert" } 
-        %span{ :id => "alert-content" }
-          Click on the pages to trigger the page-clicked event
 
   .row
     .col-md-1
     .col-md-10
       %div= haml :footer
 
-%script{ :src => "js/jquery-1.10.2.min.js" }
-%script{ :src => "js/bootstrap.min.js" }
-%script{ :src => "js/bootstrap-paginator.js" }
-:javascript
-  $('#myTab a').click(function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-  })
-:javascript
-  var options = {
-    currentPage: 1,
-    totalPages: 10, 
-    onPageClicked: function(e, originalEvent, type, page) {
-      $('#alert-content').text("Page item clicked, type: " + type + " page: " + page);
-    }
-  }
-  $('#example').bootstrapPaginator(options);
 

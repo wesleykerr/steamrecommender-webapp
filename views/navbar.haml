@@ -24,6 +24,6 @@
               %a{:href => '/contact'}Contact
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{:href => '/steamid'}= session[:steamid] ? "Steam Id=#{session[:steamid]}" : "Steam Id"
+              %a{:href => '/steamid'}= session[:steamid] ? "#{session[:steamid]}" : "Steam Id"
             %li
               %a{:href => '/reset'}Reset

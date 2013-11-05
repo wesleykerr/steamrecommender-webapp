@@ -77,6 +77,8 @@ helpers do
     # the details are missing so we need to query it
     steamDetails = getSteamDetails(steamid)
     
+    ## TODO: iterate through the games and pull in the
+    #  details for the first page? 
   end 
 
   # This method sends a query to steam to get the most recent
@@ -110,7 +112,8 @@ helpers do
       logger.error { "Failed to connect to steam after n tries, so giving up" }
       raise IOError, "Steam connection error!" 
     end
-
+    raise RuntimeError, 'Private Steam Profile!' if data.size == 0
+    
     data.sort! { |x,y| y['playtime_forever'] <=> x['playtime_forever'] }
     audit = Audit.create(
       :steamid => steamid,

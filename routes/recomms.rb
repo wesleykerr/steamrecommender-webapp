@@ -18,6 +18,11 @@ get '/recomms' do
   "You did it"
 end
 
+get '/recomms_submit' do
+  session[:steamid] = params[:steamid]
+  redirect to('/profile')
+end
+
 get '/recomms/:steamid' do
   @page = 1
   @page = params[:page].to_i if params[:page]

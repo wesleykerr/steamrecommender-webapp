@@ -8,12 +8,7 @@ require 'time_ext.rb'
 require 'recomms.rb'
 config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
-use Rack::Session::Cookie, 
-  :key => 'rack.session',
-  :domain => 'steamrecommender.com',
-  :path => '/',
-  :expire_after => 86400,
-  :secret => config_obj['secret_key']
+enable :sessions
 
 configure do
   @@log = Logger.new(STDOUT)

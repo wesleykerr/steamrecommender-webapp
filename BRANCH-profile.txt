@@ -16,6 +16,10 @@ into a matrix so that we can multiply it by the estimated rating.
     update all of the recommendation code to actually pull in the correct
     audits and details.
 
+    Add self.get_record (from Player.rb in models) to the audit and use that
+    for keeping getting cached records out of the database.  The code is very
+    cleanly written and worth looking into closely.
+
 2.  profile - The profile page contains the games that a player owns and the
 number of hours that they've played each game.  Every game that is played comes
 with it's own 4/5 recommendations.  

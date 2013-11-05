@@ -23,6 +23,8 @@ class Game
   property :giantbomb_id,     Integer
   property :updated_datetime, DateTime
 
+  property :recomms,          Json
+
   property :steam_url,        String, :length => 256
   property :steam_img_url,    String, :length => 256
   property :last_checked,     DateTime

@@ -10,7 +10,7 @@
     .col-md-1
     .col-md-10
       %center
-        %h2 Recommendations
+        %h2 Profile
         .row
           .col-md-1
           .col-md-5
@@ -23,17 +23,6 @@
                   %img{:src => e_game['steam_img_url'], :width=>'150px'}
                 %br 
                 %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
-          .col-md-5
-            %h3 Should Buy
-            - @not_owned.each do |n_game|
-              .row
-                %a{ :href => "games/#{n_game['appid']}" }= n_game['title']
-                %br
-                %a{ :href => n_game['steam_url'] }
-                  %img{:src => n_game['steam_img_url'], :width=>'150px'}
-                %br 
-                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
-
 
       %hr
   .row

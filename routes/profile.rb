@@ -5,7 +5,7 @@ get '/profile' do
     session[:returnTo] = '/profile'
     redirect to('/steamid')
   end
-  haml :profile
+  json getProfile(session[:steamid])
 end
 
 get '/profile/:steamid' do

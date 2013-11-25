@@ -1,3 +1,4 @@
+require 'narray'
 require 'json'
 require 'uri'
 require 'net/http'
@@ -20,79 +21,151 @@ helpers do
   # @param [Number] the appid to lookup
   # @param [Number] the number of recommendations
   # @return [Array] recommended items
-  def getRecomms(appids, nrecs)
+  def getRecommIdsAndScores(played, notPlayed, nrecs)
     headers = Model.get(1, -1)
     headers = headers.model_column.split(",").map { |x| x.to_i } 
-    models = Model.all(:model_id => 1, :appid => appids)
-    models.collect do |model,idx|
-      apps = []
-      model.model_column.split(",").each_with_index do |x,idx|
-        apps << [headers[idx], x]
+
+    modelMatrix = NMatrix.float(played.count, headers.count)
+    models = Model.all(:model_id => 1, :appid => played, :order => [:appid.asc])
+    models.each_with_index do |model,col|
+      model.model_column.split(",").each_with_index do |x,row|
+        modelMatrix[col, row] = x.to_f
       end
-      apps.sort! { |x,y| y[1] <=> x[1] }
-      apps[0..(nrecs-1)]
     end
+    vector = NVector.float(played.count)
+    vector.fill!(1)
+    
+    resultVector = modelMatrix * vector
+    recommsNew = []
+    recommsNotPlayed = []
+    headers.each_with_index do |appid,idx|
+      unless played.include?(appid) 
+        hash = { 'appid' => appid, 'score' => resultVector[idx] }
+        if notPlayed.include?(appid)
+          recommsNotPlayed << hash
+        else
+          recommsNew << hash
+        end
+      end
+    end
+    recommsNew.sort! { |x,y| y['score'] <=> x['score'] }.slice!(0, 100)
+    recommsNotPlayed.sort! { |x,y| y['score'] <=> x['score'] }.slice!(0, 100)
+    { "new" => populateGameData(recommsNew), 
+      "owned" => populateGameData(recommsNotPlayed) } 
   end
 
-  # This method will query the database to see if this steam id has been online
-  # recently and therefore there is no need to query steam for their profile since
-  # it couldn't have changed much
-  # @param [String] steamid
-  # @return json game details if they exist in the cache
-  def querySteamCache(steamid) 
-    min_date = DateTime.now - Rational(8, 24)
-    audit_records = Audit.all(:steamid => steamid, 
-                              :order => [ :create_datetime.desc ])
-    json_obj = nil  
-    if (audit_records && audit_records.length > 0 && 
-        audit_records.first[:create_datetime] > min_date)
-      audit_recomm = audit_records.first
-      json_obj = audit_recomm[:json]
+  # compute all of the recommendations for a user
+  # and gather them from the cache if they already exist
+  # @param [String] the steam id
+  # @return the recommendations
+  def getRecomms(steamid)
+    cacheDetails = AuditRecomm.getAuditRecord(steamid)
+    return cacheDetails if cacheDetails
+
+    steamDetails = getSteamDetails(steamid)
+    played,notPlayed = parsePlayerData(steamDetails)
+    recomms = getRecommIdsAndScores(played, notPlayed, 5)
+    audit = AuditRecomm.create(
+      :steamid => steamid,
+      :recomms => recomms,
+      :create_datetime => DateTime.now
+    )
+    unless audit.saved?
+      logger.info(" RECOMMS: #{recomms.to_s.length}")
+      logger.error("Failed to create audit recomms record #{steamid}") 
+      audit.errors.each do |e| 
+        logger.info { "error #{e}" }
+      end
     end
-    json_obj
+    recomms
   end
 
-  # This method will query the key-value cache for the steamid and if
-  # it is prsent will return the details that we've retrieved within the
-  # last eight hours.
-  # @param [String] steamid
-  # @return json details of the game stored in the cache
-  def queryProfileCache(steamid)
-    min_date = DateTime.now - Rational(8, 24)
-    audit_records = AuditProfile.all(:steamid => steamid, 
-                                     :order => [ :create_datetime.desc ])
-    json_obj = nil  
-    if (audit_records && audit_records.length > 0 && 
-        audit_records.first[:create_datetime] > min_date)
-      audit_recomm = audit_records.first
-      json_obj = audit_recomm[:json]
+  # iterate through the array and populate each game with
+  # details from the game database.
+  # @param [Array] the arry of game hash details
+  # @return [Array] the array of game ids with additional details
+  def populateGameData(array) 
+    gameMap = {}
+    ids = array.collect do |steamGame| 
+      id = steamGame['appid']
+      gameMap[id] = steamGame
+      id
     end
-    json_obj
+    games = Game.all(:fields => [:appid,:title,:steam_url,:steam_img_url], :appid => ids ) 
+    games.each do |game|
+      hash = gameMap[game.appid]
+      hash['title'] = game.title
+      hash['steam_url'] = game.steam_url
+      hash['steam_img_url'] = game.steam_img_url
+    end
+    gameMap.values
+  end
+ 
+  # go over all of the player data and find the games 
+  # played so that we can pull build the correct
+  # records.
+  def parsePlayerData(data)
+    played = Set.new
+    notPlayed = Set.new
+    data['games'].each do |game_stats|
+      appid = game_stats['appid']
+      forever = game_stats['playtime_forever']
+      if forever && forever >= 30
+        played.add(appid)
+      else
+        notPlayed.add(appid)
+      end
+    end
+    [played, notPlayed]
   end
 
+  # generate the profile data for the profile endpoint.
+  # If present in the cache, return it. Otherwise
+  # generate it.
   def getProfile(steamid)
-    cacheDetails = queryProfileCache(steamid)
+    cacheDetails = AuditProfile.getAuditRecord(steamid)
     return cacheDetails if cacheDetails
 
     # the details are missing so we need to query it
     steamDetails = getSteamDetails(steamid)
+    logger.info { "Steam Details #{steamDetails.to_json}" } 
+    gameMap = {}
+    ids = steamDetails['games'].map do |steamGame| 
+      id = steamGame['appid']
+      gameMap[id] = steamGame
+      id
+    end
+    games = Game.all(:fields => [:appid,:title,:steam_url,:steam_img_url,:recomms], :appid => ids ) 
+    games.each do |game|
+      hash = gameMap[game.appid]
+      hash['title'] = game.title
+      hash['steam_url'] = game.steam_url
+      hash['steam_img_url'] = game.steam_img_url
+      hash['recomms'] = game.recomms
+    end
     
-    ## TODO: iterate through the games and pull in the
-    #  details for the first page? 
+    audit = AuditProfile.create(:steamid => steamid,
+                                :profile => gameMap.values,
+                                :create_datetime => DateTime.now
+    )
+    logger.error("failed to create audit profile record #{steamid}") unless audit.saved?
+    gameMap.values
   end 
 
   # This method sends a query to steam to get the most recent
   # statistics about a players gaming habits.
   # @param [String] steamid
   def getSteamDetails(steamid)
-    json_obj = querySteamCache(steamid)
+    json_obj = Audit.getAuditRecord(steamid)
     return json_obj if json_obj
     
+    logger.info { "GET IPlayerService/GetOwnedGames/v0001/#{steamid}" } 
     host="api.steampowered.com"
     path="/IPlayerService/GetOwnedGames/v0001/"
     steam_key=@@config_obj['steam_key']
     params='include_played_free_games=1'
     uri = URI("http://#{host}#{path}?key=#{steam_key}&steamid=#{steamid}&#{params}")
+    logger.info { "GET #{uri}" } 
     
     count = 0 
     success = false
@@ -114,7 +187,6 @@ helpers do
     end
     raise RuntimeError, 'Private Steam Profile!' if data.size == 0
     
-    data.sort! { |x,y| y['playtime_forever'] <=> x['playtime_forever'] }
     audit = Audit.create(
       :steamid => steamid,
       :json => data,

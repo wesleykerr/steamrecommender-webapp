@@ -16,9 +16,16 @@ into a matrix so that we can multiply it by the estimated rating.
     update all of the recommendation code to actually pull in the correct
     audits and details.
 
-    Add self.get_record (from Player.rb in models) to the audit and use that
-    for keeping getting cached records out of the database.  The code is very
-    cleanly written and worth looking into closely.
+    11/24/2013 - We dropped the idea of a Player.rb and instead used the ones
+    that existed already.  I've got the application producing JSON and caching
+    the results so that we don't have to grab everything too frequently.  
+
+    We are only going to support a few endpoints
+        game/:appid/
+        games/?page=xxx&order=xxx
+        genres/:genre/?page=xxx&order=xxx
+        profile/
+        recomms/
 
 2.  profile - The profile page contains the games that a player owns and the
 number of hours that they've played each game.  Every game that is played comes
@@ -29,7 +36,18 @@ with it's own 4/5 recommendations.
     also need to augment the profile with all of the game related data (title,
     steam_url, steam_img_url and recommendations).
 
+    Update: 11/24/2013 - ready to work on the front end and make sure that the
+    model is generating good recommendations.
+
 3.  pagination - In app pagination rather than server side.  
 
     Status: Can't quite remember.  Was working but not sure how.
+
+4.  webapp - The webapp will be an angular js app written to interact with the 
+REST interface.
+
+    11/24/2013: We have a working front page with bootstrap 3.0.2.  The earlier
+    version of bootstrap doesn't have a carousel that looks nice.  A think to 
+    keep in mind is that accordions do not work with angular-ui bootstrap and
+    the newer version of bootstrap.
 

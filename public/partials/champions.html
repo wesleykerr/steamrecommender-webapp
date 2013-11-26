@@ -1,0 +1,47 @@
+
+  <div>
+    <form>
+      <fieldset>
+        <accordion>
+          <accordion-group heading="Champions" is-open="true">
+            <div class="row">
+              <div class="span1" ng-repeat="champion in championObjects | filter:orderBy:'name'" >
+                <center>
+                  {{champion.name}}
+                  <br />
+                  <img ng-src="http://ddragon.leagueoflegends.com/cdn/3.14.20/img/champion/{{champion.name}}.png" title="{{champion.name}}" />
+                  <br />
+                  <input type="checkbox" ng-model="championsSelected[champion.name]" />
+                  <hr />
+                </center> 
+              </div>
+            </div>
+          </accordion-group>
+        </accordion>
+        <label class="checkbox"><input type="checkbox" ng-model="filterSkins" />Filter Skins</label>
+        <button class="btn" ng-click="getRecomms()">Submit</button>
+        <button class="btn" ng-click="clearChampions()">Clear</button>
+      </fieldset>
+    </form>
+    <h3>Selected</h3>
+    <div class="row">
+      <div class="span1" ng-repeat="champion in champions">
+        <img ng-src={{champion.imgSrc}} width="80px" title="{{champion.name}}" />
+      </div>
+    </div>
+    <hr />
+
+    <h3>Recommendations</h3>
+    <accordion close-others="false">
+      <accordion-group heading="{{modelId}}" ng-repeat="modelId in modelIds" is-open="true">
+        <div class="row">
+          <div class="span2" ng-repeat="champion in recommendations[modelId] | filter:orderBy:'-score'">
+            <img ng-src={{champion.imgSrc}} width="200px" title="{{champion.name}}" />
+            <br />
+            {{champion.score | number:4}}
+          </div>
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+

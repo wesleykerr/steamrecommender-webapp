@@ -1,0 +1,53 @@
+<div ng-controller="CarouselCtrl">
+  <carousel interval="myInterval">
+    <slide ng-repeat="slide in slides" active="slide.active">
+      <img ng-src="{{slide.image}}" style="margin:auto;">
+      <div class="carousel-caption">
+        <h1>{{slide.header}}</h1>
+        <p class="lead">{{slide.text}}</p>
+        <a class="btn btn-large btn-primary" ng-href="{{slide.btnLink}}">{{slide.btnText}}</a>
+      </div>
+    </slide>
+  </carousel>
+</div>
+
+<div class="container marketing">
+  <div class="row">
+    <div class="col-md-4">
+      <center>
+      <img class="img-circle" src="img/payday2.png">
+      <h2>FPS</h2>
+      <p>
+        So you think you have played every FPS there is to play?  
+        Checkout the recommender and see if there is one that you missed and should try.
+      </p>
+      <p>
+        <a class="btn" href="genres/25">View details &raquo;</a>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <center>
+      <img class="img-circle" src="img/baldurs-gate.png"> 
+      <h2>RPG</h2>
+      <p> 
+        Are you a fan of single player campaigns?  Do you miss spending hours exploring
+        the Temple of Elemental Evil?  See if we can find you some new RPGs to play.
+      </p>
+      <p> 
+        <a class="btn" href="genres/7">View details &raquo;</a>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <center>
+      <img class="img-circle" src="img/starcraft2.png"> 
+      <h2>RTS</h2>
+      <p> 
+        It may be hard to believe, but there are other popular RTS games besides Starcraft.  Check it out
+        and you may find something new.
+      </p>
+      <p> 
+        <a class="btn" href="genres/31">View details &raquo;</a>
+      </p>
+    </div>
+  </div>
+</div>

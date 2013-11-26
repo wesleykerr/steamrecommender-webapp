@@ -1,0 +1,46 @@
+<div>
+  <div class='container marketing'>
+    <div class='row'>
+      <div class='col-md-1'></div>
+      <div class='col-md-10'>
+        <form action='contact' id='contactForm' method='post'>
+          <div class='form-group'>
+            <input class='form-control' id='name' name='name' placeholder='Name' type='text'>
+          </div>
+          <div class='form-group'>
+            <input class='form-control' id='email' name='email' placeholder='Email address' type='text'>
+          </div>
+          <div class='form-group'>
+            <textarea class='form-control' id='message' name='message' placeholder='Your Message' rows='5'></textarea>
+          </div>
+          <div class='form-group'>
+            <button class='btn btn-primary' id='contact-submit' type='submit'>
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+
+<script type="text/javascript">
+  $("#contactForm").validate({
+    rules: { 
+      name: { 
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      message: { 
+        required: true
+      }
+    }
+  })
+</script>

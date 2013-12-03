@@ -39,7 +39,18 @@ function CarouselCtrl($scope) {
 };
 
 function ProfileCtrl($scope, $http) { 
+};
 
+function GamesCtrl($scope, $http) {
+    $scope.getGames = function() { 
+        $http.get('/games').
+            success(function (data) { 
+                $scope.games = data;
+                console.log(data);
+            });
+    };
+
+    $scope.getGames();
 };
 
 function RecommsCtrl($scope, $http, championService, dragonService, filterService, recommsService) { 

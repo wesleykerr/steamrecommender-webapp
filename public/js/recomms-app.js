@@ -9,6 +9,7 @@ recommApp = angular
           when('/contact', {templateUrl: 'partials/contact.html' }).
           when('/champions', {templateUrl: 'partials/champions.html', controller: ChampionsCtrl}).
           when('/recomms', {templateUrl: 'partials/recomms.html', controller: RecommsCtrl}).
+          when('/games', { templateUrl: 'partials/games.html', controller: GamesCtrl}).
           otherwise({redirectTo: '/home'});
     }])
     .config(['$httpProvider', function($httpProvider) {

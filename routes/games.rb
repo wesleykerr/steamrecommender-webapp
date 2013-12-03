@@ -7,14 +7,13 @@ get '/games' do
   if params[:order]
     order_list = [ params[:order].to_sym.desc, :appid.asc ]
   end
-  @games = Game.paginate(:app_type => 'game', :order => order_list,  :page => page, :per_page => 30)
-  haml :games
+  games = Game.paginate(:app_type => 'game', :order => order_list,  :page => page, :per_page => 30)
+  games.to_json
 end
 
 get '/games/:game' do
-  @game = Game.get(params[:game])
-  @title = @game.title
-  haml :game
+  game = Game.get(params[:game])
+  game.to_json
 end
 
 

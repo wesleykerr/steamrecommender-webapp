@@ -6,7 +6,6 @@ require 'yaml'
 require 'haml'
 
 require 'time_ext.rb'
-#require 'helpers/recomms.rb'
 config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
 enable :sessions

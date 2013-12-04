@@ -26,6 +26,7 @@ into a matrix so that we can multiply it by the estimated rating.
         genres/:genre/?page=xxx&order=xxx
         profile/
         recomms/
+        steam/
 
 2.  profile - The profile page contains the games that a player owns and the
 number of hours that they've played each game.  Every game that is played comes
@@ -41,7 +42,10 @@ with it's own 4/5 recommendations.
 
 3.  pagination - In app pagination rather than server side.  
 
-    Status: Can't quite remember.  Was working but not sure how.
+    Status: Can't quite remember.  Was working but not sure how.  We might be able
+    to get away with server side by relying on the bootstrap paginator buttons
+    and capturing click events.  Those events will send the page that we've clicked
+    on to the call to the server and we will grab the appropriate games.
 
 4.  webapp - The webapp will be an angular js app written to interact with the 
 REST interface.
@@ -51,3 +55,20 @@ REST interface.
     keep in mind is that accordions do not work with angular-ui bootstrap and
     the newer version of bootstrap.
 
+
+12/2/2013
+
+    Started adding support for the /games endpoint.  This involved changing the route
+    to return JSON instead of HTML and then processing the JSON through angular.  I
+    had to add an additional route into the Angular app and set up a new controller
+    to handle the calls.  The rest was pretty straight forward.
+
+12/3/2013
+
+    The games endpoint now looks more like the old games endpoint.  I dropped the
+    recent played columns because they are not accurate.  I haven't figured out
+    how to add in pagination yet, nor sorting server side.  One option is to load
+    in all of the data into main memory and then do everything client side.  This
+    works as long as the datasets are relatively small.  The other option is
+    to create attach the click to a model parameter and then resubmit the query every
+    time.

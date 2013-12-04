@@ -1,0 +1,60 @@
+
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <center>
+        <h2>Games</h2>
+      </center>
+      <center>
+        <div class="row">
+          <div class="col-md-8"></div>
+          <div class="col-md-2 text-center" title="Sort by total playtime">
+            <a href="games?order=total_playtime"><strong>All Time</strong></a>
+          </div>
+        </div>
+      </center>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-4 text-left">
+          <strong>Title</strong>
+        </div>
+        <div class="col-md-2 text-right" title="Sort by total playtime">
+          <a href="games?order=total_playtime">
+            <strong>Total</strong>
+          </a>
+        </div>
+        <div class="col-md-1 text-right" title="Sort by the total average playtime">
+          <a href="games?order=total_median">
+            <strong>Median</strong>
+          </a>
+        </div>
+      </div>
+
+      <div ng-repeat="game in games"> 
+        <div class="row">
+          <div class="col-md-3">
+            <a href="games/{{game.appid}}">
+              <img ng-src={{game.steam_img_url}} width="200px" title="{{game.title}}" />
+            </a>
+            <br></br>
+          </div>
+          <div class="col-md-4 text-left">
+            <a href="games/{{game.appid}}">
+              {{game.title}}
+            </a>
+          </div>
+          <div class="col-md-2 text-right">
+            {{game.total_playtime | number:2}}
+          </div>
+          <div class="col-md-1 text-right">
+            {{game.total_median | number:2}}
+          </div>
+        </div>
+        <hr></hr>
+      </div>
+      <hr></hr>
+
+    </div>
+  </div>
+</div>

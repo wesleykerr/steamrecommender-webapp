@@ -39,174 +39,116 @@ function CarouselCtrl($scope) {
 };
 
 function ProfileCtrl($scope, $http) { 
+    $scope.pageCount = 1;
+    $scope.itemCount = 1;
+    $scope.currentPage = 1;
+    $scope.currentData = [];
+    
+    $scope.getProfile = function() { 
+        $http.get('/profile/76561197971257137').
+            success(function (data) { 
+                $scope.profile = data;
+                $scope.itemCount = data.length;
+                $scope.pageCount = data.length / 20;
+                $scope.setPage(1);
+            });
+    };
+
+    $scope.setPage = function(pageNo) { 
+        $scope.currentPage = pageNo;
+        var start = (pageNo-1)*20;
+        console.log(start);
+        $scope.currentData = $scope.profile.slice(start, start+20);
+    };
+    
+    $scope.getProfile();
 };
 
-function GamesCtrl($scope, $http) {
-    $scope.getGames = function() { 
-        $http.get('/games').
-            success(function (data) { 
-                $scope.games = data;
-                console.log(data);
+function GenresCtrl($scope, $http) { 
+    $scope.pageCount = 1;
+    $scope.itemCount = 1;
+    $scope.currentPage = 1;
+    
+    $scope.getSize = function() { 
+        $http.get('/genres/size').
+            success(function (data) {
+                $scope.pageCount = data['pageCount'];
+                $scope.itemCount = data['itemCount'];
             });
     };
 
-    $scope.getGames();
+    $scope.getGenres = function(pageNo) { 
+        $http.get('/genres?page='+pageNo).
+            success(function (data) { 
+                console.log(data);
+                $scope.genres = data;
+            });
+    };
+    
+    $scope.setPage = function (pageNo) { 
+        $scope.currentPage = pageNo;
+        $scope.getGenres(pageNo);
+    };
+
+    $scope.getSize();
+    $scope.setPage(1);
 };
 
-function RecommsCtrl($scope, $http, championService, dragonService, filterService, recommsService) { 
-    $scope.summonerName = 'deerslyr1';
-    $scope.filterOwned = false;
-    $scope.filterPlayed = true;
-    $scope.modelIds = ['crm_3', 'crm_4', 'crm_5', 'crm_6', 'crm_7', 'crm_8', 'crm_0', 'crm_1', 'crm_2'];
-    $scope.recommendations = {};
+function GamesCtrl($scope, $http, gamesService) {
+    $scope.pageCount = 1;
+    $scope.gameCount = 1;
+    $scope.currentPage = 1;
+    $scope.maxSize = 10;
+    $scope.order = 'total_playtime';
+    $scope.header = 'Games';
+    $scope.url = '/games';
+
+    var gamesSetup = function(data) { 
+        $scope.games = data;
+    }
     
-    championService.getChampions($scope, $http);
-
-    $scope.getRecomms = function() { 
-        var apiSummonerName = $scope.summonerName.toLowerCase().replace(" ", "");
-        var url = "/legs/playersearch/summonername?platform=NA1&summonerName=" + apiSummonerName;
-        $http.get(url).
-            success(function (data) { 
-                $scope.accountId = data[0].accountId;
-                annotateInstance($scope.accountId);
-                for (var i in $scope.modelIds) {
-                    recomms($scope.accountId, $scope.modelIds[i]);
-                }
-            }).
-            error(function(data, status, headers, config) { 
-                console.log(data);
-                console.log(status);
-                console.log(headers);
-            });
+    $scope.setPage = function (pageNo) { 
+        $scope.currentPage = pageNo;
+        gamesService.getGames($scope, $http, '/games',
+                pageNo, $scope.order, gamesSetup);
     };
 
-    var annotateInstance = function(accountId) { 
-        var url = "/api/annotations/summoner_owned_played/annotate";
-        $http.post(url, { 'dreco_id': accountId+':NA1' }).
-            success(function (data) { 
-                console.log(data);
-                $scope.itemsPlayed = {};
-                $scope.championsPlayed = [];
-                for (var champ in data.played.champion) { 
-                    if ($scope.championMap[champ] == null)
-                        continue;
-                    $scope.itemsPlayed[champ] = true;
-                    $scope.championsPlayed.push(createChampionObj(champ, data.played.champion[champ]));
-                }
-
-                $scope.skinsPlayed = [];
-                for (var skin in data.played.skin) { 
-                    $scope.itemsPlayed[skin] = true;
-                    $scope.skinsPlayed.push(createSkinObj(skin, data.played.skin[skin]));
-                }
-
-                $scope.itemsOwned = {};
-                $scope.championsOwned = [];
-                for (var champIndex in data.owned.champion) { 
-                    var champ = data.owned.champion[champIndex];
-                    if ($scope.championMap[champ] == null)
-                        continue;
-                    $scope.itemsOwned[champ] = true;
-                    $scope.championsOwned.push(createChampionObj(champ, 0));
-                }
-
-                $scope.skinsOwned = [];
-                for (var skinIndex in data.owned.skin) { 
-                    var skin = data.owned.skin[skinIndex];
-                    $scope.itemsOwned[skin] = true;
-                    $scope.skinsOwned.push(createSkinObj(skin, 0));
-                }
-            });
+    $scope.getGames = function(order) { 
+        gamesService.getGames($scope, $http, '/games', 
+                $scope.currentPage, order, gamesSetup);
     };
 
-    var createChampionObj = function(champ, score) { 
-        var obj = {};
-        obj['id'] = champ;
-        obj['name'] = $scope.championMap[champ];
-        obj['score'] = score;
-        obj['imgSrc'] = dragonService.url() + obj['name'] + "_0.jpg";
-        return obj;
-    };
+    gamesService.getSize($scope, $http, '/games/size');
+    $scope.setPage(1);
+};
 
-    var createSkinObj = function(skin, score) { 
-        var obj = {};
-        var id = parseInt(skin);
-        obj['id'] = skin;
-        obj['championId'] = Math.floor(id / 1000);
-        obj['skinIndex'] = id % 1000;
-        obj['name'] = $scope.championMap[obj['championId']];
-        obj['imgSrc'] = dragonService.url() + obj['name'] + "_" + obj['skinIndex'] + '.jpg';
-        obj['score'] = score;
-        return obj;
-    };
-
-    var recomms = function(accountId, modelId) { 
-        var url = '/api/models/' + modelId + '/recommendation?nrecs=1000';
-        $http.post(url, { 'dreco_id': accountId+':NA1' }).
-            success(function (data) { 
-                if (data.recommendations.length == 0)
-                    return;
-               
-                results = filterService.filterUnknownedChampion($scope.itemsOwned, data.recommendations); 
-                if ($scope.filterOwned)
-                    results = filterService.filter($scope.itemsOwned, results);
-                if ($scope.filterPlayed)
-                    results = filterService.filter($scope.itemsPlayed, results);
-
-                $scope.recommendations[modelId] = recommsService.create(results, $scope.championMap, dragonService.url()).slice(0,5);
-            });
-    };
-}
-
-function ChampionsCtrl($scope, $http, championService, dragonService, filterService, recommsService) { 
-    championService.getChampions($scope, $http);
-
-    $scope.championsSelected = {};
-    $scope.champions = [];
-    $scope.filterSkins = false;
-    $scope.modelIds = ['crm_3', 'crm_4', 'crm_5', 'crm_6', 'crm_7', 'crm_8', 'crm_0', 'crm_1', 'crm_2'];
-    $scope.recommendations = {};
-
-    $scope.clearChampions = function() { 
-        $scope.championsSelected = {};
-    };
+function GenreCtrl($scope, $http, $routeParams, gamesService) { 
+    $scope.pageCount = 1;
+    $scope.gameCount = 1;
+    $scope.currentPage = 1;
+    $scope.maxSize = 10;
+    $scope.order = 'total_playtime';
+    $scope.id = $routeParams.id;
     
-    var createChampionObj = function(champ, score) { 
-        var obj = {};
-        obj['id'] = champ;
-        obj['name'] = $scope.championMap[champ];
-        obj['score'] = score;
-        obj['imgSrc'] = dragonService.url() + obj['name'] + "_0.jpg";
-        return obj;
+    var gamesSetup = function(data) { 
+        $scope.games = data.games;
+        $scope.header = data.name;
+    }
+
+    $scope.setPage = function (pageNo) { 
+        $scope.currentPage = pageNo;
+        gamesService.getGames(
+                $scope, $http, '/genres/'+$scope.id, 
+                pageNo, $scope.order, gamesSetup);
     };
 
-    $scope.getRecomms = function() { 
-        $scope.champions = [];
-        var postObj = { 'dreco_id': 'MISSING:NONE', 'played': { 'champion': {}, 'skin': {} } };
-        Object.keys($scope.championsSelected).forEach(function(key) { 
-            if ($scope.championsSelected[key]) { 
-                postObj.played.champion[$scope.championNameToId[key]] = 1;
-                $scope.champions.push(createChampionObj($scope.championNameToId[key], 1));
-            }
-        });
-        console.log(postObj);
-        for (var i in $scope.modelIds) {
-            recomms($scope.modelIds[i], postObj);
-        }
+    $scope.getGames = function(order) { 
+        gamesService.getGames(
+                $scope, $http, '/genres/'+$scope.id, 
+                $scope.currentPage, order, gamesSetup);
     };
-    
-    var recomms = function(modelId, postObj) { 
-        var url = '/api/models/' + modelId + '/recommendation?nrecs=1000';
-        console.log(postObj);
-        $http.post(url, postObj).
-            success(function (data) { 
-                if (data.recommendations == null || data.recommendations.length == 0)
-                    return;
 
-                results = filterService.filter(postObj.played.champion, data.recommendations);
-                if ($scope.filterSkins) 
-                    results = filterService.filterSkins(results);
-                $scope.recommendations[modelId] = recommsService.create(results, $scope.championMap, dragonService.url()).slice(0,5);
-            });
-    };
-}
+    gamesService.getSize($scope, $http, '/genres/'+$scope.id+'/size');
+    $scope.setPage(1);
+};
+

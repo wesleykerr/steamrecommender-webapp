@@ -7,9 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
   <script src="js/recomms-app.js"></script> 
   <script src="js/recomms.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/carousel.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
       <div class="container">
         <div class="navbar navbar-inverse navbar-static-top">
           <div class="navbar-inner">
-            <a class="navbar-brand" href="#">Steam Recommender</a>
+            <a class="brand" href="#">Steam Recommender</a>
             <ul class="nav navbar-nav">
               <li><a href="#/profile">Profile</a></li>
               <li><a href="#/recomms">Recommendations</a></li>
@@ -27,7 +27,7 @@
               <li><a href="#/about">About</a></li>
               <li><a href="#/contact">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav pull-right">
               <li><a href="#/steamid">{{steamId}}</a></li>
               <li><a ng-click="resetSteam();">Reset</a></li>
             </ul>
@@ -40,11 +40,11 @@
   <div ng-view></div>
 
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="span1"></div>
+    <div class="span11">
       <footer>
         <p>
-          <a href="www.steampowered.com">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
+          <a href="http://www.steampowered.com">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
           All copyrights reserved to their respective owners.
         </p>
         <p>&copy; Wesley Kerr 2013</p> 

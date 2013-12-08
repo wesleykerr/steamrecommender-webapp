@@ -7,9 +7,10 @@ recommApp = angular
           when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl }).
           when('/about', {templateUrl: 'partials/about.html' }).
           when('/contact', {templateUrl: 'partials/contact.html' }).
-          when('/champions', {templateUrl: 'partials/champions.html', controller: ChampionsCtrl}).
-          when('/recomms', {templateUrl: 'partials/recomms.html', controller: RecommsCtrl}).
           when('/games', { templateUrl: 'partials/games.html', controller: GamesCtrl}).
+          when('/game/:id', { templateUrl: 'partials/game.html', controller: GamesCtrl}).
+          when('/genres', { templateUrl: 'partials/genres.html', controller: GenresCtrl }).
+          when('/genre/:id', { templateUrl: 'partials/genre.html', controller: GenreCtrl }).
           otherwise({redirectTo: '/home'});
     }])
     .config(['$httpProvider', function($httpProvider) {
@@ -25,6 +26,22 @@ recommApp = angular
             };
         });
     }]);
+
+recommApp.service("gamesService", function() { 
+
+    this.getSize = function(scope, http, url) {
+        http.get(url).
+            success(function (data) {
+                scope.pageCount = data['pageCount']
+                scope.gameCount = data['gameCount']
+            });
+    };
+    
+    this.getGames = function(scope, http, prefix, pageNo, order, fn) { 
+        scope.order = order;
+        http.get(prefix+'?page='+pageNo+'&order='+order).success(fn);
+    };
+});
 
 recommApp.service("championService", function() { 
     this.getChampions = function(scope, http) { 

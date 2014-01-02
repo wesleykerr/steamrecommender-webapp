@@ -38,27 +38,45 @@ function CarouselCtrl($scope) {
     ];
 };
 
-function ProfileCtrl($scope, $http) { 
-    $scope.pageCount = 1;
-    $scope.itemCount = 1;
-    $scope.currentPage = 1;
-    $scope.currentData = [];
+function ProfileCtrl($scope, $http, ProfileCache) { 
+    $scope.state = {};
+    $scope.$watch('state.pageCount', function(newValue, oldValue, scope) { 
+        console.log('State Changed: ' + $scope.state.pageCount); 
+    });
     
     $scope.getProfile = function() { 
-        $http.get('/profile/76561197971257137').
-            success(function (data) { 
-                $scope.profile = data;
-                $scope.itemCount = data.length;
-                $scope.pageCount = data.length / 20;
-                $scope.setPage(1);
-            });
+        var cacheObj = ProfileCache.get('76561197971257137');
+        if (cacheObj) {
+            console.log('cache hit');
+            console.log(cacheObj);
+            $scope.state = {
+                profile: cacheObj.profile,
+                itemCount: cacheObj.itemCount,
+                pageCount: cacheObj.pageCount,
+                currentPage: cacheObj.currentPage,
+                currentData: cacheObj.currentData
+            };
+            console.log($scope.state);
+        } else { 
+            console.log('cache miss');
+            $http.get('/profile/76561197971257137').
+                success(function (data) { 
+                    $scope.state = {
+                        profile: data,
+                        itemCount: data.length,
+                        pageCount: Math.floor(data.length / 20) + 1
+                    };
+                    $scope.setPage(1);
+                    ProfileCache.put('76561197971257137', $scope.state);
+                    console.log($scope.state);
+                });
+        }
     };
 
     $scope.setPage = function(pageNo) { 
-        $scope.currentPage = pageNo;
         var start = (pageNo-1)*20;
-        console.log(start);
-        $scope.currentData = $scope.profile.slice(start, start+20);
+        $scope.state.currentPage = pageNo;
+        $scope.state.currentData = $scope.state.profile.slice(start, start+20);
     };
     
     $scope.getProfile();
@@ -94,7 +112,19 @@ function GenresCtrl($scope, $http) {
     $scope.setPage(1);
 };
 
-function GamesCtrl($scope, $http, gamesService) {
+function GameCtrl($scope, $http, $routeParams) { 
+    $scope.id = $routeParams.id;
+    $http.get('games/'+$scope.id).
+        success(function (data) {
+            $scope.game = data;
+            if ($scope.game.owned && $scope.game.not_played) {
+                $scope.game.playedGame = $scope.game.owned - $scope.game.not_played;
+            }
+            console.log($scope.game);
+        });
+};
+
+function GamesCtrl($scope, $http, GamesService) {
     $scope.pageCount = 1;
     $scope.gameCount = 1;
     $scope.currentPage = 1;
@@ -105,24 +135,25 @@ function GamesCtrl($scope, $http, gamesService) {
 
     var gamesSetup = function(data) { 
         $scope.games = data;
+        console.log($scope.games);
     }
     
     $scope.setPage = function (pageNo) { 
         $scope.currentPage = pageNo;
-        gamesService.getGames($scope, $http, '/games',
+        GamesService.getGames($scope, $http, '/games',
                 pageNo, $scope.order, gamesSetup);
     };
 
     $scope.getGames = function(order) { 
-        gamesService.getGames($scope, $http, '/games', 
+        GamesService.getGames($scope, $http, '/games', 
                 $scope.currentPage, order, gamesSetup);
     };
 
-    gamesService.getSize($scope, $http, '/games/size');
+    GamesService.getSize($scope, $http, '/games/size');
     $scope.setPage(1);
 };
 
-function GenreCtrl($scope, $http, $routeParams, gamesService) { 
+function GenreCtrl($scope, $http, $routeParams, GamesService) { 
     $scope.pageCount = 1;
     $scope.gameCount = 1;
     $scope.currentPage = 1;
@@ -148,7 +179,7 @@ function GenreCtrl($scope, $http, $routeParams, gamesService) {
                 $scope.currentPage, order, gamesSetup);
     };
 
-    gamesService.getSize($scope, $http, '/genres/'+$scope.id+'/size');
+    GamesService.getSize($scope, $http, '/genres/'+$scope.id+'/size');
     $scope.setPage(1);
 };
 

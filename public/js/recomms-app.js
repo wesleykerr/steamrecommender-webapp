@@ -8,7 +8,7 @@ recommApp = angular
           when('/about', {templateUrl: 'partials/about.html' }).
           when('/contact', {templateUrl: 'partials/contact.html' }).
           when('/games', { templateUrl: 'partials/games.html', controller: GamesCtrl}).
-          when('/game/:id', { templateUrl: 'partials/game.html', controller: GamesCtrl}).
+          when('/game/:id', { templateUrl: 'partials/game.html', controller: GameCtrl}).
           when('/genres', { templateUrl: 'partials/genres.html', controller: GenresCtrl }).
           when('/genre/:id', { templateUrl: 'partials/genre.html', controller: GenreCtrl }).
           otherwise({redirectTo: '/home'});
@@ -27,102 +27,44 @@ recommApp = angular
         });
     }]);
 
-recommApp.service("gamesService", function() { 
+recommApp.directive('game', function() { 
+    return { 
+        restrict: 'E',
+        templateUrl: 'partials/game-directive.html'
+    };
+});
 
-    this.getSize = function(scope, http, url) {
+recommApp.factory('ProfileCache', function($cacheFactory) { 
+   return $cacheFactory('profile');
+});
+
+recommApp.service("GamesService", function() { 
+    var genresState = {};
+    var genreState = {};
+    
+    var gamesState = {};
+    var profileState = {
+        pageCount:1,
+        itemCount:1,
+        currentPage:1
+         
+    };
+
+    var gameState = {};
+
+    this.getSize = function(state, http, url) {
         http.get(url).
             success(function (data) {
-                scope.pageCount = data['pageCount']
-                scope.gameCount = data['gameCount']
+                state.pageCount = data['pageCount']
+                state.gameCount = data['gameCount']
             });
     };
-    
-    this.getGames = function(scope, http, prefix, pageNo, order, fn) { 
-        scope.order = order;
+
+    this.getGames = function(state, http, prefix, pageNo, order, fn) { 
+        state.pageNo = pageNo;
+        state.order = order;
         http.get(prefix+'?page='+pageNo+'&order='+order).success(fn);
     };
 });
 
-recommApp.service("championService", function() { 
-    this.getChampions = function(scope, http) { 
-        var url = "/rapi/api/na/v1/champions";
-        http.get(url).
-            success(function (data, status) { 
-                scope.championObjects = [];
-                scope.championMap = {};
-                scope.championNameToId = {};
-                data.champions.map(function(champion) {
-                    scope.championMap[champion.id] = champion.name;
-                    scope.championNameToId[champion.name] = champion.id;
-
-                    scope.championObjects.push({ 'name': champion.name, 'id': parseInt(champion.id) });
-                });
-            })
-    };
-});
-
-recommApp.service("dragonService", function() { 
-    this.url = function() { 
-        return 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/';
-    };
-});
-
-recommApp.service("filterService", function() { 
-    this.filter = function(removeSet, recomms) { 
-        var results = [];
-        recomms.forEach(function(obj) { 
-            if (!removeSet[obj.value])
-                results.push(obj);
-        });
-        return results;
-    };
-
-    this.filterSkins = function(recomms) { 
-        var results = [];
-        recomms.forEach(function(obj) { 
-            var id = parseInt(obj.value);
-            if (id < 1000) {
-                results.push(obj);
-            } 
-        });
-        return results;
-    };
-
-    this.filterUnknownedChampion = function(ownedSet, recomms) { 
-        var results = [];
-        recomms.forEach(function(obj) { 
-            var id = parseInt(obj.value);
-            if (id < 1000) {
-                results.push(obj);
-            } else { 
-                var championId = Math.floor(id / 1000);
-                if (ownedSet[championId])
-                    results.push(obj); 
-            }
-        });
-        return results;
-    };
-});
-
-recommApp.service("recommsService", function() { 
-    this.create = function(results, championMap, url) { 
-        return results.map(function (obj) { 
-            var id = parseInt(obj.value);
-            var resultObj = {};
-            if (id >= 1000) { 
-                resultObj.type = 'skin';
-                resultObj.championId = Math.floor(id / 1000);
-                resultObj.skinIndex = id % 1000;
-            } else { 
-                resultObj.type = 'champion';
-                resultObj.championId = id;
-                resultObj.skinIndex = 0;
-            }
-            resultObj.name = championMap[resultObj.championId];
-            resultObj.imgSrc = url + resultObj.name + "_" + resultObj.skinIndex + '.jpg';
-            resultObj.score = obj.score;
-            return resultObj;
-        });
-    };
-});
 

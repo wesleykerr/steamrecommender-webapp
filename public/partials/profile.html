@@ -9,12 +9,11 @@
     </div>
   </div>
 
-  <div ng-repeat="game in currentData">
-    <div class="row">
-      <div class="span2">
-        <a ng-href="games/{{game.appid}}">
-          <img ng-src={{game.steam_img_url}} width="150px" title="{{game.title}}" />
-        </a>
-    </div>
+  <div class="span10">
+    <game ng-repeat="game in state.currentData"></game>
+    <center> 
+      <pagination boundary-links="true" total-items="state.itemCount" page="state.currentPage" items-per-page="20" class="pagination-small" max-size="10" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" rotate="false" on-select-page="setPage(page)"></pagination>
+    </center> 
+    <hr></hr>
   </div>
 </div>

@@ -1,0 +1,83 @@
+  <div class="row">
+    <div class="span2"></div>
+    <div class="span10">
+      <center>
+        <a ng-href="http://store.steampowered.com/app/{{id}}">
+          <img ng-src="http://cdn2.steampowered.com/v/gfx/apps/{{id}}/header_292x136.jpg" width="200px" />
+        </a>
+        <h1>
+          <a ng-href="http://store.steampowered.com/app/{{id}}/">
+            {{game.title}}
+          </a>
+        </h1>
+
+        <div class="span8">
+          <div class="row">
+            <hr></hr>
+            <div class="span2 text-left">Steam Id</div>
+            <div class="span6 text-left">{{game.appid}}</div>
+          </div>
+          <div class="row">
+            <hr></hr>
+            <div class="span2 text-left">App Type</div>
+            <div class="span6 text-left">{{game.app_type}}</div>
+          </div>
+          <div class="row">
+            <hr></hr>
+            <div class="span2 text-left">Metacritic Site</div>
+            <div class="span6 text-left">
+              <a ng-href="{{game.metacritic}}">{{game.metacritic}}</a> 
+            </div>
+          </div>
+          <div class="row">
+            <hr></hr>
+            <div class="span2 text-left">Genres</div>
+            <div class="span6 text-left">{{game.genres}}</div>
+          </div>
+          <div class="row">
+            <hr></hr>
+            <div class="span2 text-left">Owned By</div>
+            <div class="span6 text-left">{{game.owned}}</div>
+          </div>
+          <div class="row">
+            <hr></hr>
+          </div>
+
+          <div class="row">
+            <div class="span8">
+              <h4>Also Recommended</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span2" ng-repeat="recomm in game.recomms">
+              <a ng-href="http://store.steampowered.com/app/{{recomm.appid}}">
+                <img ng-src="{{recomm.imgUrl}}" title="{{recomm.title}}" />
+              </a> 
+            </div>
+          </div>
+
+          <div class="row">
+            <hr></hr>
+          </div>
+          <div class="row">
+            <center>
+              <h3>Total Playtime</h3>
+              <table class="table">
+                <tr>
+                  <td>Played Game</td>
+                  <td>{{ game.playedGame | number:0 }}</td>
+                </tr>
+                <tr>
+                  <td>Hours Played</td>
+                  <td>{{ game.total_playtime | number:0 }}</td>
+                </tr>
+                <tr>
+                  <td>Median Played</td>
+                  <td>{{ game.total_median | number:2 }}</td>
+                </tr>
+              </table>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>

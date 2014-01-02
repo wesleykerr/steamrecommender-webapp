@@ -33,29 +33,8 @@
         </div>
       </div>
 
-      <div ng-repeat="game in games"> 
-        <div class="row">
-          <div class="span2">
-            <a ng-href="games/{{game.appid}}">
-              <img ng-src={{game.steam_img_url}} width="150px" title="{{game.title}}" />
-            </a>
-            <br></br>
-          </div>
-          <div class="span3 text-left">
-            <a href="games/{{game.appid}}">
-              {{game.title}}
-            </a>
-          </div>
-          <div class="span2 text-right">
-            {{game.total_playtime | number:2}}
-          </div>
-          <div class="span1 text-right">
-            {{game.total_median | number:2}}
-          </div>
-        </div>
-        <hr></hr>
-      </div>
-      <center>
+      <game ng-repeat="game in games"></game>
+      <center> 
         <pagination boundary-links="true" total-items="gameCount" page="currentPage" class="pagination-small" max-size="maxSize" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" rotate="false" num-pages="pageCount" on-select-page="setPage(page)"></pagination>
       </center> 
       <hr></hr>

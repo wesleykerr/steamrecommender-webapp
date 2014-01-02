@@ -23,9 +23,11 @@ get '/games' do
 end
 
 get '/games/:game' do
-  @game = Game.get(params[:game])
-  @title = @game.title
-  haml :game
+  game = Game.get(params[:game])
+  genres = game.genres.map { |genre| genre.name }.join(", ")
+  hash = JSON.parse(game.to_json)
+  hash['genres'] = genres
+  hash.to_json
 end
 
 

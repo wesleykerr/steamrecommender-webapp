@@ -128,17 +128,17 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
             };
             AppLoading.ready(true);
         } else { 
-            if (data.error && data.id == 1) { 
-                $location.path('/private');
-                AppLoading.ready(true);
-                return;
-            } else if (data.error && data.id == 2) { 
-                $location.path('/connection');
-                AppLoading.ready(true);
-                return;
-            }
             $http.get('/recomms/' + steamId).
                 success(function (data) { 
+                    if (data.error && data.id == 1) { 
+                        $location.path('/private');
+                        AppLoading.ready(true);
+                        return;
+                    } else if (data.error && data.id == 2) { 
+                        $location.path('/connection');
+                        AppLoading.ready(true);
+                        return;
+                    }
                     $scope.state = {
                         recommsNew: data.recommsNew,
                         recommsOwned: data.recommsOwned,

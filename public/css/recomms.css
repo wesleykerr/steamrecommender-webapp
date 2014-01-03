@@ -1,0 +1,23 @@
+.app-loading-container {
+  float:left;
+  margin-right:20px;
+  width:25px;
+  height:25px;
+}
+
+.app-loading-animation {
+  -webkit-transition:all 0.25s linear;
+  background:url(../img/spinner.gif) center center no-repeat;
+  width:25px;
+  height:25px;
+  display:block;
+}
+
+.app-loading-animation,
+.app-loading-animation.ready {
+  opacity:0;
+}
+
+.app-loading-animation.loading {
+  opacity:1;
+}

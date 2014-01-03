@@ -18,21 +18,21 @@ function CarouselCtrl($scope) {
             image: 'img/game-alt.png',
             header: 'Recommendations',
             text: ' Let us help you decide what game(s) to purchase next from Steam. Our recommendations are made based on what games you own and what games you actively play.',
-            btnLink: '/recomms',
+            btnLink: '#/recomms',
             btnText: 'Get Recommendations' 
         },
         {   
             image: 'img/game2.png',
             header: 'What should I play?',
             text: 'Is your Steam library so large that you are not sure what game you should play next? The technology that helps determine what game you should purchase next can also be used to let you know what game you should play next.',
-            btnLink: '/recomms',
+            btnLink: '#/recomms',
             btnText: 'Get Recommendation'
         },
         {
             image: 'img/game3.png',
             header: 'Steam Game Statistics',
             text: 'Curious to see how popular a game is?  Interested in knowing how long the average player invests in a game?  With your help we can gather these statistics and get a deeper look into the game and how much you played compared to the general population.',
-            btnLink: '/games',
+            btnLink: '#/games',
             btnText: 'Games'
         }
     ];

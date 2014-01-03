@@ -122,11 +122,13 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
             console.log('cache hit');
             console.log(cacheObj);
             $scope.state = {
-                recomms: cacheObj.recomms,
+                recommsNew: cacheObj.recommsNew,
+                recommsOwned: cacheObj.recommsOwned,
                 itemCount: cacheObj.itemCount,
                 pageCount: cacheObj.pageCount,
                 currentPage: cacheObj.currentPage,
-                currentData: cacheObj.currentData
+                currentNew: cacheObj.currentNew,
+                currentOwned: cacheObj.currentOwned
             };
             console.log($scope.state);
             AppLoading.ready(true);
@@ -134,11 +136,11 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
             console.log('cache miss');
             $http.get('/recomms/' + steamId).
                 success(function (data) { 
-                    console.log(data);
                     $scope.state = {
-                        recomms: data,
-                        itemCount: data.length,
-                        pageCount: Math.floor(data.length / 20) + 1
+                        recommsNew: data.recommsNew,
+                        recommsOwned: data.recommsOwned,
+                        itemCount: data.recommsNew.length,
+                        pageCount: Math.floor(data.recommsNew.length / 20) + 1
                     };
                     $scope.setPage(1);
                     RecommsCache.put(steamId, $scope.state);
@@ -151,7 +153,8 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
     $scope.setPage = function(pageNo) { 
         var start = (pageNo-1)*20;
         $scope.state.currentPage = pageNo;
-        $scope.state.currentData = $scope.state.recomms.slice(start, start+20);
+        $scope.state.currentNew = $scope.state.recommsNew.slice(start, start+20);
+        $scope.state.currentOwned = $scope.state.recommsOwned.slice(start, start+20);
     };
     
     $scope.getRecomms();

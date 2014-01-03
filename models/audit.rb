@@ -42,10 +42,10 @@ class AuditProfile
   def self.getAuditRecord(steamid)
     min_date = DateTime.now - Rational(8, 24)
     audit_record = AuditProfile.first(:steamid => steamid, 
-                                      :order => [ :create_datetime.desc ])
+                                      :order => [ :create_datetime.desc ]) 
     json_obj = nil  
     if (audit_record && audit_record[:create_datetime] > min_date)
-      json_obj = audit_record[:json]
+      json_obj = audit_record[:profile]
     end
     json_obj
   end
@@ -71,7 +71,6 @@ class AuditRecomm
     json_obj = nil
     if (audit_record && audit_record[:create_datetime] > min_date)
       json_obj = audit_record[:json]
-      logger.info { "Found a record for #{steamid}" }
     end
     json_obj
   end

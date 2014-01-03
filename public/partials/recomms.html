@@ -1,64 +1,46 @@
 
-  <form>
-    <fieldset>
-      <label>Summoner Name:</label>
-      <input type="text" ng-model="summonerName" placeholder="Enter NA summoner name" />
-    <br />
-    <label class="checkbox"><input type="checkbox" ng-model="filterPlayed" />Filter Items Played</label>
-    <label class="checkbox"><input type="checkbox" ng-model="filterOwned" />Filter Items Owned</label>
-    <button class="btn" ng-click="getRecomms()">Submit</button>
-    <hr />
-
-
-    <h2>Summoner Details</h2>
-    <accordion>
-      <accordion-group heading="Champions Played">
+<div class="container marketing">
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span10">
+      <center>
+        <h2>Recommendations</h2>
         <div class="row">
-          <div class="span1" ng-repeat="champion in championsPlayed | orderBy:'-score'">
-            <img ng-src={{champion.imgSrc}} width="80px" title="{{champion.name}}" />
-            <br />
-            {{champion.score | number:4}}
+          <div class="span5">
+            <h3>Should Play</h3>
+            <div class="row" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/{{game.appid}}">{{game.title}}</a><br />
+              <a ng-href="{{game.steam_url}}">
+                <img ng-src="{{game.steam_img_url}}"></img>
+              </a><br />
+              <a ng-href="#/game/{{game.appid}}">{{game.score}}</a><br />
+            </div>
+          </div>
+          <div class="span5">
+            <h3>Should Buy</h3>
+            <div class="row" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/{{game.appid}}">{{game.title}}</a><br />
+              <a ng-href="{{game.steam_url}}">
+                <img ng-src="{{game.steam_img_url}}"></img>
+              </a><br />
+              <a ng-href="#/game/{{game.appid}}">{{game.score}}</a><br />
+            </div>
           </div>
         </div>
-      </accordion-group>
-      <accordion-group heading="Skins Played">
-        <div class="row">
-          <div class="span1" ng-repeat="skin in skinsPlayed | orderBy:'-score'">
-            <img ng-src={{skin.imgSrc}} width="80px" title="{{skin.name}}" />
-            <br />
-            {{skin.score | number:4}}
-          </div>
-        </div>
-      </accordion-group>
-
-      <accordion-group heading="Champions Owned">
-        <div class="row">
-          <div class="span1" ng-repeat="champion in championsOwned | orderBy:'name'">
-            <img ng-src={{champion.imgSrc}} width="80px" title="{{champion.name}}" />
-          </div>
-        </div>
-      </accordion-group>
-      <accordion-group heading="Skins Owned">
-        <div class="row">
-          <div class="span1" ng-repeat="skin in skinsOwned | orderBy:'name'">
-            <img ng-src={{skin.imgSrc}} width="80px" title="{{skin.name}}" />
-          </div>
-        </div>
-      </accordion-group>
-    </accordion>
+      </center>
+    </div>
     
-    <h2>Recommendations</h2>
-    <accordion close-others="false">
-      <accordion-group heading="{{modelId}}" ng-repeat="modelId in modelIds" is-open="true">
-        <div class="row">
-          <div class="span2" ng-repeat="champion in recommendations[modelId] | filter:orderBy:'-score'">
-            <img ng-src={{champion.imgSrc}} width="200px" title="{{champion.name}}" />
-            <br />
-            {{champion.type}}
-            <br />
-            {{champion.score | number:4}}
-          </div>
-        </div>
-      </accordion-group>
-    </accordion>
+    <center> 
+      <pagination boundary-links="true" total-items="state.itemCount" page="state.currentPage" items-per-page="20" class="pagination-small" max-size="10" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" rotate="false" on-select-page="setPage(page)"></pagination>
+    </center> 
+    <hr></hr>
   </div>
+
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span10">    
+      Google Ad goes here...
+    </div>
+  </div>
+</div> 
+

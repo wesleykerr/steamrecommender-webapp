@@ -17,6 +17,18 @@ helpers do
                </script>'
   end
 
+  # generate the rating for this game based on the different
+  # quantiles provided.
+  def getRating(playtime, q25, q50, q75)
+    return 0 unless playtime && playtime > 0 
+    
+    hoursPlayed = playtime / 60.0
+    return 1 if hoursPlayed < q25
+    return 2 if hoursPlayed < q50
+    return 3 if hoursPlayed < q75
+    return 4 
+  end
+
   # retrieve related recommendations for the given appid
   # @param [Number] the appid to lookup
   # @param [Number] the number of recommendations
@@ -48,10 +60,10 @@ helpers do
         end
       end
     end
-    recommsNew.sort! { |x,y| y['score'] <=> x['score'] }.slice!(0, 100)
-    recommsNotPlayed.sort! { |x,y| y['score'] <=> x['score'] }.slice!(0, 100)
-    { "new" => populateGameData(recommsNew), 
-      "owned" => populateGameData(recommsNotPlayed) } 
+    newRecomms = recommsNew.sort! { |x,y| y['score'] <=> x['score'] }.slice(0, nrecs)
+    ownedRecomms = recommsNotPlayed.sort! { |x,y| y['score'] <=> x['score'] }.slice(0, nrecs)
+    { "recommsNew" => populateGameData(newRecomms), 
+      "recommsOwned" => populateGameData(ownedRecomms) } 
   end
 
   # compute all of the recommendations for a user
@@ -64,7 +76,7 @@ helpers do
 
     steamDetails = getSteamDetails(steamid)
     played,notPlayed = parsePlayerData(steamDetails)
-    recomms = getRecommIdsAndScores(played, notPlayed, 5)
+    recomms = getRecommIdsAndScores(played, notPlayed, 100)
     audit = AuditRecomm.create(
       :steamid => steamid,
       :recomms => recomms,
@@ -135,13 +147,23 @@ helpers do
       gameMap[id] = steamGame
       id
     end
-    games = Game.all(:fields => [:appid,:title,:steam_url,:steam_img_url,:recomms], :appid => ids ) 
+    fields = [
+      :appid, :title, :steam_url, :steam_img_url,
+      :total_q25, :total_median, :total_q75, 
+      :recomms
+    ]
+    games = Game.all(:fields => fields, :appid => ids ) 
     games.each do |game|
       hash = gameMap[game.appid]
       hash['title'] = game.title
       hash['steam_url'] = game.steam_url
       hash['steam_img_url'] = game.steam_img_url
       hash['recomms'] = game.recomms
+      hash['total_median'] = game.total_median.to_f
+      hash['rating'] = getRating(
+        hash['playtime_forever'], game.total_q25, game.total_median, game.total_q75
+      )
+      hash['playtime'] = hash['playtime_forever'] / 60.0 if hash['playtime_forever']
     end
     
     audit = AuditProfile.create(:steamid => steamid,

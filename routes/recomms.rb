@@ -1,31 +1,12 @@
 
-get '/recomms' do
-  unless session[:steamid]
-    session[:redirectTo] = '/recomms'
-    redirect to('/steamid')
-  end
-  begin
-    json getRecomms(session[:steamid])
-  rescue RuntimeError
-    redirect to('/private')
-  rescue IOError => e
-    logger.info { "ERROR -> #{e}" }
-    redirect to('/connection')
-  end
-end
-
-get '/recomms_submit' do
-  session[:steamid] = params[:steamid]
-  redirect to('/profile')
-end
-
 get '/recomms/:steamid' do
-  @page = 1
-  @page = params[:page].to_i if params[:page]
-  @steamid = params[:steamid]
-  session[:steamid] = @steamid
-  @not_played,@not_owned = get_recomms(@steamid, @page)
-  haml :recomms
+  begin
+    json getRecomms(params[:steamid])
+  rescue RuntimeError => e
+    { "error" => true, "message" => e }.to_json
+  rescue IOError => e
+    { "error" => true, "message" => e }.to_json
+  end
 end
 
 get '/private' do

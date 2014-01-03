@@ -9,6 +9,7 @@ recommApp = angular
           when('/private', {templateUrl: 'partials/private.html'}).
           when('/connection', {templateUrl: 'partials/connection.html'}).
           when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl }).
+          when('/profile/:id', {templateUrl: 'partials/profile.html', controller: ProfileCtrl }).
           when('/recomms', {templateUrl: 'partials/recomms.html', controller: RecommsCtrl }).
           when('/steamid', {templateUrl: 'partials/steamid.html', controller: SteamIdCtrl }).
           when('/games', { templateUrl: 'partials/games.html', controller: GamesCtrl}).
@@ -68,6 +69,7 @@ recommApp.service('SteamIdService', function($cookies) {
 
     this.reset = function() { 
         steamId = 'Steam Id';
+        delete $cookies.steamId;
         ready = false;
     };
 

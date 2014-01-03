@@ -2,7 +2,6 @@
 function NavbarCtrl($scope, $location, SteamIdService) {
     $scope.service = SteamIdService;
     $scope.resetSteam = function() { 
-        console.log("resetSteam called");
         SteamIdService.reset();
         $location.path('/steamid');
     };
@@ -47,25 +46,22 @@ function SteamIdCtrl($scope, $location, SteamIdService) {
     };
 };
 
-function ProfileCtrl($scope, $http, $location, AppLoading, SteamIdService, ProfileCache) { 
+function ProfileCtrl($scope, $http, $routeParams, $location, AppLoading, SteamIdService, ProfileCache) { 
     $scope.state = {};
-    $scope.$watch('state.pageCount', function(newValue, oldValue, scope) { 
-        console.log('State Changed: ' + $scope.state.pageCount); 
-    });
-    
     $scope.getProfile = function() { 
         AppLoading.loading();
-        if (!SteamIdService.isReady()) { 
+        if (!$routeParams.id && !SteamIdService.isReady()) { 
             $location.path('/steamid');
             AppLoading.ready(true);
             return;
         }
 
+        if ($routeParams.id) {
+            SteamIdService.setSteamId($routeParams.id);
+        }
         var steamId = SteamIdService.getSteamId();
         var cacheObj = ProfileCache.get(steamId);
         if (cacheObj) {
-            console.log('cache hit');
-            console.log(cacheObj);
             $scope.state = {
                 profile: cacheObj.profile,
                 itemCount: cacheObj.itemCount,
@@ -73,10 +69,8 @@ function ProfileCtrl($scope, $http, $location, AppLoading, SteamIdService, Profi
                 currentPage: cacheObj.currentPage,
                 currentData: cacheObj.currentData
             };
-            console.log($scope.state);
             AppLoading.ready(true);
         } else { 
-            console.log('cache miss');
             $http.get('/profile/' + steamId).
                 success(function (data) { 
                     if (data.error && data.id == 1) { 
@@ -96,8 +90,6 @@ function ProfileCtrl($scope, $http, $location, AppLoading, SteamIdService, Profi
                     };
                     $scope.setPage(1);
                     ProfileCache.put(steamId, $scope.state);
-                    console.log($scope.state);
-                    console.log('ready');
                     AppLoading.ready(true);
                 });
         }
@@ -114,10 +106,6 @@ function ProfileCtrl($scope, $http, $location, AppLoading, SteamIdService, Profi
 
 function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, RecommsCache) { 
     $scope.state = {};
-    $scope.$watch('state.pageCount', function(newValue, oldValue, scope) { 
-        console.log('State Changed: ' + $scope.state.pageCount); 
-    });
-    
     $scope.getRecomms = function() { 
         AppLoading.loading();
         if (!SteamIdService.isReady()) { 
@@ -129,8 +117,6 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
         var steamId = SteamIdService.getSteamId();
         var cacheObj = RecommsCache.get(steamId);
         if (cacheObj) {
-            console.log('cache hit');
-            console.log(cacheObj);
             $scope.state = {
                 recommsNew: cacheObj.recommsNew,
                 recommsOwned: cacheObj.recommsOwned,
@@ -140,10 +126,8 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
                 currentNew: cacheObj.currentNew,
                 currentOwned: cacheObj.currentOwned
             };
-            console.log($scope.state);
             AppLoading.ready(true);
         } else { 
-            console.log('cache miss');
             if (data.error && data.id == 1) { 
                 $location.path('/private');
                 AppLoading.ready(true);
@@ -163,7 +147,6 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
                     };
                     $scope.setPage(1);
                     RecommsCache.put(steamId, $scope.state);
-                    console.log($scope.state);
                     AppLoading.ready(true);
                 });
         }
@@ -198,7 +181,6 @@ function GenresCtrl($scope, $http, AppLoading) {
         AppLoading.loading();
         $http.get('/genres?page='+pageNo).
             success(function (data) { 
-                console.log(data);
                 $scope.genres = data;
                 AppLoading.ready(true);
             });
@@ -223,7 +205,6 @@ function GameCtrl($scope, $http, $routeParams, AppLoading) {
                 $scope.game.playedGame = $scope.game.owned - $scope.game.not_played;
             }
             AppLoading.ready(true);
-            console.log($scope.game);
         });
 };
 

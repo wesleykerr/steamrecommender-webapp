@@ -79,6 +79,17 @@ function ProfileCtrl($scope, $http, $location, AppLoading, SteamIdService, Profi
             console.log('cache miss');
             $http.get('/profile/' + steamId).
                 success(function (data) { 
+                    console.log(data);
+                    if (data.error && data.id == 1) { 
+                        $location.path('/private');
+                        AppLoading.ready(true);
+                        return;
+                    } else if (data.error && data.id == 2) { 
+                        $location.path('/connection');
+                        AppLoading.ready(true);
+                        return;
+                    }
+
                     $scope.state = {
                         profile: data,
                         itemCount: data.length,

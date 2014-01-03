@@ -4,11 +4,13 @@ recommApp = angular
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
           when('/home', {templateUrl: 'partials/home.html', controller: CarouselCtrl }).
+          when('/about', {templateUrl: 'partials/about.html' }).
+          when('/contact', {templateUrl: 'partials/contact.html' }).
+          when('/private', {templateUrl: 'partials/private.html'}).
+          when('/connection', {templateUrl: 'partials/connection.html'}).
           when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl }).
           when('/recomms', {templateUrl: 'partials/recomms.html', controller: RecommsCtrl }).
-          when('/about', {templateUrl: 'partials/about.html' }).
           when('/steamid', {templateUrl: 'partials/steamid.html', controller: SteamIdCtrl }).
-          when('/contact', {templateUrl: 'partials/contact.html' }).
           when('/games', { templateUrl: 'partials/games.html', controller: GamesCtrl}).
           when('/game/:id', { templateUrl: 'partials/game.html', controller: GameCtrl}).
           when('/genres', { templateUrl: 'partials/genres.html', controller: GenresCtrl }).

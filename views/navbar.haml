@@ -11,6 +11,8 @@
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
             %li
+              %a{:href => '/profile'}Profile
+            %li
               %a{:href => '/recomms'}Recommendations
             %li
               %a{:href => '/genres'}Genres
@@ -20,3 +22,8 @@
               %a{:href => '/about'}About
             %li
               %a{:href => '/contact'}Contact
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{:href => '/steamid'}= session[:steamid] ? "#{session[:steamid]}" : "Steam Id"
+            %li
+              %a{:href => '/reset'}Reset

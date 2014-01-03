@@ -19,5 +19,6 @@ require 'models/game'
 require 'models/game_duplicates'
 require 'models/genre'
 require 'models/genre_mapping'
+require 'models/model'
 
 DataMapper.finalize

@@ -49,6 +49,10 @@ body {
   height: 500px;
 }
 
+.carousel-control { 
+  top: 50%;
+  font-size: 75px;
+}
 
 
 /* MARKETING CONTENT

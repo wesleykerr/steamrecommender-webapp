@@ -1,0 +1,36 @@
+
+<div class="container marketing">
+  <div class="span1"></div>
+  <div class="span10">
+    <div class="row">
+      <center>
+        <h2>Genres</h2>
+      </center>
+      <div class="row" ng-repeat="genre in genres">
+        <div class="row">
+          <div class="span10">
+            <center><h3>
+                <a ng-href="#/genre/{{genre.id}}">
+                  {{genre.name}}
+                </a>
+            </h3></center>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span1"></div>
+          <div class="span2" ng-repeat="game in genre.games">
+            <a ng-href="games/{{game.appid}}">
+              <img ng-src={{game.steam_img_url}} width="150px" title="{{game.title}}" />
+            </a>
+          </div>
+        </div>
+        <hr></hr>
+      </div>
+      <center>
+        <pagination boundary-links="true" total-items="itemCount" items-per-page="10" page="currentPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" rotate=false num-pages="pageCount" on-select-page="setPage(page)"></pagination>
+      </center> 
+
+      <hr></hr>
+    </div>
+  </div>
+</div>

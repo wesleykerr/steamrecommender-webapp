@@ -1,0 +1,65 @@
+
+<div class="container marketing">
+  <div class="span2"></div>
+  <div class="span8">
+    <div class="row">
+      <center>
+        <h2>{{header}}</h2>
+      </center>
+      <center>
+        <div class="row">
+          <div class="span5"></div>
+          <div class="span2 text-center" title="Sort by total playtime">
+            <a ng-click="getGames('total_playtime')">
+              <strong>All Time</strong>
+            </a>
+          </div>
+        </div>
+      </center>
+      <div class="row">
+        <div class="span2"></div>
+        <div class="span3 text-left">
+          <strong>Title</strong>
+        </div>
+        <div class="span2 text-right" title="Sort by total playtime">
+          <a ng-click="getGames('total_playtime')">
+            <strong>Total</strong>
+          </a>
+        </div>
+        <div class="span1 text-right" title="Sort by the total average playtime">
+          <a ng-click="getGames('total_median')">
+            <strong>Median</strong>
+          </a>
+        </div>
+      </div>
+
+      <div ng-repeat="game in games"> 
+        <div class="row">
+          <div class="span2">
+            <a ng-href="games/{{game.appid}}">
+              <img ng-src={{game.steam_img_url}} width="150px" title="{{game.title}}" />
+            </a>
+            <br></br>
+          </div>
+          <div class="span3 text-left">
+            <a href="games/{{game.appid}}">
+              {{game.title}}
+            </a>
+          </div>
+          <div class="span2 text-right">
+            {{game.total_playtime | number:2}}
+          </div>
+          <div class="span1 text-right">
+            {{game.total_median | number:2}}
+          </div>
+        </div>
+        <hr></hr>
+      </div>
+      <center>
+        <pagination boundary-links="true" total-items="gameCount" page="currentPage" class="pagination-small" max-size="maxSize" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" rotate="false" items-per-page="20" on-select-page="setPage(page)"></pagination>
+      </center> 
+      <hr></hr>
+
+    </div>
+  </div>
+</div>

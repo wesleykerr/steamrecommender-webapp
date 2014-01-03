@@ -1,45 +1,78 @@
-.container.marketing
+:css
+  .table td.recomms { 
+    text-align: center;
+  }
+  .table th.recomms, .table td.recomms { 
+    border-top: none;
+  }
+.container
   .row
     .col-md-1
     .col-md-10
-      %h2 Steam OpenID
-      %a{ :href => '/login'} 
-        %img{ :src => 'http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_large_border.png' }
-      %br
-      %br
-      %p
-        Login with Steam and we can automatically generate recommendations for you.  At no time do we have access
-        to your Steam credentials.  
-      %br
-      %br
-      %form{:action => "recomms_submit" }
-        %fieldset
-          %legend Manual Entry
-          %label Steam Id
-          %input{:type => "text", :name => "steamid", :placeholder => "7656119xxxxxxxxxx", :required => true }
-          %button{:type => "submit", "class" => "btn"} Submit
-              
-      %p
-        Enter your unique steam id in order to get personalized recommendations.  If you are not sure
-        what your steam id is, then we suggest heading over to 
+      %center
+        %h2 Recommendations
+        .row
+          .col-md-1
+          .col-md-5
+            %h3 Should Play
+            - @not_played.each do |e_game|
+              .row
+                %a{ :href => "games/#{e_game['appid']}" }= e_game['title']
+                %br
+                %a{ :href => e_game['steam_url'] }
+                  %img{:src => e_game['steam_img_url'], :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{e_game['appid']}" }= e_game['score']
+          .col-md-5
+            %h3 Should Buy
+            - @not_owned.each do |n_game|
+              .row
+                %a{ :href => "games/#{n_game['appid']}" }= n_game['title']
+                %br
+                %a{ :href => n_game['steam_url'] }
+                  %img{:src => n_game['steam_img_url'], :width=>'150px'}
+                %br 
+                %a{ :href => "games/#{n_game['appid']}" }= n_game['score']
 
-        %a{ :href => "http://steamidfinder.com" }
-          Steam ID Finder
-
-        and tracking down the profile ID (7656119xxxxxxxxx).  With this identifer we are able to see what 
-        games you own and what games you have been playing so that we can give you personalized game
-        recommendations.  
-        
-      %p
-        %strong
-          This only works if your profile is public, as we do not have access to any private
-          information from your profile.
 
       %hr
-
+  .row
+    .col-md-1
+    .col-md-10
+      %center
+        %ul.pagination
+          - if (@page == 1)
+            %li.disabled
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=1"}
+                &laquo;
+          - else
+            %li
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page-1}" }
+                &laquo;
+          - (1..9).each do |x|
+            - if (@page == x)
+              %li.active 
+                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
+            - else
+              %li 
+                %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{x}"}= x
+          - if (@page == 9)
+            %li.disabled
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=9"}
+                &raquo;
+          - else
+            %li
+              %a{ :href => "recomms_submit?steamid=#{@steamid}&page=#{@page+1}"}
+                &raquo;
+        
+  .row
+    .col-md-1
+    .col-md-10
+      %center
+        = google_ad()
   .row
     .col-md-1
     .col-md-10
       %div= haml :footer
 
-    
+

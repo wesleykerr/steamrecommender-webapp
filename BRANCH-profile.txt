@@ -1,0 +1,74 @@
+This branch is working towards a browsable profile for users of steam
+recommender.  This involves quite a few changes and this branch attempts to
+juggle them all.  This document will serve as a reminder for where I am so that
+when I return after a few days rest to the project I don't lose as much time
+trying to figure out what I was doing.
+
+1. recomms - We are changing the way that we are storing the recommendation and
+the model.  Rather than keep it in a file, we are storing by column in the
+database.  There is a single record in the database with column id equal to -1
+that stores the names (game ids) for all of the column information.  When we
+compute the recommendations, we first pull the Steam profile information for a
+player, then iterate over the games that we care about and pull the columns
+into a matrix so that we can multiply it by the estimated rating.
+
+    Status: database is prepared and queries are being prepared.  need to
+    update all of the recommendation code to actually pull in the correct
+    audits and details.
+
+    11/24/2013 - We dropped the idea of a Player.rb and instead used the ones
+    that existed already.  I've got the application producing JSON and caching
+    the results so that we don't have to grab everything too frequently.  
+
+    We are only going to support a few endpoints
+        game/:appid/
+        games/?page=xxx&order=xxx
+        genres/:genre/?page=xxx&order=xxx
+        profile/
+        recomms/
+        steam/
+
+2.  profile - The profile page contains the games that a player owns and the
+number of hours that they've played each game.  Every game that is played comes
+with it's own 4/5 recommendations.  
+
+    Status: currently are pulling the profile from steam and storing it into
+    mysql for viewing.  Need to update the webpage so that it looks good.  I
+    also need to augment the profile with all of the game related data (title,
+    steam_url, steam_img_url and recommendations).
+
+    Update: 11/24/2013 - ready to work on the front end and make sure that the
+    model is generating good recommendations.
+
+3.  pagination - In app pagination rather than server side.  
+
+    Status: Can't quite remember.  Was working but not sure how.  We might be able
+    to get away with server side by relying on the bootstrap paginator buttons
+    and capturing click events.  Those events will send the page that we've clicked
+    on to the call to the server and we will grab the appropriate games.
+
+4.  webapp - The webapp will be an angular js app written to interact with the 
+REST interface.
+
+    11/24/2013: We have a working front page with bootstrap 3.0.2.  The earlier
+    version of bootstrap doesn't have a carousel that looks nice.  A think to 
+    keep in mind is that accordions do not work with angular-ui bootstrap and
+    the newer version of bootstrap.
+
+
+12/2/2013
+
+    Started adding support for the /games endpoint.  This involved changing the route
+    to return JSON instead of HTML and then processing the JSON through angular.  I
+    had to add an additional route into the Angular app and set up a new controller
+    to handle the calls.  The rest was pretty straight forward.
+
+12/3/2013
+
+    The games endpoint now looks more like the old games endpoint.  I dropped the
+    recent played columns because they are not accurate.  I haven't figured out
+    how to add in pagination yet, nor sorting server side.  One option is to load
+    in all of the data into main memory and then do everything client side.  This
+    works as long as the datasets are relatively small.  The other option is
+    to create attach the click to a model parameter and then resubmit the query every
+    time.

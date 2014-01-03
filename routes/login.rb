@@ -4,16 +4,30 @@ use Rack::Session::Cookie
 require 'rack/openid'
 use Rack::OpenID
 
+get '/steamid' do
+  haml :steamid
+end
+
+get '/reset' do
+  session[:steamid] = nil
+  session[:redirectTo] = nil
+  redirect to('/steamid')
+end
+
 get '/login' do
   if resp = request.env["rack.openid.response"]
     if resp.status == :success
       puts "Welcome: #{resp.display_identifier}"
       tokens = resp.display_identifier.split('/')
       id = tokens[tokens.length-1]
-      redirect "/recomms_submit?steamid=#{id}"
+      session[:steamid] = id
+      if session[:redirectTo]
+        redirect to(session[:redirectTo])
+      end
+      redirect to('/profile')
     else
       "Error: #{resp.status}"
-      redirect "/recomms"
+      redirect "/steamid"
     end
   else
     headers 'WWW-Authenticate' => Rack::OpenID.build_header(

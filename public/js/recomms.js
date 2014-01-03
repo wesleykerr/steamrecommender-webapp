@@ -239,7 +239,7 @@ function GamesCtrl($scope, $http, AppLoading, GamesService) {
     $scope.setPage(1);
 };
 
-function GenreCtrl($scope, $http, $routeParams, GamesService) { 
+function GenreCtrl($scope, $http, $routeParams, AppLoading, GamesService) { 
     $scope.pageCount = 1;
     $scope.gameCount = 1;
     $scope.currentPage = 1;

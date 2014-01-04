@@ -22,11 +22,9 @@ helpers do
   def getRating(playtime, q25, q50, q75)
     return 0 unless playtime && playtime > 0 
     
-    hoursPlayed = playtime / 60.0
-    return 1 if hoursPlayed < q25
-    return 2 if hoursPlayed < q50
-    return 3 if hoursPlayed < q75
-    return 4 
+    hoursPlayed = [playtime / 60.0, q75].min
+    pctScore = hoursPlayed / q75.to_f;
+    return 1 + (pctScore * 5)
   end
 
   # retrieve related recommendations for the given appid

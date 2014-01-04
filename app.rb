@@ -9,10 +9,14 @@ require 'haml'
 require 'time_ext.rb'
 config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
-enable :sessions
-
 configure do
+  enable :sessions
+  enable :logging
   @@config_obj = config_obj
+end
+
+before do
+  env['rack.logger'] = Logger.new("logs/recommender.log", "weekly")
 end
 
 get '/' do

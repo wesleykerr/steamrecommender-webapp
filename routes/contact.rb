@@ -1,35 +1,29 @@
 
-get '/contact' do
-  haml :contact
-end
-
-post '/contact' do
-  puts params[:email]
+post '/contact', :provides => :json  do
+  readParams = JSON.parse(request.body.read)
   require 'net/smtp'
-  from = params[:email] 
+  from = readParams['email'] 
   to = 'steamrecommender@gmail.com'
+  config = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
+
   msg = <<EOF
-From: #{params[:name]} <#{params[:email]}>
+From: #{readParams['name']} <#{readParams['email']}>
 To: Steam Recommender <steamrecommender@gmail.com>
 MIME-Version: 1.0
 Content-type: text/plain
-Subject: [steamrecommender.com] #{params[:name]} has contacted you
+Subject: [steamrecommender.com] #{readParams['name']} has contacted you
 
-#{params[:name]} <#{params[:email]}>
+#{readParams['name']} <#{readParams['email']}>
 ---
 
-#{params[:message]}
+#{readParams['message']}
 EOF
 
   smtp = Net::SMTP.new 'smtp.gmail.com', 587
   smtp.enable_starttls
-  smtp.start('steamrecommender.com', @@config['mail_user'], @@config['mail_password'], :login) do
+  smtp.start('steamrecommender.com', config['mail_user'], config['mail_password'], :login) do
     smtp.send_message(msg, from, to)
   end
-  redirect '/success'
 end
 
-get '/success' do
-  haml :success
-end
 

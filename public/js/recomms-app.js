@@ -5,7 +5,8 @@ recommApp = angular
         $routeProvider.
           when('/home', {templateUrl: 'partials/home.html', controller: CarouselCtrl }).
           when('/about', {templateUrl: 'partials/about.html' }).
-          when('/contact', {templateUrl: 'partials/contact.html' }).
+          when('/contact', {templateUrl: 'partials/contact.html', controller: ContactCtrl }).
+          when('/success', {templateUrl: 'partials/success.html' }).
           when('/private', {templateUrl: 'partials/private.html'}).
           when('/connection', {templateUrl: 'partials/connection.html'}).
           when('/profile', {templateUrl: 'partials/profile.html', controller: ProfileCtrl }).

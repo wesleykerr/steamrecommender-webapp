@@ -208,6 +208,23 @@ function GameCtrl($scope, $http, $routeParams, AppLoading) {
         });
 };
 
+function ContactCtrl($scope, $http, $location, AppLoading) { 
+    $scope.name = "";
+    $scope.email = "";
+    $scope.message = ""; 
+
+    $scope.sendEmail = function() {
+        AppLoading.loading(); 
+        var data = { "name": $scope.name, "email": $scope.email, "message": $scope.message };
+        console.log(data);
+        $http.post('contact', data).
+            success(function (data) { 
+                AppLoading.ready(true);
+                $location.path('/success');
+            });
+    } 
+}
+
 function GamesCtrl($scope, $http, AppLoading, GamesService) {
     $scope.pageCount = 1;
     $scope.gameCount = 1;

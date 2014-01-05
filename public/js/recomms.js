@@ -260,7 +260,6 @@ function GenreCtrl($scope, $http, $routeParams, AppLoading, GamesService) {
     $scope.pageCount = 1;
     $scope.gameCount = 1;
     $scope.currentPage = 1;
-    $scope.maxSize = 10;
     $scope.order = 'total_playtime';
     $scope.id = $routeParams.id;
     

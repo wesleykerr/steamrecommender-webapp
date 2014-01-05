@@ -43,7 +43,7 @@ get '/genres/:genre/size' do
   genreCount = genre.games.count
   pageCount = (genreCount / 30).ceil.to_i
   hash = {
-    "itemCount" => genreCount,
+    "gameCount" => genreCount,
     "pageCount" => pageCount
   }
   hash.to_json

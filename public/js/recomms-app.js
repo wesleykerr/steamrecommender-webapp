@@ -99,19 +99,6 @@ recommApp.service('SteamIdService', function($cookies) {
 });
 
 recommApp.service("GamesService", function(AppLoading) { 
-    var genresState = {};
-    var genreState = {};
-    
-    var gamesState = {};
-    var profileState = {
-        pageCount:1,
-        itemCount:1,
-        currentPage:1
-         
-    };
-
-    var gameState = {};
-
     this.getSize = function(state, http, url) {
         AppLoading.loading();
         http.get(url).

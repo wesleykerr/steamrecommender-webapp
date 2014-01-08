@@ -21,6 +21,7 @@ helpers do
   # quantiles provided.
   def getRating(playtime, q25, q50, q75)
     return 0 unless playtime && playtime > 0 
+    return 0 if q75.to_f == 0
     
     hoursPlayed = [playtime / 60.0, q75].min
     pctScore = hoursPlayed / q75.to_f;
@@ -163,7 +164,7 @@ helpers do
       )
       hash['playtime'] = hash['playtime_forever'] / 60.0 if hash['playtime_forever']
     end
-    
+   
     audit = AuditProfile.create(:steamid => steamid,
                                 :profile => gameMap.values,
                                 :create_datetime => DateTime.now

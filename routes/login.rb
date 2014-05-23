@@ -8,6 +8,7 @@ get '/login' do
   if resp = request.env["rack.openid.response"]
     if resp.status == :success
       puts "Welcome: #{resp.display_identifier}"
+      logger.info { "welcome [#{resp.display_identifier}]" }
       tokens = resp.display_identifier.split('/')
       id = tokens[tokens.length-1]
       redirect to("index.html#/profile/#{id}")

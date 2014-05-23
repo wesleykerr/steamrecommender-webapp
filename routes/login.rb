@@ -24,4 +24,13 @@ get '/login' do
   end
 end
 
-
+get '/resolve/:vanity' do
+  begin
+    details = getSteamId(params[:vanity])
+    json details
+  rescue RuntimeError => e
+    { "error" => true, "id" => 1, "message" => e}.to_json
+  rescue IOError => e
+    { "error" => true, "id" => 2, "message" => e}.to_json
+  end
+end

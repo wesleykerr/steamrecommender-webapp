@@ -171,6 +171,35 @@ helpers do
     )
     logger.error("failed to create audit profile record #{steamid}") unless audit.saved?
     gameMap.values
+  end
+
+  # This method sends a query to steam to resolve a vanity URL into a steamid
+  # @param [String] vanity url
+  def getSteamId(vanity)
+    host="api.steampowered.com"
+    path="/ISteamUser/ResolveVanityURL/v0001/"
+    steam_key=@@config_obj['steam_key']
+    uri = URI("http://#{host}#{path}?key=#{steam_key}&vanityurl=#{vanity}")
+    logger.info { "GET #{uri}" }
+    count = 0
+    success = false
+    begin
+      begin
+        document = Net::HTTP.get(uri)
+        data = JSON.parse(document)['response']
+        success = true
+      rescue JSON::ParserError => e
+        logger.debug { "Failed to parse response document #{e}" }
+        success = false
+        count += 1
+      end
+    end while !success && count < 5
+
+    unless success
+      logger.error { "Failed to connect to steam after n tries, so giving up" }
+      raise IOError, "Steam connection error!"
+    end
+    data
   end 
 
   # This method sends a query to steam to get the most recent

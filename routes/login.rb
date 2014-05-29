@@ -34,3 +34,14 @@ get '/resolve/:vanity' do
     { "error" => true, "id" => 2, "message" => e}.to_json
   end
 end
+
+get '/summary/:steamId' do
+  begin
+    details = getPlayerSummary(params[:steamId])
+    json details
+  rescue RuntimeError => e
+    { "error" => true, "id" => 1, "message" => e}.to_json
+  rescue IOError => e
+    { "error" => true, "id" => 2, "message" => e}.to_json
+  end
+end

@@ -1,7 +1,45 @@
 
-<div class="container marketing">
   <div class="span1"></div>
   <div class="span10">
+    <div class="row">
+      <h2>Steam Id</h2>
+      <p>Welcome to Steam Recommender.  Enter your unique Steam ID in order to 
+      generate a profile and personalized recommendations. If you are not sure 
+      what your Steam ID, then enter your custom URL (also known as a vanity URL)
+      and we can search for your Steam ID for you.  If you are still unsure what 
+      to input, we suggest logging into Steam (below) and finding your URL information
+      that way.</p>
+    </div>
+    <div class="row">
+      <div class="input-group">
+        <input type="text" class="span6 input-large" 
+        ng-model="userEntry" ng-enter="searchSteamId()" ng-keypress="isCollapsed = true" 
+        placeholder="http://steamcommunity.com/id/<customURL> OR <customURL>">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="searchSteamId()">Submit</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div collapse="isCollapsed">
+        <div class="alert alert-error">
+          <strong>Warning!</strong>  We were unable to find a Steam Id for {{customUrl}}.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <p>The following inputs are acceptable:
+      <ul>
+        <li>http://steamcommunity.com/id/<customURL> OR <customURL></li>
+        <li>http://steamcommunity.com/profiles/7656119xxxxxxxxxx</li>
+        <li>7656119xxxxxxxxxx</li>
+      </ul>
+      <p><strong>This only works if your profile is public, as we do not have access to any private information
+        from your profile</strong></p>
+    </div>
+
     <div class="row">
       <h2>Steam OpenID</h2>
       <a href="/login">
@@ -10,33 +48,8 @@
       <br /><br />
       <p>Login with Steam and we can automatically generate a profile with recommendations for you.  
       At no time do we have access to your steam credentials or any private information.</p>
-
-      <form ng-submit="setSteamId()">
-        <fieldset>
-          <legend>Manual Entry</legend>
-          <label>Steam Id</label>
-          <input type="text" ng-model="steamId" placeholder="7656119xxxxxxxxxx" required="true"></input>
-          <button type="submit" class="btn">Submit</button>
-        </fieldset>
-      </form>
-
-      <p>Enter your unique Steam id in order to generate a profile and personalized recommendations. 
-      If you are not sure what your Steam id is, then we suggest heading over to 
-
-      <a href="http://steamidfinder.com">Steam ID Finder</a>
-
-      and tracking down the profile ID (7656119xxxxxxxxxx).  With this identifier we are able to see 
-      what games own and what games you have been playing so that we can give you personalized game
-      recommendations.  You may have to run steamidfinder twice since the first value they give back may
-      look like the following: STEAM_0:1:xxxxxxx.  If so, input this value back in and retrieve the profile ID.
-      </p>
-
-      <p><strong>This only works if your profile is public, as we do not have access to any private information
-        from your profile</strong></p>
-
     </div>
     <hr />
   </div>
-</div>
 
     

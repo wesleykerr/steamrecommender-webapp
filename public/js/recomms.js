@@ -5,10 +5,6 @@ function NavbarCtrl($scope, $location, SteamIdService) {
         SteamIdService.reset();
         $location.path('/steamid');
     };
-
-    $scope.$watch('service.getSteamId()', function(newVal) { 
-        $scope.steamId = newVal;
-    });
 };
 
 function CarouselCtrl($scope) { 
@@ -38,16 +34,76 @@ function CarouselCtrl($scope) {
     ];
 };
 
-function SteamIdCtrl($scope, $location, SteamIdService) { 
-    $scope.steamId = "";
-    $scope.setSteamId = function() {
-        SteamIdService.setSteamId($scope.steamId);
-        $location.path('/profile');
+function SteamIdCtrl($scope, $http, $location, AppLoading, SteamIdService) { 
+    $scope.isCollapsed = true;
+    $scope.userEntry = "";
+    $scope.showError = true;
+
+    $scope.setSteamId = function(steamId) {
+        AppLoading.loading();
+        $http.get('/summary/' + steamId).
+            success(function (data) { 
+                if (data.error) { 
+                    console.log(data);
+                    AppLoading.ready(true);
+                    return;
+                }
+                console.log(data.players[0]);
+                SteamIdService.setSteamId(steamId, data.players[0]);
+                $location.path('/profile');
+                AppLoading.ready(true);
+            }); 
     };
+
+    $scope.searchSteamId = function() { 
+        var stringId = "";
+        var custom = "http://steamcommunity.com/id/";
+        var customURLSet = false;
+
+        var profile = "http://steamcommunity.com/profiles/";
+        var profileURLSet = false;
+
+        var steamIdPrefix = "7656119";
+
+        if ($scope.userEntry.slice(0, custom.length) == custom) {
+            customURLSet = true;
+            stringId = $scope.userEntry(custom.length, $scope.userEntry.length);
+        } else if ($scope.userEntry.slice(0, profile.length) == profile) { 
+            profileURLSet = true;
+            stringId = $scope.userEntry(profile.length, $scope.userEntry.length);
+        } else { 
+            stringId = $scope.userEntry;
+        }
+        console.log(stringId);
+
+        // if we are directly setting the steam id, then we
+        // should just go forward.
+        if (profileURLSet || stringId.slice(0, steamIdPrefix.length) == steamIdPrefix) {
+            $scope.setSteamId(stringId);
+            return;
+        }
+
+        AppLoading.loading();
+        $http.get('/resolve/' + stringId).
+            success(function (data) { 
+                if (data.error || data.success != 1) { 
+                    console.log(data);
+                    $scope.isCollapsed = false;
+                    AppLoading.ready(true);
+                    return;
+                }
+                console.log(data);
+                $scope.isCollapsed = true;
+                AppLoading.ready(true);
+                $scope.setSteamId(data['steamid']);
+            });
+    };
+
 };
 
 function ProfileCtrl($scope, $http, $routeParams, $location, AppLoading, SteamIdService, ProfileCache) { 
     $scope.state = {};
+    $scope.steamDetails = {};
     $scope.getProfile = function() { 
         AppLoading.loading();
         if (!$routeParams.id && !SteamIdService.isReady()) { 
@@ -59,7 +115,8 @@ function ProfileCtrl($scope, $http, $routeParams, $location, AppLoading, SteamId
         if ($routeParams.id) {
             SteamIdService.setSteamId($routeParams.id);
         }
-        var steamId = SteamIdService.getSteamId();
+        $scope.steamDetails = SteamIdService.getSteamDetails();
+        var steamId = $scope.steamDetails.steamid;
         var cacheObj = ProfileCache.get(steamId);
         if (cacheObj) {
             $scope.state = {
@@ -106,6 +163,7 @@ function ProfileCtrl($scope, $http, $routeParams, $location, AppLoading, SteamId
 
 function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, RecommsCache) { 
     $scope.state = {};
+    $scope.steamDetails = {};
     $scope.getRecomms = function() { 
         AppLoading.loading();
         if (!SteamIdService.isReady()) { 
@@ -114,7 +172,8 @@ function RecommsCtrl($scope, $http, $location, AppLoading, SteamIdService, Recom
             return;
         }
 
-        var steamId = SteamIdService.getSteamId();
+        $scope.steamDetails = SteamIdService.getSteamDetails();
+        var steamId = $scope.steamDetails.steamid;
         var cacheObj = RecommsCache.get(steamId);
         if (cacheObj) {
             $scope.state = {

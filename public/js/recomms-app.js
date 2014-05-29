@@ -45,10 +45,31 @@ recommApp.factory('AppLoading', function($rootScope) {
     };
 });
 
+recommApp.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 recommApp.directive('game', function() { 
     return { 
         restrict: 'E',
         templateUrl: 'partials/game-directive.html'
+    };
+});
+
+recommApp.directive('profile', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/header-directive.html'
     };
 });
 
@@ -60,37 +81,53 @@ recommApp.factory('RecommsCache', function($cacheFactory) {
    return $cacheFactory('recomms');
 });
 
-recommApp.service('SteamIdService', function($cookies) { 
+recommApp.service('SteamIdService', function($http, $cookies) { 
     var steamId = 'Steam Id';
+    var steamDetails = {};
     var ready = false;
+    var stateLookup = {
+        0 : 'Offline', 1 : 'Online', 2 : 'Busy', 3 : 'Away',
+        4 : 'Snooze', 5 : 'Looking to trade', 6 : 'Looking to play'
+    };
 
-    this.isReady = function() { 
+    this.isReady = function() {
         return ready;
     };
 
     this.reset = function() { 
         steamId = 'Steam Id';
+        steamDetails = '';
         delete $cookies.steamId;
         ready = false;
     };
 
-    this.setSteamId = function(newSteamId) { 
+    this.setSteamId = function(newSteamId, newSteamDetails) {
         steamId = newSteamId;
+        steamDetails = newSteamDetails;
+        steamDetails.stateString = stateLookup[steamDetails['personastate']]
         $cookies.steamId = steamId;
+        $cookies.steamDetails = JSON.stringify(steamDetails);
         ready = true;
     };
 
-    this.getSteamId = function() { 
+    this.getSteamId = function() {
         return steamId;
     };
 
+    this.getSteamDetails = function() { 
+        return steamDetails;
+    };
+
     this.init = function() { 
-        var cookieValue = $cookies.steamId;
-        if (cookieValue) {
-            steamId = cookieValue;
+        var cookieSteamId = $cookies.steamId;
+        var cookieSteamDetails = $cookies.steamDetails;
+        if (cookieSteamId && cookieSteamDetails) {
+            steamId = cookieSteamId;
+            steamDetails = JSON.parse(cookieSteamDetails);
             ready = true;
         } else { 
             steamId = 'Steam Id';
+            steamDetails = {}; 
             ready = false;
         }
     };

@@ -14,11 +14,11 @@ pass = config_obj['mysql_password']
 DataMapper::Property::String.length(255)
 DataMapper.setup(:default, "mysql://#{user}:#{pass}@#{host}/#{db}")
 
-require 'models/audit'
-require 'models/game'
-require 'models/game_duplicates'
-require 'models/genre'
-require 'models/genre_mapping'
-require 'models/model'
+require_relative 'audit'
+require_relative 'game'
+require_relative 'game_duplicates'
+require_relative 'genre'
+require_relative 'genre_mapping'
+require_relative 'model'
 
 DataMapper.finalize

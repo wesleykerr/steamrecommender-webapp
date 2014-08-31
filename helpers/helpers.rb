@@ -33,7 +33,9 @@ helpers do
   # @param [Number] the number of recommendations
   # @return [Array] recommended items
   def getRecommIdsAndScores(played, notPlayed, nrecs)
-    headers = Model.get(1, -1)
+    modelId = ModelStatus.getModelId()
+    logger.info("Model Id: #{modelId}")
+    headers = Model.get(modelId, -1)
     headers = headers.model_column.split(",").map { |x| x.to_i } 
 
     modelMatrix = NMatrix.float(played.count, headers.count)

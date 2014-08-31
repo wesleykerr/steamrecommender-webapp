@@ -3,7 +3,7 @@ require 'data_mapper'
 if (@@config_obj)
   config_obj = @@config_obj
 else
-  config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
+  config_obj = YAML::load_file( "#{File.expand_path('.')}/../config-app/steamrecommender.yml" )
 end
 
 host = config_obj['mysql_host']

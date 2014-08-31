@@ -1,4 +1,3 @@
-require 'rubygems' # skip this line in ruby 1.9 and later
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/cookies'

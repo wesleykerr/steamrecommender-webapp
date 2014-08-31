@@ -20,5 +20,6 @@ require_relative 'game_duplicates'
 require_relative 'genre'
 require_relative 'genre_mapping'
 require_relative 'model'
+require_relative 'model_status'
 
 DataMapper.finalize

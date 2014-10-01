@@ -19,7 +19,7 @@
         <div class="row">
           <div class="span1"></div>
           <div class="span2" ng-repeat="game in genre.games">
-            <a ng-href="games/{{game.appid}}">
+            <a ng-href="#/game/{{game.appid}}">
               <img ng-src={{game.steam_img_url}} width="150px" title="{{game.title}}" />
             </a>
           </div>

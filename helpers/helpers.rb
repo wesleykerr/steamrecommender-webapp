@@ -39,7 +39,7 @@ helpers do
     headers = headers.model_column.split(",").map { |x| x.to_i } 
 
     modelMatrix = NMatrix.float(played.count, headers.count)
-    models = Model.all(:model_id => 1, :appid => played, :order => [:appid.asc])
+    models = Model.all(:model_id => modelId, :appid => played, :order => [:appid.asc])
     models.each_with_index do |model,col|
       model.model_column.split(",").each_with_index do |x,row|
         modelMatrix[col, row] = x.to_f
@@ -47,7 +47,7 @@ helpers do
     end
     vector = NVector.float(played.count)
     vector.fill!(1)
-    
+
     resultVector = modelMatrix * vector
     recommsNew = []
     recommsNotPlayed = []

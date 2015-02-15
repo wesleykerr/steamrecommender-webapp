@@ -76,8 +76,11 @@ helpers do
     return cacheDetails if cacheDetails
 
     steamDetails = getSteamDetails(steamid)
+    logger.info { "Retrieved Steam details." }
     played,notPlayed = parsePlayerData(steamDetails)
+    logger.info { "Successfully parsed player data" }
     recomms = getRecommIdsAndScores(played, notPlayed, 100)
+    logger.info { "Successfully got recommendations." }
     audit = AuditRecomm.create(
       :steamid => steamid,
       :recomms => recomms,

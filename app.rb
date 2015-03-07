@@ -5,7 +5,7 @@ require 'sinatra/json'
 require 'yaml'
 
 require_relative 'time_ext.rb'
-config_obj = YAML::load_file( "#{File.expand_path('.')}/../config-app/steamrecommender.yml" )
+config_obj = YAML::load_file( "#{File.expand_path('.')}/../config/steamrecommender.yml" )
 
 configure do
   enable :sessions

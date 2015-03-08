@@ -17,11 +17,6 @@ before do
   env['rack.logger'] = Logger.new("log/recommender.log", "weekly")
 end
 
-get '/' do
-  @title = 'Steam Recommender'
-  haml :index
-end
-
 require_relative 'helpers/helpers.rb'
 require_relative 'models/init.rb'
 require_relative 'routes/init.rb'

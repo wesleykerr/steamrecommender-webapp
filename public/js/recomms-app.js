@@ -3,7 +3,7 @@ recommApp = angular
     .module('recommender', ['ngAnimate', 'ngRoute', 'ngCookies', 'ui.bootstrap'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
-          when('/home', {templateUrl: 'partials/home.html', controller: CarouselCtrl }).
+          when('/home', {templateUrl: 'partials/steamid.html', controller: CarouselCtrl }).
           when('/about', {templateUrl: 'partials/about.html' }).
           when('/contact', {templateUrl: 'partials/contact.html', controller: ContactCtrl }).
           when('/success', {templateUrl: 'partials/success.html' }).
@@ -20,25 +20,25 @@ recommApp = angular
           otherwise({redirectTo: '/home'});
     }]);
 
-recommApp.factory('AppLoading', function($rootScope) { 
+recommApp.factory('AppLoading', function($rootScope) {
     var timer;
-    return { 
-        loading : function() { 
+    return {
+        loading : function() {
             clearTimeout(timer);
             $rootScope.status = 'loading';
             if (!$rootScope.$$phase) $rootScope.$apply();
         },
-        ready : function(delay) { 
-            function ready() { 
+        ready : function(delay) {
+            function ready() {
                 $rootScope.status = 'ready';
                 if (!$rootScope.$$phase) $rootScope.$apply();
             }
 
             clearTimeout(timer);
             delay = delay == null ? 5000 : false;
-            if (delay) { 
+            if (delay) {
                 timer = setTimeout(ready, delay);
-            } else { 
+            } else {
                 ready();
             }
         }
@@ -59,8 +59,8 @@ recommApp.directive('ngEnter', function () {
     };
 });
 
-recommApp.directive('game', function() { 
-    return { 
+recommApp.directive('game', function() {
+    return {
         restrict: 'E',
         templateUrl: 'partials/game-directive.html'
     };
@@ -73,15 +73,15 @@ recommApp.directive('profile', function() {
     };
 });
 
-recommApp.factory('ProfileCache', function($cacheFactory) { 
+recommApp.factory('ProfileCache', function($cacheFactory) {
    return $cacheFactory('profile');
 });
 
-recommApp.factory('RecommsCache', function($cacheFactory) { 
+recommApp.factory('RecommsCache', function($cacheFactory) {
    return $cacheFactory('recomms');
 });
 
-recommApp.service('SteamIdService', function($http, $cookies) { 
+recommApp.service('SteamIdService', function($http, $cookies) {
     var steamId = 'Steam Id';
     var steamDetails = {};
     var ready = false;
@@ -94,7 +94,7 @@ recommApp.service('SteamIdService', function($http, $cookies) {
         return ready;
     };
 
-    this.reset = function() { 
+    this.reset = function() {
         steamId = 'Steam Id';
         steamDetails = '';
         delete $cookies.steamId;
@@ -114,20 +114,20 @@ recommApp.service('SteamIdService', function($http, $cookies) {
         return steamId;
     };
 
-    this.getSteamDetails = function() { 
+    this.getSteamDetails = function() {
         return steamDetails;
     };
 
-    this.init = function() { 
+    this.init = function() {
         var cookieSteamId = $cookies.steamId;
         var cookieSteamDetails = $cookies.steamDetails;
         if (cookieSteamId && cookieSteamDetails) {
             steamId = cookieSteamId;
             steamDetails = JSON.parse(cookieSteamDetails);
             ready = true;
-        } else { 
+        } else {
             steamId = 'Steam Id';
-            steamDetails = {}; 
+            steamDetails = {};
             ready = false;
         }
     };
@@ -135,7 +135,7 @@ recommApp.service('SteamIdService', function($http, $cookies) {
     this.init();
 });
 
-recommApp.service("GamesService", function(AppLoading) { 
+recommApp.service("GamesService", function(AppLoading) {
     this.getSize = function(state, http, url) {
         AppLoading.loading();
         http.get(url).
@@ -146,11 +146,9 @@ recommApp.service("GamesService", function(AppLoading) {
             });
     };
 
-    this.getGames = function(state, http, prefix, pageNo, order, fn) { 
+    this.getGames = function(state, http, prefix, pageNo, order, fn) {
         state.pageNo = pageNo;
         state.order = order;
         http.get(prefix+'?page='+pageNo+'&order='+order).success(fn);
     };
 });
-
-

@@ -3,7 +3,7 @@ recommApp = angular
     .module('recommender', ['ngAnimate', 'ngRoute', 'ngCookies', 'ui.bootstrap'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
-          when('/home', {templateUrl: 'partials/steamid.html', controller: CarouselCtrl }).
+          when('/home', {templateUrl: 'partials/steamid.html', controller: SteamIdCtrl }).
           when('/about', {templateUrl: 'partials/about.html' }).
           when('/contact', {templateUrl: 'partials/contact.html', controller: ContactCtrl }).
           when('/success', {templateUrl: 'partials/success.html' }).

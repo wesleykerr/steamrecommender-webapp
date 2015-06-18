@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://www.steamrecommender.com/#/profile -->
+<html lang="en" ng-app="recommender" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Recommender</title>
+  <script src="./profile_files/angular.min.js"></script>
+  <script src="./profile_files/angular-cookies.min.js"></script>
+  <script src="./profile_files/angular-animate.min.js"></script>
+  <script src="./profile_files/angular-route.min.js"></script>
+  <script src="./profile_files/jquery.min.js"></script>
+  <script src="./profile_files/ui-bootstrap-tpls.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+  <script src="./profile_files/recomms-app.js"></script> 
+  <script src="./profile_files/recomms.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+  <div ng-controller="NavbarCtrl" class="ng-scope">
+    <div class="navbar-wrapper">
+      <div class="container">
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="navbar-inner">
+            <a class="brand" href="#">
+              <span class="app-loading-container">
+                <span class="app-loading-animation ready" data-ng-class="status" style=""></span>
+              </span>
+              Steam Recommender
+            </a>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Recommendations</a></li>
+              <li><a href="#">Genres</a></li>
+              <li><a href="#">Games</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a ng-click="resetSteam();">Reset</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ngView:  --><div ng-view="" class="ng-scope">
+<div class="container marketing ng-scope">
+  <profile><div class="well">
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span1">
+      <img ng-src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/3c/3ce6a7f2f28119d43680a7745381231900c0724b_medium.jpg" title="deerslyr1" src="./profile_files/3ce6a7f2f28119d43680a7745381231900c0724b_medium.jpg">
+    </div> 
+    <div class="span6">
+      <strong class="ng-binding">deerslyr1</strong><br>
+      <em class="ng-binding">Online</em><br>
+      <a ng-href="http://steamcommunity.com/id/deerslyr1/" class="ng-binding" href="http://steamcommunity.com/id/deerslyr1/">http://steamcommunity.com/id/deerslyr1/</a>
+    </div>
+  </div>
+</div>
+
+
+</profile>
+  <div class="row">
+    <div class="span2"></div>
+    <div class="span8">
+      <center>
+        <h2>User Profile</h2>
+      </center>
+    </div>
+  </div>
+
+  <div class="span10">
+    <!-- ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/72850" href="http://store.steampowered.com/app/72850">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/72850/header_292x136.jpg" width="150px" title="The Elder Scrolls V: Skyrim" src="./profile_files/header_292x136.jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/72850" class="ng-binding">
+              The Elder Scrolls V: Skyrim
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">95.62</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">50.78</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/40390" href="http://store.steampowered.com/app/40390">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/40390/header_292x136.jpg" width="75px" title="Risen 2: Dark Waters" src="./profile_files/header_292x136(1).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/49520" href="http://store.steampowered.com/app/49520">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/49520/header_292x136.jpg" width="75px" title="Borderlands 2" src="./profile_files/header_292x136(2).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/236430" href="http://store.steampowered.com/app/236430">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236430/header_292x136.jpg" width="75px" title="DARK SOULS™ II" src="./profile_files/header_292x136(3).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/34220" href="http://store.steampowered.com/app/34220">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="150px" title="Football Manager 2011" src="./profile_files/applogo.gif">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/34220" class="ng-binding">
+              Football Manager 2011
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">91.35</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">147.53</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/34000" href="http://store.steampowered.com/app/34000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34000/header_292x136.jpg" width="75px" title="Football Manager™ 2010" src="./profile_files/header_292x136(5).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/10540" href="http://store.steampowered.com/app/10540">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10540/header_292x136.jpg" width="75px" title="Football Manager 2009" src="./profile_files/header_292x136(6).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/295270" href="http://store.steampowered.com/app/295270">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/295270/header_292x136.jpg" width="75px" title="Football Manager 2015" src="./profile_files/header_292x136(7).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/242460" href="http://store.steampowered.com/app/242460">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Football Manager 2014 Editor" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/251570" href="http://store.steampowered.com/app/251570">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/251570/header_292x136.jpg" width="150px" title="7 Days to Die" src="./profile_files/header_292x136(8).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/251570" class="ng-binding">
+              7 Days to Die
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">76.25</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">9.32</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/242760" href="http://store.steampowered.com/app/242760">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/242760/header_292x136.jpg" width="75px" title="The Forest" src="./profile_files/header_292x136(9).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/322300" href="http://store.steampowered.com/app/322300">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/322300/header_292x136.jpg" width="75px" title="The Repopulation" src="./profile_files/header_292x136(10).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/227560" href="http://store.steampowered.com/app/227560">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227560/header_292x136.jpg" width="75px" title="Scourge: Outbreak" src="./profile_files/header_292x136(11).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/333950" href="http://store.steampowered.com/app/333950">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/333950/header_292x136.jpg" width="75px" title="Medieval Engineers" src="./profile_files/header_292x136(12).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/71270" href="http://store.steampowered.com/app/71270">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/71270/header_292x136.jpg" width="150px" title="Football Manager 2012" src="./profile_files/header_292x136(13).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/71270" class="ng-binding">
+              Football Manager 2012
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">38.50</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">154.57</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/295270" href="http://store.steampowered.com/app/295270">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/295270/header_292x136.jpg" width="75px" title="Football Manager 2015" src="./profile_files/header_292x136(7).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/34000" href="http://store.steampowered.com/app/34000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34000/header_292x136.jpg" width="75px" title="Football Manager™ 2010" src="./profile_files/header_292x136(5).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/242460" href="http://store.steampowered.com/app/242460">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Football Manager 2014 Editor" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/255260" href="http://store.steampowered.com/app/255260">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/255260/header_292x136.jpg" width="75px" title="Pro Cycling Manager 2014" src="./profile_files/header_292x136(14).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/220240" href="http://store.steampowered.com/app/220240">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/220240/header_292x136.jpg" width="150px" title="Far Cry 3" src="./profile_files/header_292x136(15).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/220240" class="ng-binding">
+              Far Cry 3
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">36.45</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">17.38</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/203160" href="http://store.steampowered.com/app/203160">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/203160/header_292x136.jpg" width="75px" title="Tomb Raider" src="./profile_files/header_292x136(16).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/206420" href="http://store.steampowered.com/app/206420">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/206420/header_292x136.jpg" width="75px" title="Saints Row IV" src="./profile_files/header_292x136(17).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/218620" href="http://store.steampowered.com/app/218620">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header_292x136.jpg" width="75px" title="PAYDAY 2" src="./profile_files/header_292x136(18).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/550" href="http://store.steampowered.com/app/550">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/550/header_292x136.jpg" width="150px" title="Left 4 Dead 2" src="./profile_files/header_292x136(19).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/550" class="ng-binding">
+              Left 4 Dead 2
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">34.38</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">9.74</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/223530" href="http://store.steampowered.com/app/223530">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Left 4 Dead 2 Beta" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./profile_files/header_292x136(20).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./profile_files/header_292x136(21).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/304930" href="http://store.steampowered.com/app/304930">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/304930/header_292x136.jpg" width="75px" title="Unturned" src="./profile_files/header_292x136(22).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/218620" href="http://store.steampowered.com/app/218620">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header_292x136.jpg" width="150px" title="PAYDAY 2" src="./profile_files/header_292x136(18).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/218620" class="ng-binding">
+              PAYDAY 2
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">28.92</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">18.67</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/230410" href="http://store.steampowered.com/app/230410">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/230410/header_292x136.jpg" width="75px" title="Warframe" src="./profile_files/header_292x136(23).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/242760" href="http://store.steampowered.com/app/242760">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/242760/header_292x136.jpg" width="75px" title="The Forest" src="./profile_files/header_292x136(9).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/259080" href="http://store.steampowered.com/app/259080">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" width="75px" title="Just Cause 2: Multiplayer Mod" src="./profile_files/header_292x136(24).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/236390" href="http://store.steampowered.com/app/236390">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236390/header_292x136.jpg" width="75px" title="War Thunder" src="./profile_files/header_292x136(25).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/203770" href="http://store.steampowered.com/app/203770">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/203770/header_292x136.jpg" width="150px" title="Crusader Kings II" src="./profile_files/header_292x136(26).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/203770" class="ng-binding">
+              Crusader Kings II
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">22.52</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">11.00</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/42960" href="http://store.steampowered.com/app/42960">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42960/header_292x136.jpg" width="75px" title="Victoria II" src="./profile_files/header_292x136(27).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/227760" href="http://store.steampowered.com/app/227760">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227760/header_292x136.jpg" width="75px" title="March of the Eagles" src="./profile_files/header_292x136(28).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/330840" href="http://store.steampowered.com/app/330840">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330840/header_292x136.jpg" width="75px" title="Game of Thrones - A Telltale Games Series" src="./profile_files/header_292x136(29).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/73170" href="http://store.steampowered.com/app/73170">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/73170/header_292x136.jpg" width="75px" title="Darkest Hour: A Hearts of Iron Game" src="./profile_files/header_292x136(30).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/57400" href="http://store.steampowered.com/app/57400">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/57400/header_292x136.jpg" width="150px" title="Batman: Arkham City" src="./profile_files/header_292x136(31).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/57400" class="ng-binding">
+              Batman: Arkham City
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">18.02</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">15.03</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/209000" href="http://store.steampowered.com/app/209000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/209000/header_292x136.jpg" width="75px" title="Batman™: Arkham Origins" src="./profile_files/header_292x136(32).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/200260" href="http://store.steampowered.com/app/200260">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/200260/header_292x136.jpg" width="75px" title="Batman: Arkham City - Game of the Year Edition" src="./profile_files/header_292x136(33).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/267490" href="http://store.steampowered.com/app/267490">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/267490/header_292x136.jpg" width="75px" title="Batman™: Arkham Origins Blackgate - Deluxe Edition" src="./profile_files/header_292x136(34).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/28050" href="http://store.steampowered.com/app/28050">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/28050/header_292x136.jpg" width="150px" title="Deus Ex: Human Revolution" src="./profile_files/header_292x136(35).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/28050" class="ng-binding">
+              Deus Ex: Human Revolution
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">14.38</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">15.26</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/201280" href="http://store.steampowered.com/app/201280">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/201280/header_292x136.jpg" width="75px" title="Deus Ex: Human Revolution - The Missing Link" src="./profile_files/header_292x136(36).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/258180" href="http://store.steampowered.com/app/258180">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/258180/header_292x136.jpg" width="75px" title="Deus Ex: The Fall" src="./profile_files/header_292x136(37).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/9200" href="http://store.steampowered.com/app/9200">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/9200/header_292x136.jpg" width="75px" title="RAGE" src="./profile_files/header_292x136(38).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/63380" href="http://store.steampowered.com/app/63380">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/63380/header_292x136.jpg" width="150px" title="Sniper Elite V2" src="./profile_files/header_292x136(39).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/63380" class="ng-binding">
+              Sniper Elite V2
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">13.78</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">2.73</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/34870" href="http://store.steampowered.com/app/34870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34870/header_292x136.jpg" width="75px" title="Sniper: Ghost Warrior 2" src="./profile_files/header_292x136(40).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/236830" href="http://store.steampowered.com/app/236830">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Red Orchestra 2: Heroes of Stalingrad - Single Player" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/218620" href="http://store.steampowered.com/app/218620">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header_292x136.jpg" width="75px" title="PAYDAY 2" src="./profile_files/header_292x136(18).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/24240" href="http://store.steampowered.com/app/24240">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24240/header_292x136.jpg" width="75px" title="PAYDAY™ The Heist" src="./profile_files/header_292x136(41).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/213670" href="http://store.steampowered.com/app/213670">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/213670/header_292x136.jpg" width="150px" title="South Park™: The Stick of Truth™" src="./profile_files/header_292x136(42).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/213670" class="ng-binding">
+              South Park™: The Stick of Truth™
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">13.03</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">13.53</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/250320" href="http://store.steampowered.com/app/250320">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/250320/header_292x136.jpg" width="75px" title="The Wolf Among Us" src="./profile_files/header_292x136(43).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/261030" href="http://store.steampowered.com/app/261030">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/261030/header_292x136.jpg" width="75px" title="The Walking Dead: Season 2" src="./profile_files/header_292x136(44).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/354380" href="http://store.steampowered.com/app/354380">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/354380/header_292x136.jpg" width="75px" title="Assassin’s Creed® Chronicles: China" src="./profile_files/header_292x136(45).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/339800" href="http://store.steampowered.com/app/339800">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/339800/header_292x136.jpg" width="75px" title="HuniePop" src="./profile_files/header_292x136(46).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/500" href="http://store.steampowered.com/app/500">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/500/header_292x136.jpg" width="150px" title="Left 4 Dead" src="./profile_files/header_292x136(47).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/500" class="ng-binding">
+              Left 4 Dead
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">12.85</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">9.97</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./profile_files/header_292x136(20).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/630" href="http://store.steampowered.com/app/630">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/630/header_292x136.jpg" width="75px" title="Alien Swarm" src="./profile_files/header_292x136(48).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/24960" href="http://store.steampowered.com/app/24960">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24960/header_292x136.jpg" width="75px" title="Battlefield: Bad Company™ 2" src="./profile_files/header_292x136(49).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/17500" href="http://store.steampowered.com/app/17500">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17500/header_292x136.jpg" width="75px" title="Zombie Panic! Source" src="./profile_files/header_292x136(50).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="150px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/8870" class="ng-binding">
+              BioShock Infinite
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">12.50</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">11.27</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/203160" href="http://store.steampowered.com/app/203160">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/203160/header_292x136.jpg" width="75px" title="Tomb Raider" src="./profile_files/header_292x136(16).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/205100" href="http://store.steampowered.com/app/205100">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/205100/header_292x136.jpg" width="75px" title="Dishonored" src="./profile_files/header_292x136(51).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/49520" href="http://store.steampowered.com/app/49520">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/49520/header_292x136.jpg" width="75px" title="Borderlands 2" src="./profile_files/header_292x136(2).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/20920" href="http://store.steampowered.com/app/20920">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/20920/header_292x136.jpg" width="75px" title="The Witcher 2: Assassins of Kings Enhanced Edition" src="./profile_files/header_292x136(52).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/35010" href="http://store.steampowered.com/app/35010">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/35010/header_292x136.jpg" width="150px" title="Batman: Arkham Asylum Game of the Year Edition" src="./profile_files/header_292x136(53).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/35010" class="ng-binding">
+              Batman: Arkham Asylum Game of the Year Edition
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">12.45</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">12.45</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/7210" href="http://store.steampowered.com/app/7210">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/7210/header_292x136.jpg" width="75px" title="Runaway, A Road Adventure" src="./profile_files/header_292x136(54).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/57400" href="http://store.steampowered.com/app/57400">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/57400/header_292x136.jpg" width="75px" title="Batman: Arkham City" src="./profile_files/header_292x136(31).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/32500" href="http://store.steampowered.com/app/32500">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/32500/header_292x136.jpg" width="75px" title="STAR WARS™ - The Force Unleashed™ II" src="./profile_files/header_292x136(55).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/233150" href="http://store.steampowered.com/app/233150">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/233150/header_292x136.jpg" width="75px" title="LUFTRAUSERS" src="./profile_files/header_292x136(56).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/207610" href="http://store.steampowered.com/app/207610">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/207610/header_292x136.jpg" width="150px" title="The Walking Dead" src="./profile_files/header_292x136(57).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/207610" class="ng-binding">
+              The Walking Dead
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">12.22</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">11.32</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/330840" href="http://store.steampowered.com/app/330840">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330840/header_292x136.jpg" width="75px" title="Game of Thrones - A Telltale Games Series" src="./profile_files/header_292x136(29).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./profile_files/header_292x136(4).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/249360" href="http://store.steampowered.com/app/249360">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/249360/header_292x136.jpg" width="75px" title="Zafehouse: Diaries" src="./profile_files/header_292x136(58).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/330830" href="http://store.steampowered.com/app/330830">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330830/header_292x136.jpg" width="75px" title="Tales from the Borderlands" src="./profile_files/header_292x136(59).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/8930" href="http://store.steampowered.com/app/8930">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8930/header_292x136.jpg" width="150px" title="Sid Meier&#39;s Civilization® V" src="./profile_files/header_292x136(60).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/8930" class="ng-binding">
+              Sid Meier's Civilization® V
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">11.55</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">40.10</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/24780" href="http://store.steampowered.com/app/24780">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24780/header_292x136.jpg" width="75px" title="SimCity™ 4 Deluxe Edition" src="./profile_files/header_292x136(61).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/289130" href="http://store.steampowered.com/app/289130">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/289130/header_292x136.jpg" width="75px" title="Endless Legend™" src="./profile_files/header_292x136(62).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/10500" href="http://store.steampowered.com/app/10500">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10500/header_292x136.jpg" width="75px" title="Empire: Total War™" src="./profile_files/header_292x136(63).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/282210" href="http://store.steampowered.com/app/282210">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/282210/header_292x136.jpg" width="75px" title="Sid Meier&#39;s Starships" src="./profile_files/header_292x136(64).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/10560" href="http://store.steampowered.com/app/10560">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10560/header_292x136.jpg" width="150px" title="Worldwide Soccer Manager™ 2009" src="./profile_files/header_292x136(65).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/10560" class="ng-binding">
+              Worldwide Soccer Manager™ 2009
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">9.35</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">83.32</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/34000" href="http://store.steampowered.com/app/34000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34000/header_292x136.jpg" width="75px" title="Football Manager™ 2010" src="./profile_files/header_292x136(5).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/34220" href="http://store.steampowered.com/app/34220">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Football Manager 2011" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/10" href="http://store.steampowered.com/app/10">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10/header_292x136.jpg" width="75px" title="Counter-Strike" src="./profile_files/header_292x136(66).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/20" href="http://store.steampowered.com/app/20">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/20/header_292x136.jpg" width="75px" title="Team Fortress Classic" src="./profile_files/header_292x136(67).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/2400" href="http://store.steampowered.com/app/2400">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/2400/header_292x136.jpg" width="150px" title="The Ship: Murder Party" src="./profile_files/header_292x136(68).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/2400" class="ng-binding">
+              The Ship: Murder Party
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">9.03</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">1.42</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/2420" href="http://store.steampowered.com/app/2420">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/2420/header_292x136.jpg" width="75px" title="The Ship: Single Player" src="./profile_files/header_292x136(69).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/2430" href="http://store.steampowered.com/app/2430">
+              <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="The Ship Tutorial" src="./profile_files/applogo.gif">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/272040" href="http://store.steampowered.com/app/272040">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/272040/header_292x136.jpg" width="75px" title="KAMI" src="./profile_files/header_292x136(70).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./profile_files/header_292x136(21).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData --><div class="row ng-scope" ng-repeat="game in state.currentData">
+      <div class="span2">
+        <a ng-href="#/game/200710" href="http://store.steampowered.com/app/200710">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/200710/header_292x136.jpg" width="150px" title="Torchlight II" src="./profile_files/header_292x136(71).jpg">
+        </a>
+        <br><br><br><br>
+        <div class="span10"><hr></div>
+      </div>
+      <div class="span6">
+        <div class="row">
+          <div class="span3 text-left">
+            <a href="http://store.steampowered.com/app/200710" class="ng-binding">
+              Torchlight II
+            </a>
+          </div>
+          <div class="span3 text-right">
+            <span ng-mouseleave="reset()" value="game.rating" max="5" readonly="readonly" class="ng-isolate-scope">
+	<!-- ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range --><i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" ng-class="$index &lt; val &amp;&amp; (r.stateOn || &#39;icon-star&#39;) || (r.stateOff || &#39;icon-star-empty&#39;)" class="ng-scope icon-star-empty"></i><!-- end ngRepeat: r in range -->
+</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="span2 text-left"><strong>Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">8.62</div>
+          <div class="span2 text-left"><strong>Median Hours Played:</strong></div>
+          <div class="span1 text-right ng-binding">11.50</div>
+        </div>
+
+        <div class="row"><div class="span6"><br></div></div>
+
+        <div class="row">
+          <div class="span6 text-left">
+            <strong>Players also like...</strong>
+          </div>
+        </div>
+        <div class="row">
+          <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/230230" href="http://store.steampowered.com/app/230230">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/230230/header_292x136.jpg" width="75px" title="Divinity: Original Sin" src="./profile_files/header_292x136(72).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/228320" href="http://store.steampowered.com/app/228320">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/228320/header_292x136.jpg" width="75px" title="A Valley Without Wind 2" src="./profile_files/header_292x136(73).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/291650" href="http://store.steampowered.com/app/291650">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/291650/header_292x136.jpg" width="75px" title="Pillars of Eternity" src="./profile_files/header_292x136(74).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+            <a ng-href="#/game/239070" href="http://store.steampowered.com/app/239070">
+              <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/239070/header_292x136.jpg" width="75px" title="Hammerwatch" src="./profile_files/header_292x136(75).jpg">
+            </a> 
+          </div><!-- end ngRepeat: recommGame in game.recomms -->
+        </div>
+      
+        <div class="row"><div class="span6"><br></div></div>
+      </div>
+    </div><!-- end ngRepeat: game in state.currentData -->
+
+    <center> 
+  </ul>
+</div>
+    </center> 
+    <hr>
+  </div>
+</div>
+</div>
+
+  <div class="container marketing">
+    <div class="span1"></div>
+    <div class="span11">
+      <div class="row">
+        <footer>
+        <p>
+        <a href="http://www.steampowered.com/">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
+        All copyrights reserved to their respective owners.
+        </p>
+        <p>© Wesley Kerr 2014</p> 
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body></html>

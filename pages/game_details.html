@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://www.steamrecommender.com/#/game/8930 -->
+<html lang="en" ng-app="recommender" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Recommender</title>
+  <script src="./game_details_files/angular.min.js"></script>
+  <script src="./game_details_files/angular-cookies.min.js"></script>
+  <script src="./game_details_files/angular-animate.min.js"></script>
+  <script src="./game_details_files/angular-route.min.js"></script>
+  <script src="./game_details_files/jquery.min.js"></script>
+  <script src="./game_details_files/ui-bootstrap-tpls.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+  <script src="./game_details_files/recomms-app.js"></script> 
+  <script src="./game_details_files/recomms.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+  <div ng-controller="NavbarCtrl" class="ng-scope">
+    <div class="navbar-wrapper">
+      <div class="container">
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="navbar-inner">
+            <a class="brand" href="http://www.steamrecommender.com/#">
+              <span class="app-loading-container">
+                <span class="app-loading-animation loading-add loading-add-active ready" data-ng-class="status" style=""></span>
+              </span>
+              Steam Recommender
+            </a>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Recommendations</a></li>
+              <li><a href="#">Genres</a></li>
+              <li><a href="#">Games</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a ng-click="resetSteam();">Reset</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ngView:  --><div ng-view="" class="ng-scope"><br class="ng-scope">
+<div class="container marketing ng-scope">
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span10">
+      <center>
+        <a ng-href="http://store.steampowered.com/app/8930" href="http://store.steampowered.com/app/8930">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8930/header_292x136.jpg" width="200px" src="./game_details_files/header_292x136.jpg">
+        </a>
+        <h1>
+          <a ng-href="http://store.steampowered.com/app/8930/" class="ng-binding" href="http://store.steampowered.com/app/8930/">
+            Sid Meier's Civilization® V
+          </a>
+        </h1>
+
+        <div class="span8">
+          <div class="row">
+            <hr>
+            <div class="span2 text-left">Steam Id</div>
+            <div class="span6 text-left ng-binding">8930</div>
+          </div>
+          <div class="row">
+            <hr>
+            <div class="span2 text-left">App Type</div>
+            <div class="span6 text-left ng-binding">game</div>
+          </div>
+          <div class="row">
+            <hr>
+            <div class="span2 text-left">Metacritic Site</div>
+            <div class="span6 text-left">
+              <a ng-href="http://www.metacritic.com/game/pc/sid-meiers-civilization-v" class="ng-binding" href="http://www.metacritic.com/game/pc/sid-meiers-civilization-v">http://www.metacritic.com/game/pc/sid-meiers-civilization-v</a> 
+            </div>
+          </div>
+          <div class="row">
+            <hr>
+            <div class="span2 text-left">Genres</div>
+            <div class="span6 text-left ng-binding">Strategy</div>
+          </div>
+          <div class="row">
+            <hr>
+            <div class="span2 text-left">Owned By</div>
+            <div class="span6 text-left ng-binding">78884</div>
+          </div>
+          <div class="row">
+            <hr>
+          </div>
+
+          <div class="row">
+            <div class="span8">
+              <h4>Also Recommended</h4>
+            </div>
+          </div>
+          <div class="row">
+            <!-- ngRepeat: recomm in game.recomms --><div class="span2 ng-scope" ng-repeat="recomm in game.recomms">
+              <a ng-href="http://store.steampowered.com/app/24780" href="http://store.steampowered.com/app/24780">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24780/header_292x136.jpg" title="SimCity™ 4 Deluxe Edition" src="./game_details_files/header_292x136(1).jpg">
+              </a> 
+            </div><!-- end ngRepeat: recomm in game.recomms --><div class="span2 ng-scope" ng-repeat="recomm in game.recomms">
+              <a ng-href="http://store.steampowered.com/app/289130" href="http://store.steampowered.com/app/289130">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/289130/header_292x136.jpg" title="Endless Legend™" src="./game_details_files/header_292x136(2).jpg">
+              </a> 
+            </div><!-- end ngRepeat: recomm in game.recomms --><div class="span2 ng-scope" ng-repeat="recomm in game.recomms">
+              <a ng-href="http://store.steampowered.com/app/10500" href="http://store.steampowered.com/app/10500">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10500/header_292x136.jpg" title="Empire: Total War™" src="./game_details_files/header_292x136(3).jpg">
+              </a> 
+            </div><!-- end ngRepeat: recomm in game.recomms --><div class="span2 ng-scope" ng-repeat="recomm in game.recomms">
+              <a ng-href="http://store.steampowered.com/app/282210" href="http://store.steampowered.com/app/282210">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/282210/header_292x136.jpg" title="Sid Meier&#39;s Starships" src="./game_details_files/header_292x136(4).jpg">
+              </a> 
+            </div><!-- end ngRepeat: recomm in game.recomms -->
+          </div>
+
+          <div class="row">
+            <hr>
+          </div>
+          <div class="row">
+            <center>
+              <h3>Total Playtime</h3>
+              <table class="table">
+                <tbody><tr>
+                  <td>Played Game</td>
+                  <td class="ng-binding">74,544</td>
+                </tr>
+                <tr>
+                  <td>Hours Played</td>
+                  <td class="ng-binding">11,763,673</td>
+                </tr>
+                <tr>
+                  <td>Median Played</td>
+                  <td class="ng-binding">40.10</td>
+                </tr>
+              </tbody></table>
+            </center>
+          </div>
+        </div>
+      </center></div>
+    </div>
+  </div>
+
+</div>
+
+  <div class="container marketing">
+    <div class="span1"></div>
+    <div class="span11">
+      <div class="row">
+        <footer>
+        <p>
+        <a href="http://www.steampowered.com/">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
+        All copyrights reserved to their respective owners.
+        </p>
+        <p>© Wesley Kerr 2014</p> 
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body></html>

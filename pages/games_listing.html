@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://www.steamrecommender.com/#/games -->
+<html lang="en" ng-app="recommender" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Recommender</title>
+  <script src="./games_listing_files/angular.min.js"></script>
+  <script src="./games_listing_files/angular-cookies.min.js"></script>
+  <script src="./games_listing_files/angular-animate.min.js"></script>
+  <script src="./games_listing_files/angular-route.min.js"></script>
+  <script src="./games_listing_files/jquery.min.js"></script>
+  <script src="./games_listing_files/ui-bootstrap-tpls.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+  <script src="./games_listing_files/recomms-app.js"></script> 
+  <script src="./games_listing_files/recomms.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+  <div ng-controller="NavbarCtrl" class="ng-scope">
+    <div class="navbar-wrapper">
+      <div class="container">
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="navbar-inner">
+            <a class="brand" href="http://www.steamrecommender.com/#">
+              <span class="app-loading-container">
+                <span class="app-loading-animation ready" data-ng-class="status" style=""></span>
+              </span>
+              Steam Recommender
+            </a>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Recommendations</a></li>
+              <li><a href="#">Genres</a></li>
+              <li><a href="#">Games</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a ng-click="resetSteam();">Reset</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ngView:  --><div ng-view="" class="ng-scope">
+<div class="container marketing ng-scope">
+  <div class="span2"></div>
+  <div class="span8">
+    <div class="row">
+      <center>
+        <h2 class="ng-binding">Games</h2>
+      </center>
+      <center>
+        <div class="row">
+          <div class="span5"></div>
+          <div class="span2 text-center" title="Sort by total playtime">
+            <a ng-click="getGames(&#39;total_playtime&#39;)">
+              <strong>All Time</strong>
+            </a>
+          </div>
+        </div>
+      </center>
+      <div class="row">
+        <div class="span2"></div>
+        <div class="span3 text-left">
+          <strong>Title</strong>
+        </div>
+        <div class="span2 text-right" title="Sort by total playtime">
+          <a ng-click="getGames(&#39;total_playtime&#39;)">
+            <strong>Total</strong>
+          </a>
+        </div>
+        <div class="span1 text-right" title="Sort by the total average playtime">
+          <a ng-click="getGames(&#39;total_median&#39;)">
+            <strong>Median</strong>
+          </a>
+        </div>
+      </div>
+
+      <!-- ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/570" href="http://store.steampowered.com/app/570">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/570/header_292x136.jpg" width="150px" title="Dota 2" src="./games_listing_files/header_292x136.jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/570" class="ng-binding">
+          Dota 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        88,724,232.02
+      </div>
+      <div class="span1 text-right ng-binding">
+        9.05
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/205790" href="http://store.steampowered.com/app/205790">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Dota 2 Test" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/245550" href="http://store.steampowered.com/app/245550">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/245550/header_292x136.jpg" width="75px" title="Free to Play" src="./games_listing_files/header_292x136(1).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/730" href="http://store.steampowered.com/app/730">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/730/header_292x136.jpg" width="75px" title="Counter-Strike: Global Offensive" src="./games_listing_files/header_292x136(2).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/339610" href="http://store.steampowered.com/app/339610">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/339610/header_292x136.jpg" width="75px" title="Freestyle2: Street Basketball" src="./games_listing_files/header_292x136(3).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="150px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/440" class="ng-binding">
+          Team Fortress 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        21,279,404.47
+      </div>
+      <div class="span1 text-right ng-binding">
+        5.55
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./games_listing_files/header_292x136(5).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/31280" href="http://store.steampowered.com/app/31280">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/31280/header_292x136.jpg" width="75px" title="Poker Night at the Inventory" src="./games_listing_files/header_292x136(6).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/304930" href="http://store.steampowered.com/app/304930">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/304930/header_292x136.jpg" width="75px" title="Unturned" src="./games_listing_files/header_292x136(7).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/550" href="http://store.steampowered.com/app/550">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/550/header_292x136.jpg" width="75px" title="Left 4 Dead 2" src="./games_listing_files/header_292x136(8).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/730" href="http://store.steampowered.com/app/730">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/730/header_292x136.jpg" width="150px" title="Counter-Strike: Global Offensive" src="./games_listing_files/header_292x136(2).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/730" class="ng-binding">
+          Counter-Strike: Global Offensive
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        20,455,142.87
+      </div>
+      <div class="span1 text-right ng-binding">
+        45.55
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/570" href="http://store.steampowered.com/app/570">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/570/header_292x136.jpg" width="75px" title="Dota 2" src="./games_listing_files/header_292x136.jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./games_listing_files/header_292x136(5).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/259080" href="http://store.steampowered.com/app/259080">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" width="75px" title="Just Cause 2: Multiplayer Mod" src="./games_listing_files/header_292x136(9).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/10" href="http://store.steampowered.com/app/10">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10/header_292x136.jpg" width="150px" title="Counter-Strike" src="./games_listing_files/header_292x136(10).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/10" class="ng-binding">
+          Counter-Strike
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        16,410,407.92
+      </div>
+      <div class="span1 text-right ng-binding">
+        9.37
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/80" href="http://store.steampowered.com/app/80">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/80/header_292x136.jpg" width="75px" title="Counter-Strike: Condition Zero" src="./games_listing_files/header_292x136(11).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/100" href="http://store.steampowered.com/app/100">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/100/header_292x136.jpg" width="75px" title="Counter-Strike: Condition Zero" src="./games_listing_files/header_292x136(12).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/40" href="http://store.steampowered.com/app/40">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/40/header_292x136.jpg" width="75px" title="Deathmatch Classic" src="./games_listing_files/header_292x136(13).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/60" href="http://store.steampowered.com/app/60">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/60/header_292x136.jpg" width="75px" title="Ricochet" src="./games_listing_files/header_292x136(14).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/240" href="http://store.steampowered.com/app/240">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/240/header_292x136.jpg" width="150px" title="Counter-Strike: Source" src="./games_listing_files/header_292x136(15).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/240" class="ng-binding">
+          Counter-Strike: Source
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        16,107,039.93
+      </div>
+      <div class="span1 text-right ng-binding">
+        13.73
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/211" href="http://store.steampowered.com/app/211">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Source SDK" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/17500" href="http://store.steampowered.com/app/17500">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17500/header_292x136.jpg" width="75px" title="Zombie Panic! Source" src="./games_listing_files/header_292x136(16).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/630" href="http://store.steampowered.com/app/630">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/630/header_292x136.jpg" width="75px" title="Alien Swarm" src="./games_listing_files/header_292x136(17).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/8930" href="http://store.steampowered.com/app/8930">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8930/header_292x136.jpg" width="150px" title="Sid Meier&#39;s Civilization® V" src="./games_listing_files/header_292x136(18).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/8930" class="ng-binding">
+          Sid Meier's Civilization® V
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        11,763,672.58
+      </div>
+      <div class="span1 text-right ng-binding">
+        40.10
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/24780" href="http://store.steampowered.com/app/24780">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24780/header_292x136.jpg" width="75px" title="SimCity™ 4 Deluxe Edition" src="./games_listing_files/header_292x136(19).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/289130" href="http://store.steampowered.com/app/289130">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/289130/header_292x136.jpg" width="75px" title="Endless Legend™" src="./games_listing_files/header_292x136(20).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/10500" href="http://store.steampowered.com/app/10500">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10500/header_292x136.jpg" width="75px" title="Empire: Total War™" src="./games_listing_files/header_292x136(21).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/282210" href="http://store.steampowered.com/app/282210">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/282210/header_292x136.jpg" width="75px" title="Sid Meier&#39;s Starships" src="./games_listing_files/header_292x136(22).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/72850" href="http://store.steampowered.com/app/72850">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/72850/header_292x136.jpg" width="150px" title="The Elder Scrolls V: Skyrim" src="./games_listing_files/header_292x136(23).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/72850" class="ng-binding">
+          The Elder Scrolls V: Skyrim
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        10,051,249.05
+      </div>
+      <div class="span1 text-right ng-binding">
+        50.78
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/40390" href="http://store.steampowered.com/app/40390">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/40390/header_292x136.jpg" width="75px" title="Risen 2: Dark Waters" src="./games_listing_files/header_292x136(24).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/49520" href="http://store.steampowered.com/app/49520">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/49520/header_292x136.jpg" width="75px" title="Borderlands 2" src="./games_listing_files/header_292x136(25).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/236430" href="http://store.steampowered.com/app/236430">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236430/header_292x136.jpg" width="75px" title="DARK SOULS™ II" src="./games_listing_files/header_292x136(26).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./games_listing_files/header_292x136(27).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/10190" href="http://store.steampowered.com/app/10190">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10190/header_292x136.jpg" width="150px" title="Call of Duty®: Modern Warfare® 2" src="./games_listing_files/header_292x136(28).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/10190" class="ng-binding">
+          Call of Duty®: Modern Warfare® 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        7,149,524.25
+      </div>
+      <div class="span1 text-right ng-binding">
+        56.82
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/10180" href="http://store.steampowered.com/app/10180">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10180/header_292x136.jpg" width="75px" title="Call of Duty®: Modern Warfare® 2" src="./games_listing_files/header_292x136(29).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/209170" href="http://store.steampowered.com/app/209170">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/209170/header_292x136.jpg" width="75px" title="Call of Duty®: Ghosts" src="./games_listing_files/header_292x136(30).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/209660" href="http://store.steampowered.com/app/209660">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/209660/header_292x136.jpg" width="75px" title="Call of Duty®: Advanced Warfare - Gold Edition" src="./games_listing_files/header_292x136(31).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/212910" href="http://store.steampowered.com/app/212910">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/212910/header_292x136.jpg" width="75px" title="Call of Duty: Black Ops II - Zombies" src="./games_listing_files/header_292x136(32).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="150px" title="Garry&#39;s Mod" src="./games_listing_files/header_292x136(5).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/4000" class="ng-binding">
+          Garry's Mod
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        6,998,389.30
+      </div>
+      <div class="span1 text-right ng-binding">
+        17.40
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/259080" href="http://store.steampowered.com/app/259080">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" width="75px" title="Just Cause 2: Multiplayer Mod" src="./games_listing_files/header_292x136(9).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/263760" href="http://store.steampowered.com/app/263760">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/263760/header_292x136.jpg" width="75px" title="Turbo Dismount™" src="./games_listing_files/header_292x136(33).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/730" href="http://store.steampowered.com/app/730">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/730/header_292x136.jpg" width="75px" title="Counter-Strike: Global Offensive" src="./games_listing_files/header_292x136(2).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/550" href="http://store.steampowered.com/app/550">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/550/header_292x136.jpg" width="150px" title="Left 4 Dead 2" src="./games_listing_files/header_292x136(8).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/550" class="ng-binding">
+          Left 4 Dead 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        4,318,336.80
+      </div>
+      <div class="span1 text-right ng-binding">
+        9.74
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/223530" href="http://store.steampowered.com/app/223530">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Left 4 Dead 2 Beta" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./games_listing_files/header_292x136(5).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/304930" href="http://store.steampowered.com/app/304930">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/304930/header_292x136.jpg" width="75px" title="Unturned" src="./games_listing_files/header_292x136(7).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/105600" href="http://store.steampowered.com/app/105600">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/105600/header_292x136.jpg" width="150px" title="Terraria" src="./games_listing_files/header_292x136(34).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/105600" class="ng-binding">
+          Terraria
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        3,427,625.50
+      </div>
+      <div class="span1 text-right ng-binding">
+        19.07
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/264140" href="http://store.steampowered.com/app/264140">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/264140/header_292x136.jpg" width="75px" title="Pixel Piracy" src="./games_listing_files/header_292x136(35).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/238240" href="http://store.steampowered.com/app/238240">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/238240/header_292x136.jpg" width="75px" title="Edge of Space" src="./games_listing_files/header_292x136(36).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/268750" href="http://store.steampowered.com/app/268750">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/268750/header_292x136.jpg" width="75px" title="Magicite" src="./games_listing_files/header_292x136(37).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/250900" href="http://store.steampowered.com/app/250900">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/250900/header_292x136.jpg" width="75px" title="The Binding of Isaac: Rebirth" src="./games_listing_files/header_292x136(38).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/42690" href="http://store.steampowered.com/app/42690">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42690/header_292x136.jpg" width="150px" title="Call of Duty®: Modern Warfare® 3" src="./games_listing_files/header_292x136(39).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/42690" class="ng-binding">
+          Call of Duty®: Modern Warfare® 3
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        3,366,016.42
+      </div>
+      <div class="span1 text-right ng-binding">
+        35.26
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42680" href="http://store.steampowered.com/app/42680">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42680/header_292x136.jpg" width="75px" title="Call of Duty®: Modern Warfare® 3" src="./games_listing_files/header_292x136(40).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/202990" href="http://store.steampowered.com/app/202990">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/202990/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops II" src="./games_listing_files/header_292x136(41).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42710" href="http://store.steampowered.com/app/42710">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42710/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops" src="./games_listing_files/header_292x136(42).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/209170" href="http://store.steampowered.com/app/209170">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/209170/header_292x136.jpg" width="75px" title="Call of Duty®: Ghosts" src="./games_listing_files/header_292x136(30).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/10500" href="http://store.steampowered.com/app/10500">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10500/header_292x136.jpg" width="150px" title="Empire: Total War™" src="./games_listing_files/header_292x136(21).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/10500" class="ng-binding">
+          Empire: Total War™
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        3,030,758.32
+      </div>
+      <div class="span1 text-right ng-binding">
+        25.00
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/325610" href="http://store.steampowered.com/app/325610">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/325610/header_292x136.jpg" width="75px" title="Total War: ATTILA" src="./games_listing_files/header_292x136(43).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/8930" href="http://store.steampowered.com/app/8930">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8930/header_292x136.jpg" width="75px" title="Sid Meier&#39;s Civilization® V" src="./games_listing_files/header_292x136(18).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/306660" href="http://store.steampowered.com/app/306660">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/306660/header_292x136.jpg" width="75px" title="Ultimate General: Gettysburg" src="./games_listing_files/header_292x136(44).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/34030" href="http://store.steampowered.com/app/34030">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34030/header_292x136.jpg" width="75px" title="Napoleon: Total War™" src="./games_listing_files/header_292x136(45).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/49520" href="http://store.steampowered.com/app/49520">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/49520/header_292x136.jpg" width="150px" title="Borderlands 2" src="./games_listing_files/header_292x136(25).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/49520" class="ng-binding">
+          Borderlands 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        3,021,096.45
+      </div>
+      <div class="span1 text-right ng-binding">
+        27.18
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./games_listing_files/header_292x136(27).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/330830" href="http://store.steampowered.com/app/330830">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330830/header_292x136.jpg" width="75px" title="Tales from the Borderlands" src="./games_listing_files/header_292x136(46).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/72850" href="http://store.steampowered.com/app/72850">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/72850/header_292x136.jpg" width="75px" title="The Elder Scrolls V: Skyrim" src="./games_listing_files/header_292x136(23).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/298110" href="http://store.steampowered.com/app/298110">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/298110/header_292x136.jpg" width="75px" title="Far Cry® 4" src="./games_listing_files/header_292x136(47).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/230410" href="http://store.steampowered.com/app/230410">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/230410/header_292x136.jpg" width="150px" title="Warframe" src="./games_listing_files/header_292x136(48).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/230410" class="ng-binding">
+          Warframe
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        2,521,498.23
+      </div>
+      <div class="span1 text-right ng-binding">
+        6.10
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/218620" href="http://store.steampowered.com/app/218620">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header_292x136.jpg" width="75px" title="PAYDAY 2" src="./games_listing_files/header_292x136(49).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/227700" href="http://store.steampowered.com/app/227700">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227700/header_292x136.jpg" width="75px" title="Firefall" src="./games_listing_files/header_292x136(50).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/222900" href="http://store.steampowered.com/app/222900">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/222900/header_292x136.jpg" width="75px" title="Dead Island: Epidemic" src="./games_listing_files/header_292x136(51).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/218230" href="http://store.steampowered.com/app/218230">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218230/header_292x136.jpg" width="75px" title="PlanetSide 2" src="./games_listing_files/header_292x136(52).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/42710" href="http://store.steampowered.com/app/42710">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42710/header_292x136.jpg" width="150px" title="Call of Duty®: Black Ops" src="./games_listing_files/header_292x136(42).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/42710" class="ng-binding">
+          Call of Duty®: Black Ops
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        2,436,130.15
+      </div>
+      <div class="span1 text-right ng-binding">
+        24.73
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42700" href="http://store.steampowered.com/app/42700">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42700/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops" src="./games_listing_files/header_292x136(53).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42690" href="http://store.steampowered.com/app/42690">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42690/header_292x136.jpg" width="75px" title="Call of Duty®: Modern Warfare® 3" src="./games_listing_files/header_292x136(39).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/202990" href="http://store.steampowered.com/app/202990">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/202990/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops II" src="./games_listing_files/header_292x136(41).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42680" href="http://store.steampowered.com/app/42680">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42680/header_292x136.jpg" width="75px" title="Call of Duty®: Modern Warfare® 3" src="./games_listing_files/header_292x136(40).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/214950" href="http://store.steampowered.com/app/214950">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/214950/header_292x136.jpg" width="150px" title="Total War™: ROME II - Emperor Edition" src="./games_listing_files/header_292x136(54).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/214950" class="ng-binding">
+          Total War™: ROME II - Emperor Edition
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        2,136,647.55
+      </div>
+      <div class="span1 text-right ng-binding">
+        39.82
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/325610" href="http://store.steampowered.com/app/325610">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/325610/header_292x136.jpg" width="75px" title="Total War: ATTILA" src="./games_listing_files/header_292x136(43).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/231430" href="http://store.steampowered.com/app/231430">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/231430/header_292x136.jpg" width="75px" title="Company of Heroes 2" src="./games_listing_files/header_292x136(55).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/4770" href="http://store.steampowered.com/app/4770">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4770/header_292x136.jpg" width="75px" title="Rome: Total War™ - Alexander " src="./games_listing_files/header_292x136(56).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/300080" href="http://store.steampowered.com/app/300080">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/300080/header_292x136.jpg" width="75px" title="Total War Battles: KINGDOM" src="./games_listing_files/header_292x136(57).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/218620" href="http://store.steampowered.com/app/218620">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header_292x136.jpg" width="150px" title="PAYDAY 2" src="./games_listing_files/header_292x136(49).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/218620" class="ng-binding">
+          PAYDAY 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        2,062,878.85
+      </div>
+      <div class="span1 text-right ng-binding">
+        18.67
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/230410" href="http://store.steampowered.com/app/230410">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/230410/header_292x136.jpg" width="75px" title="Warframe" src="./games_listing_files/header_292x136(48).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/242760" href="http://store.steampowered.com/app/242760">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/242760/header_292x136.jpg" width="75px" title="The Forest" src="./games_listing_files/header_292x136(58).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/259080" href="http://store.steampowered.com/app/259080">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" width="75px" title="Just Cause 2: Multiplayer Mod" src="./games_listing_files/header_292x136(9).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/236390" href="http://store.steampowered.com/app/236390">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236390/header_292x136.jpg" width="75px" title="War Thunder" src="./games_listing_files/header_292x136(59).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/107410" href="http://store.steampowered.com/app/107410">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header_292x136.jpg" width="150px" title="Arma 3" src="./games_listing_files/header_292x136(60).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/107410" class="ng-binding">
+          Arma 3
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        2,032,115.32
+      </div>
+      <div class="span1 text-right ng-binding">
+        24.82
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/219540" href="http://store.steampowered.com/app/219540">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Arma 2: Operation Arrowhead Beta (Obsolete)" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/223750" href="http://store.steampowered.com/app/223750">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/223750/header_292x136.jpg" width="75px" title="DCS World" src="./games_listing_files/header_292x136(61).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/236390" href="http://store.steampowered.com/app/236390">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236390/header_292x136.jpg" width="75px" title="War Thunder" src="./games_listing_files/header_292x136(59).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/224580" href="http://store.steampowered.com/app/224580">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/224580/header_292x136.jpg" width="75px" title="Arma II: DayZ Mod" src="./games_listing_files/header_292x136(62).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/202990" href="http://store.steampowered.com/app/202990">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/202990/header_292x136.jpg" width="150px" title="Call of Duty®: Black Ops II" src="./games_listing_files/header_292x136(41).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/202990" class="ng-binding">
+          Call of Duty®: Black Ops II
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,984,902.95
+      </div>
+      <div class="span1 text-right ng-binding">
+        24.83
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/212910" href="http://store.steampowered.com/app/212910">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/212910/header_292x136.jpg" width="75px" title="Call of Duty: Black Ops II - Zombies" src="./games_listing_files/header_292x136(32).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/202970" href="http://store.steampowered.com/app/202970">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/202970/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops II" src="./games_listing_files/header_292x136(63).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42690" href="http://store.steampowered.com/app/42690">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42690/header_292x136.jpg" width="75px" title="Call of Duty®: Modern Warfare® 3" src="./games_listing_files/header_292x136(39).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42710" href="http://store.steampowered.com/app/42710">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42710/header_292x136.jpg" width="75px" title="Call of Duty®: Black Ops" src="./games_listing_files/header_292x136(42).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/295270" href="http://store.steampowered.com/app/295270">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/295270/header_292x136.jpg" width="150px" title="Football Manager 2015" src="./games_listing_files/header_292x136(64).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/295270" class="ng-binding">
+          Football Manager 2015
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,944,115.02
+      </div>
+      <div class="span1 text-right ng-binding">
+        133.60
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/231670" href="http://store.steampowered.com/app/231670">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/231670/header_292x136.jpg" width="75px" title="Football Manager 2014" src="./games_listing_files/header_292x136(65).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/207890" href="http://store.steampowered.com/app/207890">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/207890/header_292x136.jpg" width="75px" title="Football Manager 2013™" src="./games_listing_files/header_292x136(66).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/71270" href="http://store.steampowered.com/app/71270">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/71270/header_292x136.jpg" width="75px" title="Football Manager 2012" src="./games_listing_files/header_292x136(67).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/242460" href="http://store.steampowered.com/app/242460">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Football Manager 2014 Editor" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/221100" href="http://store.steampowered.com/app/221100">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/221100/header_292x136.jpg" width="150px" title="DayZ" src="./games_listing_files/header_292x136(68).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/221100" class="ng-binding">
+          DayZ
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,943,248.65
+      </div>
+      <div class="span1 text-right ng-binding">
+        19.50
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/295110" href="http://store.steampowered.com/app/295110">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/295110/header_292x136.jpg" width="75px" title="H1Z1" src="./games_listing_files/header_292x136(69).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/227940" href="http://store.steampowered.com/app/227940">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227940/header_292x136.jpg" width="75px" title="Heroes &amp; Generals" src="./games_listing_files/header_292x136(70).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/224580" href="http://store.steampowered.com/app/224580">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/224580/header_292x136.jpg" width="75px" title="Arma II: DayZ Mod" src="./games_listing_files/header_292x136(62).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/252490" href="http://store.steampowered.com/app/252490">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/252490/header_292x136.jpg" width="75px" title="Rust" src="./games_listing_files/header_292x136(71).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/22380" href="http://store.steampowered.com/app/22380">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/22380/header_292x136.jpg" width="150px" title="Fallout: New Vegas" src="./games_listing_files/header_292x136(72).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/22380" class="ng-binding">
+          Fallout: New Vegas
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,930,688.12
+      </div>
+      <div class="span1 text-right ng-binding">
+        22.83
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/240760" href="http://store.steampowered.com/app/240760">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/240760/header_292x136.jpg" width="75px" title="Wasteland 2" src="./games_listing_files/header_292x136(73).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/8870" href="http://store.steampowered.com/app/8870">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8870/header_292x136.jpg" width="75px" title="BioShock Infinite" src="./games_listing_files/header_292x136(27).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/72850" href="http://store.steampowered.com/app/72850">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/72850/header_292x136.jpg" width="75px" title="The Elder Scrolls V: Skyrim" src="./games_listing_files/header_292x136(23).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/9200" href="http://store.steampowered.com/app/9200">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/9200/header_292x136.jpg" width="75px" title="RAGE" src="./games_listing_files/header_292x136(74).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/34330" href="http://store.steampowered.com/app/34330">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34330/header_292x136.jpg" width="150px" title="Total War: SHOGUN 2" src="./games_listing_files/header_292x136(75).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/34330" class="ng-binding">
+          Total War: SHOGUN 2
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,722,591.52
+      </div>
+      <div class="span1 text-right ng-binding">
+        24.47
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/325610" href="http://store.steampowered.com/app/325610">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/325610/header_292x136.jpg" width="75px" title="Total War: ATTILA" src="./games_listing_files/header_292x136(43).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/289130" href="http://store.steampowered.com/app/289130">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/289130/header_292x136.jpg" width="75px" title="Endless Legend™" src="./games_listing_files/header_292x136(20).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/48700" href="http://store.steampowered.com/app/48700">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/48700/header_292x136.jpg" width="75px" title="Mount &amp; Blade: Warband" src="./games_listing_files/header_292x136(76).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/65980" href="http://store.steampowered.com/app/65980">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/65980/header_292x136.jpg" width="75px" title="Sid Meier&#39;s Civilization®: Beyond Earth™" src="./games_listing_files/header_292x136(77).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/48700" href="http://store.steampowered.com/app/48700">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/48700/header_292x136.jpg" width="150px" title="Mount &amp; Blade: Warband" src="./games_listing_files/header_292x136(76).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/48700" class="ng-binding">
+          Mount &amp; Blade: Warband
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,700,670.55
+      </div>
+      <div class="span1 text-right ng-binding">
+        33.68
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/293010" href="http://store.steampowered.com/app/293010">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/293010/header_292x136.jpg" width="75px" title="Caribbean!" src="./games_listing_files/header_292x136(78).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/42160" href="http://store.steampowered.com/app/42160">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/42160/header_292x136.jpg" width="75px" title="War of the Roses" src="./games_listing_files/header_292x136(79).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/34330" href="http://store.steampowered.com/app/34330">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/34330/header_292x136.jpg" width="75px" title="Total War: SHOGUN 2" src="./games_listing_files/header_292x136(75).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/17570" href="http://store.steampowered.com/app/17570">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17570/header_292x136.jpg" width="75px" title="Pirates, Vikings, and Knights II" src="./games_listing_files/header_292x136(80).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/252490" href="http://store.steampowered.com/app/252490">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/252490/header_292x136.jpg" width="150px" title="Rust" src="./games_listing_files/header_292x136(71).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/252490" class="ng-binding">
+          Rust
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,634,354.57
+      </div>
+      <div class="span1 text-right ng-binding">
+        21.05
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/221100" href="http://store.steampowered.com/app/221100">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/221100/header_292x136.jpg" width="75px" title="DayZ" src="./games_listing_files/header_292x136(68).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/344760" href="http://store.steampowered.com/app/344760">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/344760/header_292x136.jpg" width="75px" title="Reign Of Kings" src="./games_listing_files/header_292x136(81).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/4000" href="http://store.steampowered.com/app/4000">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" width="75px" title="Garry&#39;s Mod" src="./games_listing_files/header_292x136(5).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/259080" href="http://store.steampowered.com/app/259080">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" width="75px" title="Just Cause 2: Multiplayer Mod" src="./games_listing_files/header_292x136(9).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/80" href="http://store.steampowered.com/app/80">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/80/header_292x136.jpg" width="150px" title="Counter-Strike: Condition Zero" src="./games_listing_files/header_292x136(11).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/80" class="ng-binding">
+          Counter-Strike: Condition Zero
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,397,329.55
+      </div>
+      <div class="span1 text-right ng-binding">
+        1.82
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/100" href="http://store.steampowered.com/app/100">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/100/header_292x136.jpg" width="75px" title="Counter-Strike: Condition Zero" src="./games_listing_files/header_292x136(12).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/10" href="http://store.steampowered.com/app/10">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/10/header_292x136.jpg" width="75px" title="Counter-Strike" src="./games_listing_files/header_292x136(10).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/630" href="http://store.steampowered.com/app/630">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/630/header_292x136.jpg" width="75px" title="Alien Swarm" src="./games_listing_files/header_292x136(17).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/17570" href="http://store.steampowered.com/app/17570">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17570/header_292x136.jpg" width="75px" title="Pirates, Vikings, and Knights II" src="./games_listing_files/header_292x136(80).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/33930" href="http://store.steampowered.com/app/33930">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/33930/header_292x136.jpg" width="150px" title="Arma 2: Operation Arrowhead" src="./games_listing_files/header_292x136(82).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/33930" class="ng-binding">
+          Arma 2: Operation Arrowhead
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,393,816.85
+      </div>
+      <div class="span1 text-right ng-binding">
+        2.77
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/219540" href="http://store.steampowered.com/app/219540">
+          <img ng-src="http://www.steamrecommender.com/img/applogo.gif" width="75px" title="Arma 2: Operation Arrowhead Beta (Obsolete)" src="./games_listing_files/applogo.gif">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/227940" href="http://store.steampowered.com/app/227940">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227940/header_292x136.jpg" width="75px" title="Heroes &amp; Generals" src="./games_listing_files/header_292x136(70).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/344760" href="http://store.steampowered.com/app/344760">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/344760/header_292x136.jpg" width="75px" title="Reign Of Kings" src="./games_listing_files/header_292x136(81).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/730" href="http://store.steampowered.com/app/730">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/730/header_292x136.jpg" width="75px" title="Counter-Strike: Global Offensive" src="./games_listing_files/header_292x136(2).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/236390" href="http://store.steampowered.com/app/236390">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/236390/header_292x136.jpg" width="150px" title="War Thunder" src="./games_listing_files/header_292x136(59).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/236390" class="ng-binding">
+          War Thunder
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,305,549.18
+      </div>
+      <div class="span1 text-right ng-binding">
+        7.67
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/227940" href="http://store.steampowered.com/app/227940">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/227940/header_292x136.jpg" width="75px" title="Heroes &amp; Generals" src="./games_listing_files/header_292x136(70).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/253710" href="http://store.steampowered.com/app/253710">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/253710/header_292x136.jpg" width="75px" title="theHunter" src="./games_listing_files/header_292x136(83).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/222880" href="http://store.steampowered.com/app/222880">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/222880/header_292x136.jpg" width="75px" title="Insurgency" src="./games_listing_files/header_292x136(84).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/107410" href="http://store.steampowered.com/app/107410">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header_292x136.jpg" width="75px" title="Arma 3" src="./games_listing_files/header_292x136(60).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games --><game ng-repeat="game in games" class="ng-scope">
+<div class="row">
+  <div class="span2">
+    <a ng-href="#/game/500" href="http://store.steampowered.com/app/500">
+      <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/500/header_292x136.jpg" width="150px" title="Left 4 Dead" src="./games_listing_files/header_292x136(85).jpg">
+    </a>
+    <br><br>
+  </div>
+  <div class="span6">
+    <div class="row">
+      <div class="span3 text-left">
+        <a href="http://store.steampowered.com/app/500" class="ng-binding">
+          Left 4 Dead
+        </a>
+      </div>
+      <div class="span2 text-right ng-binding">
+        1,251,086.58
+      </div>
+      <div class="span1 text-right ng-binding">
+        9.97
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row">
+      <div class="span6 text-left">
+        <strong>Players also like...</strong>
+      </div>
+    </div>
+    <div class="row">
+      <!-- ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/440" href="http://store.steampowered.com/app/440">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" width="75px" title="Team Fortress 2" src="./games_listing_files/header_292x136(4).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/630" href="http://store.steampowered.com/app/630">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/630/header_292x136.jpg" width="75px" title="Alien Swarm" src="./games_listing_files/header_292x136(17).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/24960" href="http://store.steampowered.com/app/24960">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/24960/header_292x136.jpg" width="75px" title="Battlefield: Bad Company™ 2" src="./games_listing_files/header_292x136(86).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms --><div ng-repeat="recommGame in game.recomms " class="span1 ng-scope">
+        <a ng-href="#/game/17500" href="http://store.steampowered.com/app/17500">
+          <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17500/header_292x136.jpg" width="75px" title="Zombie Panic! Source" src="./games_listing_files/header_292x136(16).jpg">
+        </a> 
+      </div><!-- end ngRepeat: recommGame in game.recomms -->
+    </div>
+  </div>
+</div>
+<hr>
+
+</game><!-- end ngRepeat: game in games -->
+      <center> 
+  </ul>
+</div>
+      </center> 
+      <hr>
+
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="container marketing">
+    <div class="span1"></div>
+    <div class="span11">
+      <div class="row">
+        <footer>
+        <p>
+        <a href="http://www.steampowered.com/">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
+        All copyrights reserved to their respective owners.
+        </p>
+        <p>© Wesley Kerr 2014</p> 
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body></html>

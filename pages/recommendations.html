@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://www.steamrecommender.com/#/recomms -->
+<html lang="en" ng-app="recommender" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Recommender</title>
+  <script src="./recommendations_files/angular.min.js"></script>
+  <script src="./recommendations_files/angular-cookies.min.js"></script>
+  <script src="./recommendations_files/angular-animate.min.js"></script>
+  <script src="./recommendations_files/angular-route.min.js"></script>
+  <script src="./recommendations_files/jquery.min.js"></script>
+  <script src="./recommendations_files/ui-bootstrap-tpls.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+  <script src="./recommendations_files/recomms-app.js"></script> 
+  <script src="./recommendations_files/recomms.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body>
+  <div ng-controller="NavbarCtrl" class="ng-scope">
+    <div class="navbar-wrapper">
+      <div class="container">
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="navbar-inner">
+            <a class="brand" href="#">
+              <span class="app-loading-container">
+                <span class="app-loading-animation ready" data-ng-class="status" style=""></span>
+              </span>
+              Steam Recommender
+            </a>
+            <ul class="nav navbar-nav">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Recommendations</a></li>
+              <li><a href="#">Genres</a></li>
+              <li><a href="#">Games</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+              <li><a ng-click="resetSteam();">Reset</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ngView:  --><div ng-view="" class="ng-scope">
+<div class="container marketing ng-scope">
+  <profile><div class="well">
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span1">
+      <img ng-src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/3c/3ce6a7f2f28119d43680a7745381231900c0724b_medium.jpg" title="deerslyr1" src="./recommendations_files/3ce6a7f2f28119d43680a7745381231900c0724b_medium.jpg">
+    </div> 
+    <div class="span6">
+      <strong class="ng-binding">deerslyr1</strong><br>
+      <em class="ng-binding">Online</em><br>
+      <a ng-href="http://steamcommunity.com/id/deerslyr1/" class="ng-binding" href="http://steamcommunity.com/id/deerslyr1/">http://steamcommunity.com/id/deerslyr1/</a>
+    </div>
+  </div>
+</div>
+
+
+</profile>
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span10">
+      <center>
+        <h2>Recommendations</h2>
+        <div class="row">
+          <div class="span5">
+            <h3>Should Play</h3>
+            <!-- ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/201280" class="ng-binding" href="http://store.steampowered.com/app/201280">Deus Ex: Human Revolution - The Missing Link</a><br>
+              <a ng-href="http://store.steampowered.com/app/201280" href="http://store.steampowered.com/app/201280">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/201280/header_292x136.jpg" src="./recommendations_files/header_292x136.jpg">
+              </a><br>
+              <a ng-href="#/game/201280" class="ng-binding" href="http://store.steampowered.com/app/201280">0.1963477746751212</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/241600" class="ng-binding" href="http://store.steampowered.com/app/241600">Rogue Legacy</a><br>
+              <a ng-href="http://store.steampowered.com/app/241600" href="http://store.steampowered.com/app/241600">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/241600/header_292x136.jpg" src="./recommendations_files/header_292x136(1).jpg">
+              </a><br>
+              <a ng-href="#/game/241600" class="ng-binding" href="http://store.steampowered.com/app/241600">0.18714873971100104</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/49520" class="ng-binding" href="http://store.steampowered.com/app/49520">Borderlands 2</a><br>
+              <a ng-href="http://store.steampowered.com/app/49520" href="http://store.steampowered.com/app/49520">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/49520/header_292x136.jpg" src="./recommendations_files/header_292x136(2).jpg">
+              </a><br>
+              <a ng-href="#/game/49520" class="ng-binding" href="http://store.steampowered.com/app/49520">0.18480852823382865</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/630" class="ng-binding" href="http://store.steampowered.com/app/630">Alien Swarm</a><br>
+              <a ng-href="http://store.steampowered.com/app/630" href="http://store.steampowered.com/app/630">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/630/header_292x136.jpg" src="./recommendations_files/header_292x136(3).jpg">
+              </a><br>
+              <a ng-href="#/game/630" class="ng-binding" href="http://store.steampowered.com/app/630">0.16963790228122064</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/7670" class="ng-binding" href="http://store.steampowered.com/app/7670">BioShock™</a><br>
+              <a ng-href="http://store.steampowered.com/app/7670" href="http://store.steampowered.com/app/7670">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/7670/header_292x136.jpg" src="./recommendations_files/header_292x136(4).jpg">
+              </a><br>
+              <a ng-href="#/game/7670" class="ng-binding" href="http://store.steampowered.com/app/7670">0.16383504704372764</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/225080" class="ng-binding" href="http://store.steampowered.com/app/225080">Brothers - A Tale of Two Sons</a><br>
+              <a ng-href="http://store.steampowered.com/app/225080" href="http://store.steampowered.com/app/225080">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/225080/header_292x136.jpg" src="./recommendations_files/header_292x136(5).jpg">
+              </a><br>
+              <a ng-href="#/game/225080" class="ng-binding" href="http://store.steampowered.com/app/225080">0.16031719988809712</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/203160" class="ng-binding" href="http://store.steampowered.com/app/203160">Tomb Raider</a><br>
+              <a ng-href="http://store.steampowered.com/app/203160" href="http://store.steampowered.com/app/203160">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/203160/header_292x136.jpg" src="./recommendations_files/header_292x136(6).jpg">
+              </a><br>
+              <a ng-href="#/game/203160" class="ng-binding" href="http://store.steampowered.com/app/203160">0.14902625956639387</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/8850" class="ng-binding" href="http://store.steampowered.com/app/8850">BioShock® 2</a><br>
+              <a ng-href="http://store.steampowered.com/app/8850" href="http://store.steampowered.com/app/8850">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/8850/header_292x136.jpg" src="./recommendations_files/header_292x136(7).jpg">
+              </a><br>
+              <a ng-href="#/game/8850" class="ng-binding" href="http://store.steampowered.com/app/8850">0.14769440513483492</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/3990" class="ng-binding" href="http://store.steampowered.com/app/3990">Civilization IV®: Warlords</a><br>
+              <a ng-href="http://store.steampowered.com/app/3990" href="http://store.steampowered.com/app/3990">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/3990/header_292x136.jpg" src="./recommendations_files/header_292x136(8).jpg">
+              </a><br>
+              <a ng-href="#/game/3990" class="ng-binding" href="http://store.steampowered.com/app/3990">0.14729265563187935</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/248820" class="ng-binding" href="http://store.steampowered.com/app/248820">Risk of Rain</a><br>
+              <a ng-href="http://store.steampowered.com/app/248820" href="http://store.steampowered.com/app/248820">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/248820/header_292x136.jpg" src="./recommendations_files/header_292x136(9).jpg">
+              </a><br>
+              <a ng-href="#/game/248820" class="ng-binding" href="http://store.steampowered.com/app/248820">0.14577097998117233</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/35140" class="ng-binding" href="http://store.steampowered.com/app/35140">Batman: Arkham Asylum Game of the Year Edition</a><br>
+              <a ng-href="http://store.steampowered.com/app/35140" href="http://store.steampowered.com/app/35140">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/35140/header_292x136.jpg" src="./recommendations_files/header_292x136(10).jpg">
+              </a><br>
+              <a ng-href="#/game/35140" class="ng-binding" href="http://store.steampowered.com/app/35140">0.14134034979727833</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/47810" class="ng-binding" href="http://store.steampowered.com/app/47810">Dragon Age: Origins - Ultimate Edition</a><br>
+              <a ng-href="http://store.steampowered.com/app/47810" href="http://store.steampowered.com/app/47810">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/47810/header_292x136.jpg" src="./recommendations_files/header_292x136(11).jpg">
+              </a><br>
+              <a ng-href="#/game/47810" class="ng-binding" href="http://store.steampowered.com/app/47810">0.13865108828439915</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/234650" class="ng-binding" href="http://store.steampowered.com/app/234650">Shadowrun Returns</a><br>
+              <a ng-href="http://store.steampowered.com/app/234650" href="http://store.steampowered.com/app/234650">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/234650/header_292x136.jpg" src="./recommendations_files/header_292x136(12).jpg">
+              </a><br>
+              <a ng-href="#/game/234650" class="ng-binding" href="http://store.steampowered.com/app/234650">0.1279106707557018</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/203810" class="ng-binding" href="http://store.steampowered.com/app/203810">Dear Esther</a><br>
+              <a ng-href="http://store.steampowered.com/app/203810" href="http://store.steampowered.com/app/203810">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/203810/header_292x136.jpg" src="./recommendations_files/header_292x136(13).jpg">
+              </a><br>
+              <a ng-href="#/game/203810" class="ng-binding" href="http://store.steampowered.com/app/203810">0.12717901408035703</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/113020" class="ng-binding" href="http://store.steampowered.com/app/113020">Monaco: What's Yours Is Mine</a><br>
+              <a ng-href="http://store.steampowered.com/app/113020" href="http://store.steampowered.com/app/113020">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/113020/header_292x136.jpg" src="./recommendations_files/header_292x136(14).jpg">
+              </a><br>
+              <a ng-href="#/game/113020" class="ng-binding" href="http://store.steampowered.com/app/113020">0.1225509902072909</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/70300" class="ng-binding" href="http://store.steampowered.com/app/70300">VVVVVV</a><br>
+              <a ng-href="http://store.steampowered.com/app/70300" href="http://store.steampowered.com/app/70300">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/70300/header_292x136.jpg" src="./recommendations_files/header_292x136(15).jpg">
+              </a><br>
+              <a ng-href="#/game/70300" class="ng-binding" href="http://store.steampowered.com/app/70300">0.11659018918828061</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/18700" class="ng-binding" href="http://store.steampowered.com/app/18700">And Yet It Moves</a><br>
+              <a ng-href="http://store.steampowered.com/app/18700" href="http://store.steampowered.com/app/18700">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/18700/header_292x136.jpg" src="./recommendations_files/header_292x136(16).jpg">
+              </a><br>
+              <a ng-href="#/game/18700" class="ng-binding" href="http://store.steampowered.com/app/18700">0.11311082864472051</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/238210" class="ng-binding" href="http://store.steampowered.com/app/238210">System Shock 2</a><br>
+              <a ng-href="http://store.steampowered.com/app/238210" href="http://store.steampowered.com/app/238210">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/238210/header_292x136.jpg" src="./recommendations_files/header_292x136(17).jpg">
+              </a><br>
+              <a ng-href="#/game/238210" class="ng-binding" href="http://store.steampowered.com/app/238210">0.11181053401716863</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/300550" class="ng-binding" href="http://store.steampowered.com/app/300550">Shadowrun: Dragonfall - Director's Cut</a><br>
+              <a ng-href="http://store.steampowered.com/app/300550" href="http://store.steampowered.com/app/300550">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/300550/header_292x136.jpg" src="./recommendations_files/header_292x136(18).jpg">
+              </a><br>
+              <a ng-href="#/game/300550" class="ng-binding" href="http://store.steampowered.com/app/300550">0.11013839894242754</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned --><div class="row ng-scope" ng-repeat="game in state.currentOwned">
+              <a ng-href="#/game/200260" class="ng-binding" href="http://store.steampowered.com/app/200260">Batman: Arkham City - Game of the Year Edition</a><br>
+              <a ng-href="http://store.steampowered.com/app/200260" href="http://store.steampowered.com/app/200260">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/200260/header_292x136.jpg" src="./recommendations_files/header_292x136(19).jpg">
+              </a><br>
+              <a ng-href="#/game/200260" class="ng-binding" href="http://store.steampowered.com/app/200260">0.10729689479677687</a><br>
+            </div><!-- end ngRepeat: game in state.currentOwned -->
+          </div>
+          <div class="span5">
+            <h3>Should Buy</h3>
+            <!-- ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/440" class="ng-binding" href="http://store.steampowered.com/app/440">Team Fortress 2</a><br>
+              <a ng-href="http://store.steampowered.com/app/440" href="http://store.steampowered.com/app/440">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/440/header_292x136.jpg" src="./recommendations_files/header_292x136(20).jpg">
+              </a><br>
+              <a ng-href="#/game/440" class="ng-binding" href="http://store.steampowered.com/app/440">0.27414483297596476</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/237930" class="ng-binding" href="http://store.steampowered.com/app/237930">Transistor</a><br>
+              <a ng-href="http://store.steampowered.com/app/237930" href="http://store.steampowered.com/app/237930">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/237930/header_292x136.jpg" src="./recommendations_files/header_292x136(21).jpg">
+              </a><br>
+              <a ng-href="#/game/237930" class="ng-binding" href="http://store.steampowered.com/app/237930">0.2515542554897573</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/291650" class="ng-binding" href="http://store.steampowered.com/app/291650">Pillars of Eternity</a><br>
+              <a ng-href="http://store.steampowered.com/app/291650" href="http://store.steampowered.com/app/291650">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/291650/header_292x136.jpg" src="./recommendations_files/header_292x136(22).jpg">
+              </a><br>
+              <a ng-href="#/game/291650" class="ng-binding" href="http://store.steampowered.com/app/291650">0.22998326772105204</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/250900" class="ng-binding" href="http://store.steampowered.com/app/250900">The Binding of Isaac: Rebirth</a><br>
+              <a ng-href="http://store.steampowered.com/app/250900" href="http://store.steampowered.com/app/250900">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/250900/header_292x136.jpg" src="./recommendations_files/header_292x136(23).jpg">
+              </a><br>
+              <a ng-href="#/game/250900" class="ng-binding" href="http://store.steampowered.com/app/250900">0.22939880199463283</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/259080" class="ng-binding" href="http://store.steampowered.com/app/259080">Just Cause 2: Multiplayer Mod</a><br>
+              <a ng-href="http://store.steampowered.com/app/259080" href="http://store.steampowered.com/app/259080">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/259080/header_292x136.jpg" src="./recommendations_files/header_292x136(24).jpg">
+              </a><br>
+              <a ng-href="#/game/259080" class="ng-binding" href="http://store.steampowered.com/app/259080">0.20562867672502297</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/17330" class="ng-binding" href="http://store.steampowered.com/app/17330">Crysis Warhead®</a><br>
+              <a ng-href="http://store.steampowered.com/app/17330" href="http://store.steampowered.com/app/17330">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17330/header_292x136.jpg" src="./recommendations_files/header_292x136(25).jpg">
+              </a><br>
+              <a ng-href="#/game/17330" class="ng-binding" href="http://store.steampowered.com/app/17330">0.17674837057443257</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/65980" class="ng-binding" href="http://store.steampowered.com/app/65980">Sid Meier's Civilization®: Beyond Earth™</a><br>
+              <a ng-href="http://store.steampowered.com/app/65980" href="http://store.steampowered.com/app/65980">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/65980/header_292x136.jpg" src="./recommendations_files/header_292x136(26).jpg">
+              </a><br>
+              <a ng-href="#/game/65980" class="ng-binding" href="http://store.steampowered.com/app/65980">0.1746059568035824</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/206190" class="ng-binding" href="http://store.steampowered.com/app/206190">Gunpoint</a><br>
+              <a ng-href="http://store.steampowered.com/app/206190" href="http://store.steampowered.com/app/206190">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/206190/header_292x136.jpg" src="./recommendations_files/header_292x136(27).jpg">
+              </a><br>
+              <a ng-href="#/game/206190" class="ng-binding" href="http://store.steampowered.com/app/206190">0.17319828782172328</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/58230" class="ng-binding" href="http://store.steampowered.com/app/58230">MacGuffin's Curse</a><br>
+              <a ng-href="http://store.steampowered.com/app/58230" href="http://store.steampowered.com/app/58230">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/58230/header_292x136.jpg" src="./recommendations_files/header_292x136(28).jpg">
+              </a><br>
+              <a ng-href="#/game/58230" class="ng-binding" href="http://store.steampowered.com/app/58230">0.17305698441812473</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/201810" class="ng-binding" href="http://store.steampowered.com/app/201810">Wolfenstein: The New Order</a><br>
+              <a ng-href="http://store.steampowered.com/app/201810" href="http://store.steampowered.com/app/201810">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/201810/header_292x136.jpg" src="./recommendations_files/header_292x136(29).jpg">
+              </a><br>
+              <a ng-href="#/game/201810" class="ng-binding" href="http://store.steampowered.com/app/201810">0.17273258503639474</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/330840" class="ng-binding" href="http://store.steampowered.com/app/330840">Game of Thrones - A Telltale Games Series</a><br>
+              <a ng-href="http://store.steampowered.com/app/330840" href="http://store.steampowered.com/app/330840">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330840/header_292x136.jpg" src="./recommendations_files/header_292x136(30).jpg">
+              </a><br>
+              <a ng-href="#/game/330840" class="ng-binding" href="http://store.steampowered.com/app/330840">0.17173694330133543</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/730" class="ng-binding" href="http://store.steampowered.com/app/730">Counter-Strike: Global Offensive</a><br>
+              <a ng-href="http://store.steampowered.com/app/730" href="http://store.steampowered.com/app/730">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/730/header_292x136.jpg" src="./recommendations_files/header_292x136(31).jpg">
+              </a><br>
+              <a ng-href="#/game/730" class="ng-binding" href="http://store.steampowered.com/app/730">0.16972337685541633</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/214770" class="ng-binding" href="http://store.steampowered.com/app/214770">Guacamelee! Gold Edition</a><br>
+              <a ng-href="http://store.steampowered.com/app/214770" href="http://store.steampowered.com/app/214770">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/214770/header_292x136.jpg" src="./recommendations_files/header_292x136(32).jpg">
+              </a><br>
+              <a ng-href="#/game/214770" class="ng-binding" href="http://store.steampowered.com/app/214770">0.16316751606340074</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/346010" class="ng-binding" href="http://store.steampowered.com/app/346010">Besiege</a><br>
+              <a ng-href="http://store.steampowered.com/app/346010" href="http://store.steampowered.com/app/346010">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/346010/header_292x136.jpg" src="./recommendations_files/header_292x136(33).jpg">
+              </a><br>
+              <a ng-href="#/game/346010" class="ng-binding" href="http://store.steampowered.com/app/346010">0.16236536061412554</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/241930" class="ng-binding" href="http://store.steampowered.com/app/241930">Middle-earth™: Shadow of Mordor™</a><br>
+              <a ng-href="http://store.steampowered.com/app/241930" href="http://store.steampowered.com/app/241930">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/241930/header_292x136.jpg" src="./recommendations_files/header_292x136(34).jpg">
+              </a><br>
+              <a ng-href="#/game/241930" class="ng-binding" href="http://store.steampowered.com/app/241930">0.15758133490187623</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/211820" class="ng-binding" href="http://store.steampowered.com/app/211820">Starbound</a><br>
+              <a ng-href="http://store.steampowered.com/app/211820" href="http://store.steampowered.com/app/211820">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/211820/header_292x136.jpg" src="./recommendations_files/header_292x136(35).jpg">
+              </a><br>
+              <a ng-href="#/game/211820" class="ng-binding" href="http://store.steampowered.com/app/211820">0.15570390336776774</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/234710" class="ng-binding" href="http://store.steampowered.com/app/234710">Poker Night 2</a><br>
+              <a ng-href="http://store.steampowered.com/app/234710" href="http://store.steampowered.com/app/234710">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/234710/header_292x136.jpg" src="./recommendations_files/header_292x136(36).jpg">
+              </a><br>
+              <a ng-href="#/game/234710" class="ng-binding" href="http://store.steampowered.com/app/234710">0.15385712735205745</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/4000" class="ng-binding" href="http://store.steampowered.com/app/4000">Garry's Mod</a><br>
+              <a ng-href="http://store.steampowered.com/app/4000" href="http://store.steampowered.com/app/4000">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/4000/header_292x136.jpg" src="./recommendations_files/header_292x136(37).jpg">
+              </a><br>
+              <a ng-href="#/game/4000" class="ng-binding" href="http://store.steampowered.com/app/4000">0.15206427959009727</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/17450" class="ng-binding" href="http://store.steampowered.com/app/17450">Dragon Age: Origins</a><br>
+              <a ng-href="http://store.steampowered.com/app/17450" href="http://store.steampowered.com/app/17450">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/17450/header_292x136.jpg" src="./recommendations_files/header_292x136(38).jpg">
+              </a><br>
+              <a ng-href="#/game/17450" class="ng-binding" href="http://store.steampowered.com/app/17450">0.15012139362653576</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew --><div class="row ng-scope" ng-repeat="game in state.currentNew">
+              <a ng-href="#/game/330830" class="ng-binding" href="http://store.steampowered.com/app/330830">Tales from the Borderlands</a><br>
+              <a ng-href="http://store.steampowered.com/app/330830" href="http://store.steampowered.com/app/330830">
+                <img ng-src="http://cdn.akamai.steamstatic.com/steam/apps/330830/header_292x136.jpg" src="./recommendations_files/header_292x136(39).jpg">
+              </a><br>
+              <a ng-href="#/game/330830" class="ng-binding" href="http://store.steampowered.com/app/330830">0.1498855844738445</a><br>
+            </div><!-- end ngRepeat: game in state.currentNew -->
+          </div>
+        </div>
+      </center>
+    </div>
+    
+    <center> 
+  </ul>
+</div>
+    </center> 
+    <hr>
+  </div>
+
+</div> 
+
+</div>
+
+  <div class="container marketing">
+    <div class="span1"></div>
+    <div class="span11">
+      <div class="row">
+        <footer>
+        <p>
+        <a href="http://www.steampowered.com/">Powered by Steam.</a>  This site is not affiliated with Valve, Steam, or any of their partners.  
+        All copyrights reserved to their respective owners.
+        </p>
+        <p>© Wesley Kerr 2014</p> 
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</body></html>

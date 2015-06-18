@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Steam Recommender by wesleykerr</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Steam Recommender</h1>
-      <h2 class="project-tagline">Personalized recommendations for the Steam platform.</h2>
-      <a href="https://github.com/wesleykerr/steamrecommender-webapp" class="btn">View on GitHub</a>
-      <a href="https://github.com/wesleykerr/steamrecommender-webapp/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/wesleykerr/steamrecommender-webapp/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <div class="wrapper">
+      <header>
+        <h1>Steam Recommender</h1>
+        <p>Personalized recommendations for the Steam platform.</p>
 
-    <section class="main-content">
-      <p>Steam Recommender was a side project that I intended to do for a long time. I started work on the project in 2013 because I was disappointed with the recommendations that the Steam platform provided.  I thought it would be nice to discover new games besides sales and based on which games that I had spent the most time playing.  The site has been up for several years now and never really generated that much traffic, so I decided to shutdown the site and open-source all of the code.</p>
+        <p class="view"><a href="https://github.com/wesleykerr/steamrecommender-webapp">View the Project on GitHub <small>wesleykerr/steamrecommender-webapp</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/wesleykerr/steamrecommender-webapp/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/wesleykerr/steamrecommender-webapp/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/wesleykerr/steamrecommender-webapp">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Steam Recommender was a side project that I intended to do for a long time. I started work on the project in 2013 because I was disappointed with the recommendations that the Steam platform provided.  I thought it would be nice to discover new games besides sales and based on which games that I had spent the most time playing.  The site has been up for several years now and never really generated that much traffic, so I decided to shutdown the site and open-source all of the code.</p>
 
 <p>Steam is a unique platform, since it provides a user's playtime for all games in their Steam library.  If you have a public profile, then anyone can see which games you have been playing and how much time you have spent playing them.  This means that you can randomly sample Steam ids and gather training data for a recommender system.  If you are interested in more technical details see my blog <a href="http://www.wesley-kerr.com/steamrecommender/">post</a> on the subject.  </p>
 
@@ -28,84 +37,49 @@
 
 <p>The following demonstrate the capabilities of my Steam recommender site.</p>
 
-<ul>
-<li><a href="http://www.wesley-kerr.com/recommender-pages/game_details.html">Game Details</a></li>
-</ul>
+<p><strong><a href="http://www.wesley-kerr.com/recommender-pages/game_details.html">Game Details</a></strong></p>
 
-<blockquote>
 <p>This page contained details for a single game including total playtime for the sample of Steam players that I had.  I also included a small set of recommendations in case you enjoyed the game you were looking at and wanted to find similar games.</p>
-</blockquote>
 
-<ul>
-<li><a href="http://www.wesley-kerr.com/recommender-pages/games_listing.html">Game Listing</a></li>
-</ul>
+<p><strong><a href="http://www.wesley-kerr.com/recommender-pages/games_listing.html">Game Listing</a></strong></p>
 
-<blockquote>
 <p>This page contained all of the games sorted by total playtime or median playtime.  Included with each game were recommendations for the game, so you could quickly find games related to the most popular games.</p>
-</blockquote>
 
-<ul>
-<li><a href="http://www.wesley-kerr.com/recommender-pages/profile.html">Profile</a></li>
-</ul>
+<p><strong><a href="http://www.wesley-kerr.com/recommender-pages/profile.html">Profile</a></strong></p>
 
-<blockquote>
 <p>This page contained the details for a personal profile.  It has all of the games that were owned and played ordered by playtime.  In addition I compute a star rating for each game based on an individual's playtime vs. median playtime for that game.  Like the games listing page, you can get recommendations for each of your games individually.</p>
-</blockquote>
 
-<ul>
-<li><a href="http://www.wesley-kerr.com/recommender-pages/recommendations.html">Recommendations</a></li>
-</ul>
+<p><strong><a href="http://www.wesley-kerr.com/recommender-pages/recommendations.html">Recommendations</a></strong></p>
 
-<blockquote>
 <p>This page contained the top recommendations for the profile given.  If your backlog of Steam games was large enough and you had not played many of the games, then I would go ahead and recommend games off of your backlog that you should play.  Of course, there was the main set of recommendations that you should purchase from the Steam store based solely on your play history.  </p>
-</blockquote>
 
 <h3>
 <a id="technology" class="anchor" href="#technology" aria-hidden="true"><span class="octicon octicon-link"></span></a>Technology</h3>
 
 <p>The code that powered the website is broken into several GitHub projects to ease maintenance and because they were written in several languages.</p>
 
-<ul>
-<li><a href="https://github.com/wesleykerr/steamrecommender-webapp">Web Application</a></li>
-</ul>
+<p><strong><a href="https://github.com/wesleykerr/steamrecommender-webapp">Web Application</a></strong></p>
 
-<blockquote>
 <p>The main frontend and serving backend.  This was written in Ruby because at the time I wanted to learn Ruby for my position at Riot Games and it took little time to get the system up and running.</p>
-</blockquote>
 
-<ul>
-<li><a href="https://github.com/wesleykerr/steamrecommender-recommender">Recommender</a></li>
-</ul>
+<p><strong><a href="https://github.com/wesleykerr/steamrecommender-recommender">Recommender</a></strong></p>
 
-<blockquote>
 <p>This is a collection of Java programs used for scraping steam, moving data, and building recommendations.</p>
-</blockquote>
 
-<ul>
-<li><a href="https://github.com/wesleykerr/steamrecommender-etl">ETL</a></li>
-</ul>
+<p><strong><a href="https://github.com/wesleykerr/steamrecommender-etl">ETL</a></strong></p>
 
-<blockquote>
 <p>Called ETL, but really consists of one Ruby script that queries steam in order to get screenshot information and try to determine the types of apps.  This is a very flaky script and badly needed rewritten.</p>
-</blockquote>
 
-<ul>
-<li><a href="https://github.com/wesleykerr/steamrecommender-taskforest">TaskForest</a></li>
-</ul>
+<p><strong><a href="https://github.com/wesleykerr/steamrecommender-taskforest">TaskForest</a></strong></p>
 
-<blockquote>
 <p>I relied on the open-source task scheduler called <a href="http://www.taskforest.com/">TaskForest</a> and these were my configuration files for it.  It's basically a wrapper around cron with better log management, so all jobs are written in bash and executed at different times of the day or week.</p>
-</blockquote>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/wesleykerr/steamrecommender-webapp">Steam Recommender</a> is maintained by <a href="https://github.com/wesleykerr">wesleykerr</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/wesleykerr">wesleykerr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
-
-    </section>
-
-  
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
-
